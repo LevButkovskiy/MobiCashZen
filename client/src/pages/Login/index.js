@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from "react-i18next";
 import { useFormInput } from '../../Utils/Hoocks';
+import { requestWithBody } from '../../Utils/RequestUtil';
 import './index.css';
 
 import Content from '../../UI/Content';
@@ -8,6 +9,7 @@ import Input from '../../UI/Input';
 import Button from '../../UI/Button';
 
 import qrImage from '../../img/qr.png';
+import { setUserSession } from '../../Utils/UserUtil';
 
 function Login(props) {
     const [t, i18n] = useTranslation();
@@ -16,7 +18,16 @@ function Login(props) {
     const password = useFormInput('');
 
     const handleLogin = () => {
-        console.log(username.value, ":", password.value);
+        let body = JSON.stringify({
+            login: username.value,
+            password: password.value,
+            language: i18n.language
+        })
+
+        requestWithBody('/api/v1/auth/login', 'POST', body, function(success, data) {
+            setUserSession(data.authToken, data.refreshToken, data.expTime, data.user, password.value);
+            props.history.push('/');
+        })
     }
 
     return (

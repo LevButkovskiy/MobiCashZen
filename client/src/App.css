@@ -1,9 +1,14 @@
 :root {
     --mobiGray: #31363B;
+    --mobiMenuColor: linear-gradient(0deg, rgba(3, 122, 255, 0.02), rgba(3, 122, 255, 0.02)), linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #FFFFFF;
+    --mobiHeaderColor: linear-gradient(0deg, rgba(3, 122, 255, 0.1), rgba(3, 122, 255, 0.1)), linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), #FFFFFF;
     --mobiActive: #0064FF;
     --mobiAction: #037AFF;
     --linkColorRGBA: rgba(0, 100, 255, 0.04);
     --mobiLightGray: linear-gradient(0deg, rgba(3, 122, 255, 0.02), rgba(3, 122, 255, 0.02)), linear-gradient(0deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)), #FFFFFF;
+
+    --menuWidth: 300px;
+    --navBarHeight: 72px;
 }
 
 html {

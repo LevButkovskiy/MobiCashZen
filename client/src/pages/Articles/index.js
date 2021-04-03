@@ -9,8 +9,8 @@ function Articles(props) {
 
     return (
         <div className="articles">
-            <Content>
-                Articles
+            <Content title={t("ALL_ARTICLES.1")}>
+                
             </Content>
         </div>
     );

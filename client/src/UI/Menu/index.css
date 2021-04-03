@@ -1,0 +1,12 @@
+.menu {
+    width: var(--menuWidth);
+    height: calc(100vh - var(--navBarHeight));
+    background: var(--mobiMenuColor);
+
+    position: absolute;
+    top: var(--navBarHeight);
+    left: 0;
+
+    user-select: none;
+
+}

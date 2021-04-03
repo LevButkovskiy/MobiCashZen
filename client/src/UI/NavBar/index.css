@@ -2,22 +2,22 @@
     background-color: var(--mobiGray);
     color: white;
 
-    height: 72px;
+    height: var(--navBarHeight);
 
-    user-select: text;
+    user-select: none;
 }
 
 .navBar .logo {
     width: 40px;
     height: 40px;
 
-    margin-top: calc((72px - 40px) / 2);
+    margin-top: calc((var(--navBarHeight) - 40px) / 2);
     margin-left: 24px;
 }
 
 .navBar .title {
     margin-left: 8px;
-    top: calc((72px - 22px) / 2);
+    top: calc((var(--navBarHeight) - 22px) / 2);
     display: inline-block;
     position: absolute;
 
@@ -30,7 +30,7 @@
 
 .langDropdown {
     float: right;
-    top: calc((72px - 22px) / 2);
+    top: calc((var(--navBarHeight) - 22px) / 2);
     right: 28px;
     position: fixed;
 }

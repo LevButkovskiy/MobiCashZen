@@ -1,3 +1,8 @@
 .data {
-    height: calc(100vh - 72px);
+    height: calc(100vh - var(--navBarHeight));
+    width: calc(100% - var(--menuWidth));
+
+    display: inline-block;
+
+    margin-left: var(--menuWidth);
 }

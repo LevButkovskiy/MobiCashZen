@@ -1,0 +1,33 @@
+.navBar {
+    background-color: var(--mobiGray);
+    color: white;
+
+    height: 72px;
+}
+
+.navBar .logo {
+    width: 40px;
+    height: 40px;
+
+    margin-top: calc((72px - 40px) / 2);
+    margin-left: 24px;
+}
+
+.navBar .title {
+    margin-left: 8px;
+    top: calc((72px - 22px) / 2);
+    display: inline-block;
+    position: fixed;
+}
+
+.navBar .title span {
+    font-size: 22px;
+    line-height: 24px;
+}
+
+.langDropdown {
+    float: right;
+    top: calc((72px - 22px) / 2);
+    right: 28px;
+    position: fixed;
+}

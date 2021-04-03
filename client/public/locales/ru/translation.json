@@ -1,0 +1,371 @@
+{
+  "Language": {
+    "1": "Русский"
+  },
+  "LANG_ENG": {
+    "1": "Английский"
+  },
+  "LANG_RUS": {
+    "1": "Русский"
+  },
+  "UNITED_KINGDOM": {
+    "1": "Объединенное Королевство"
+  },
+  "JORDAN": {
+    "1": "Иордания"
+  },
+  "RUSSIA": {
+    "1": "Россия"
+  },
+  "Language_Icon": {
+    "1": "https://cdn1.iconfinder.com/data/icons/rounded-flat-country-flag-collection-1/2000/ru-01.png"
+  },
+  "SignIn": {
+    "1": "Войти"
+  },
+  "Login": {
+    "1": "Логин"
+  },
+  "LogOut": {
+    "1": "Выйти"
+  },
+  "Password": {
+    "1": "Пароль"
+  },
+  "YES": {
+    "1": "Да"
+  },
+  "NO": {
+    "1": "Нет"
+  },
+  "TITLE": {
+    "1": "Название"
+  },
+  "DELETE": {
+    "1": "Удалить"
+  },
+  "CANCEL": {
+    "1": "Отмена"
+  },
+  "SAVE": {
+    "1": "Сохранить"
+  },
+  "EDIT": {
+    "1": "Редактировать"
+  },
+  "DESCRIPTION": {
+    "1": "Описание"
+  },
+  "STATUS": {
+    "1": "Статус"
+  },
+  "DATE": {
+    "1": "Дата"
+  },
+  "TIME": {
+    "1": "Время"
+  },
+  "STIME": {
+    "1": "Время начала"
+  },
+  "ETIME": {
+    "1": "Время окончания"
+  },
+  "SDATE": {
+    "1": "Дата начала"
+  },
+  "EDATE": {
+    "1": "Дата окончания"
+  },
+  "SEARCH": {
+    "1": "Поиск"
+  },
+  "INFORMATION": {
+    "1": "Информация"
+  },
+  "EDITING": {
+    "1": "Редактирование"
+  },
+  "SPEAKER": {
+    "1": "Докладчик"
+  },
+  "COMPANY_NAME": {
+    "1": "Название компании"
+  },
+  "PLACE": {
+    "1": "Местоположение"
+  },
+  "JOB_TITLE": {
+    "1": "Должность"
+  },
+  "PARTICIPANTS": {
+    "1": "Участники"
+  },
+  "ARTICLES": {
+    "1": "Статьи"
+  },
+  "INVITE": {
+    "1": "Приглашение"
+  },
+  "SEND_INVITE": {
+    "1": "Отправить приглашение"
+  },
+  "INVITE_NEW": {
+    "1": "Добавить нового"
+  },
+  "PARTICIPANTS_EDIT": {
+    "1": "Редактирование участника"
+  },
+  "PARTICIPANTS_IMPORT": {
+    "1": "Импорт участников"
+  },
+  "PARTICIPANTS_INVITE": {
+    "1": "Приглашение участника"
+  },
+  "AGENDA": {
+    "1": "Agenda"
+  },
+  "RESOURCES": {
+    "1": "Документы"
+  },
+  "UPLOADED": {
+    "1": "Загружено"
+  },
+  "ADD_PHOTO": {
+    "1": "Добавить изображение"
+  },
+  "ADD_FILES": {
+    "1": "Добавить файлы"
+  },
+  "FILES_AVAILABLE_AFTER_FINISH": {
+    "1": "Файлы доступны после завершения"
+  },
+  "IMAGE": {
+    "1": "Изображение"
+  },
+  "SIZE": {
+    "1": "Размер"
+  },
+  "COMMENT": {
+    "1": "Комментарий"
+  },
+  "NAME": {
+    "1": "Имя"
+  },
+  "FIRST_NAME": {
+    "1": "Имя"
+  },
+  "FAMILY_NAME": {
+    "1": "Фамилия"
+  },
+  "PHONE_NUMBER": {
+    "1": "Номер телефона"
+  },
+  "EMAIL": {
+    "1": "Email"
+  },
+  "COUNTRY": {
+    "1": "Страна"
+  },
+  "Profile": {
+    "1": "Профиль"
+  },
+  "Description": {
+    "1": "Описание"
+  },
+  "EDIT_LIST": {
+    "1": "Редактировать"
+  },
+  "ADD_EVENT": {
+    "1": "Добавить мероприятие"
+  },
+  "CREATING_EVENT": {
+    "1": "Создание мероприятия"
+  },
+  "EDIT_EVENT": {
+    "1": "Редактировать мероприятие"
+  },
+  "EDITING_EVENT": {
+    "1": "Редактирование мероприятия"
+  },
+  "DELETE_EVENT_Q": {
+    "1": "Удалить мероприятие?"
+  },
+  "EDIT_AGENDA": {
+    "1": "Редактировать Agenda"
+  },
+  "EDITING_AGENDA": {
+    "1": "Редактирование Agenda"
+  },
+  "CREATING_AGENDA": {
+    "1": "Создание темы Agenda"
+  },
+  "ADD_TOPIC": {
+    "1": "Добавить тему"
+  },
+  "DELETE_TOPIC_Q": {
+    "1": "Удалить тему?"
+  },
+  "SUCCESS_TOPIC_DELETE": {
+    "1": "Тема удалена"
+  },
+  "ADD_ARTICLE": {
+    "1": "Добавить статью"
+  },
+  "DELETE_ARTICLE_Q": {
+    "1": "Удалить статью?"
+  },
+  "CREATING_ARTICLE": {
+    "1": "Создание статьи"
+  },
+  "EDITING_ARTICLE": {
+    "1": "Редактирование статьи"
+  },
+  "ERROR_INVALID_LOGIN": {
+    "1": "Неверный Логин или Пароль"
+  },
+  "ERROR_TRY_AGAIN_LATER": {
+    "1": "Что-то пошло не так. Пожалуйста, попробуйте позже."
+  },
+  "ERROR_EMPTY_LOGIN": {
+    "1": "Поле логина не заполнено"
+  },
+  "ERROR_EMPTY_PASSWORD": {
+    "1": "Поле пароля не заполнено"
+  },
+  "ERROR_EMPTY_LOGIN_AND_PASSWORD": {
+    "1": "Поля логина и пароля не заполнены"
+  },
+  "ERROR_USER_NOTFOUND": {
+    "1": "Пользователь не найден"
+  },
+  "ERROR_USER_INACTIVE": {
+    "1": "Пользователь не активен"
+  },
+  "ERROR_PEOPLE_NOTFOUND": {
+    "1": "Пользователь не найден"
+  },
+  "ERROR_PARTICIPANT_ALREADY_CONTAINS": {
+    "1": "Участник уже добавлен"
+  },
+  "ERROR_PEOPLE_INACTIVE": {
+    "1": "Пользователь не активен"
+  },
+  "ERROR_WRONG_REQUEST": {
+    "1": "Ошибка в запросе"
+  },
+  "ERROR_TOKEN_EXPIRED": {
+    "1": "Срок действия токена истек"
+  },
+  "ERROR_NAME_EMPTY": {
+    "1": "Введите заголовок"
+  },
+  "ERROR_DESCRIPTION_EMPTY": {
+    "1": "Введите описание"
+  },
+  "ERROR_RTEDATA_EMPTY": {
+    "1": "Заполните RTE"
+  },
+  "ERROR_EVENT_NOTFOUND": {
+    "1": "Мероприятие не найдено"
+  },
+  "ERROR_AGENDA_NOTFOUND": {
+    "1": "Agenda не найдена"
+  },
+  "ERROR_AGENDA_NO_PEOPLE": {
+    "1": "Нет участников для выбора докладчика. Невозможно создать Agenda"
+  },
+  "ERROR_ARTICLE_NOTFOUND": {
+    "1": "Статья не найдена"
+  },
+  "ERROR_DATA_TOO_LARGE": {
+    "1": "Слишком большой размер данных"
+  },
+  "SUCCESS_PARTICIPANT_DELETE": {
+    "1": "Участник удален"
+  },
+  "SUCCESS_ARTICLE_DELETE": {
+    "1": "Статья удалена"
+  },
+  "DELETE_PARTICIPANT_Q": {
+    "1": "Удалить участника?"
+  },
+  "SORTING": {
+    "1": "Сортировка"
+  },
+  "SORTING_ASCENDING_VALUE": {
+    "1": "А-Я"
+  },
+  "SORTING_DESCENDING_VALUE": {
+    "1": "Я-А"
+  },
+  "SORT_BY": {
+    "1": "Сортировать по"
+  },
+  "SORT_BY_DATE_ASCENDING": {
+    "1": "Возрастанию даты"
+  },
+  "SORT_BY_DATE_DECENDING": {
+    "1": "Убыванию даты"
+  },
+  "SORT_BY_NAME_ASCENDING": {
+    "1": "Название А-Я"
+  },
+  "SORT_BY_NAME_DECENDING": {
+    "1": "Название Я-А"
+  },
+  "SORT_BY_STATUS_ASCENDING": {
+    "1": "Статус А-Я"
+  },
+  "SORT_BY_STATUS_DECENDING": {
+    "1": "Статус Я-А"
+  },
+  "Event": {
+    "1": "Мероприятие"
+  },
+  "Events": {
+    "1": "Мероприятия"
+  },
+  "ALL_EVENTS": {
+    "1": "Все мероприятия"
+  },
+  "EventInfo": {
+    "1": "Информация о мероприятии"
+  },
+  "DISPLAY_BY": {
+    "1": "Отображать по"
+  },
+  "PAGINATION_FIRST": {
+    "1": "Первая"
+  },
+  "PAGINATION_LAST": {
+    "1": "Последняя"
+  },
+  "PAGINATION_NEXT": {
+    "1": "Вперед"
+  },
+  "PAGINATION_BACK": {
+    "1": "Назад"
+  },
+  "STATUS_ACTIVE": {
+    "1": "Активно"
+  },
+  "STATUS_NOT_ACTIVE": {
+    "1": "Не активно"
+  },
+  "STATUS_CANCELED": {
+    "1": "Отменено"
+  },
+  "DELETE_IMAGE_Q": {
+    "1": "Удалить изображение?"
+  },
+  "DELETE_FILE_Q": {
+    "1": "Удалить файл?"
+  },
+  "WANT_TO_DOWNLOAD": {
+    "1": "Вы хотите скачать файл"
+  },
+  "NO_DATA": {
+    "1": "Нет данных"
+  }
+}

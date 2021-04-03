@@ -1,0 +1,72 @@
+.login {
+    background: url('../../img/background.jpg');
+    background-size: cover;
+
+    position: fixed;
+    left: 0; right: 0; top: 72px; bottom: 0;
+    
+    user-select: text;
+}
+
+.login .inputForm {
+    width: 576px;
+
+    margin-left: calc((100vw - 576px) / 2);
+    margin-top: 10%;
+
+    background: var(--mobiGray);
+
+    box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.08);
+    border-radius: 4px;
+}
+
+.inputForm .loginByUser {
+    display: inline-block;
+    width: 50%;
+    height: 100%;
+
+    background: white;
+
+    padding: 32px;
+}
+
+.loginByUser #title {
+    font-size: 24px;
+    line-height: 32px;
+}
+
+.inputForm .loginByQR {
+    width: 50%;
+    height: 100%;
+
+    float: right;
+
+    background: var(--mobiGray);
+    
+    padding: 32px;
+
+    text-align: center;
+}
+
+.loginByQR .title {
+    font-size: 24px;
+    line-height: 32px;
+
+    color: white
+}
+
+.loginByQR .qr {
+    margin-top: 24px;
+
+    width: 154px;
+    height: 154px;
+}
+
+.loginByQR .description {
+    margin-top: 16px;
+
+    font-size: 12px;
+    line-height: 20px;
+
+    color: white
+}

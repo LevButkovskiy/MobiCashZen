@@ -1,0 +1,37 @@
+.input {
+    margin-top: 24px;
+}
+
+.input #first {
+    margin-top: 16px;
+}
+
+.input .title {
+    font-weight: 800;
+    font-size: 12px;
+    line-height: 156%;
+}
+
+.input input {
+    margin-top: 4px;
+    padding: 8px;
+
+    width: 100%;
+
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    border-radius: 2px;
+
+    font-size: 14px;
+    line-height: 22px;
+}
+
+.input input::placeholder {
+    opacity: 0.6;
+}
+
+.input input:hover {
+    border: 1px solid var(--mobiActive);
+
+    cursor: text;
+}

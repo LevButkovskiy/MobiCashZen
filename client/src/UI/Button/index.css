@@ -1,0 +1,23 @@
+.button button {
+    width: 100%;
+
+    margin-top: 24px;
+
+    background: var(--mobiAction);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
+    border-radius: 2px;
+
+    padding: 8px;
+
+    font-size: 14px;
+    line-height: 24px;
+    color: white;
+}
+
+.button button:hover {
+    background: var(--mobiActive);
+
+    cursor: pointer;
+  }

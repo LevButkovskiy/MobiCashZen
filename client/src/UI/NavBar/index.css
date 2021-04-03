@@ -3,6 +3,8 @@
     color: white;
 
     height: 72px;
+
+    user-select: text;
 }
 
 .navBar .logo {
@@ -17,7 +19,8 @@
     margin-left: 8px;
     top: calc((72px - 22px) / 2);
     display: inline-block;
-    position: fixed;
+    position: absolute;
+
 }
 
 .navBar .title span {

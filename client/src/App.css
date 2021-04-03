@@ -1,5 +1,8 @@
 :root {
     --mobiGray: #31363B;
+    --mobiActive: #0064FF;
+    --mobiAction: #037AFF;
+    --linkColorRGBA: rgba(0, 100, 255, 0.04);
     --mobiLightGray: linear-gradient(0deg, rgba(3, 122, 255, 0.02), rgba(3, 122, 255, 0.02)), linear-gradient(0deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)), #FFFFFF;
 }
 

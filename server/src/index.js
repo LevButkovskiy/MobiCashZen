@@ -4,10 +4,22 @@ var morgan = require('morgan');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 const cors = require('cors');
+const appUtil = require('./appUtil');
+
+const authAPIURL = '/api/v1/auth';
+
+var authActions = require('./routes/auth-actions');
 
 require('./dbMongo')
 
 var app = express();
+
+app.use((req, res, next) => {
+    res.append('Access-Control-Allow-Origin', ['*']);
+    res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.append('Access-Control-Allow-Headers', ['Content-Type', 'api-token']);
+    next();
+});
 
 app.use(cors());
 app.use(express.json());
@@ -18,6 +30,20 @@ app.use(express.static(path.join(__dirname, 'client', 'build')));
 
 app.get('/', (req,res) => {
     res.send("Hello world");
+});
+
+app.use(authAPIURL, authActions);
+
+app.use('/api/v1/*', function(req, res, next){
+    let token = req.header('api-token');
+  
+    appUtil.checkToken(token, function (success, err) {
+        if (err) {
+          res.status(401);
+          return res.json({ error: err });
+        }
+        next()
+    });
 });
 
 // catch 404 and forward to error handler

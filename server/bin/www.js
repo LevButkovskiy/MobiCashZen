@@ -1,8 +1,9 @@
 var app = require('../src/index');
 var debug = require('debug')('server:server');
+var config = require('../src/config');
 var http = require('http');
 
-var port = normalizePort(process.env.PORT || '3080');
+var port = normalizePort(config.server.PORT || '3080');
 app.set('port', port);
 
 var server = http.createServer(app);

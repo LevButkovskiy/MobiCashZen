@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var readLine = require("readline");
-const DB_URL = "mongodb://localhost/mobicash-zen";
+var config = require('../src/config');
+const DB_URL = config.DB_URL;
 
 if (process.platform === "win32"){
     var rl = readLine.createInterface ({

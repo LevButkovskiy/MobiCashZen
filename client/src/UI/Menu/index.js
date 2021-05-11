@@ -21,8 +21,12 @@ function Menu(props) {
         getArticlesHandler();
     }, [history.location]);
 
+    useEffect(() => {
+        getArticlesHandler();
+    }, [window.location.search]);
+
     const getArticlesHandler = () => {
-        getArticles(function(success, data) {
+        getArticles(null, function(success, data) {
             if (success) {
                 setArticles(data.docs);
                 activeCategory(data.docs);
@@ -35,6 +39,15 @@ function Menu(props) {
 
     const activeCategory = (articles) => {
         let url = window.location.pathname.split('/');
+        let tag = (new URLSearchParams(window.location.search)).get("tag");
+
+        if(tag != null) {
+            switch(tag) {
+                case "MobiCash": setSelectedCategory(1); setSelectedElement(-1); break;
+                case "Test": setSelectedCategory(2); setSelectedElement(-1); break;
+            }
+            return;
+        }
         if (url.length > 2) {
             let articleId = url[2];
             if(articleId === "new" || articles.length == 0) {
@@ -44,7 +57,7 @@ function Menu(props) {
             }
             articles.forEach((item, index) => {
                 if (articleId === item._id) {
-                    setSelectedCategory(index + 1);
+                    setSelectedCategory(index + 3);
                     activeElement();
                     return;
                 }
@@ -72,7 +85,7 @@ function Menu(props) {
         return (
             <MenuCategory
                 title={item.title.en}
-                index={key + 1}
+                index={key + 3}
                 selectedCategory={selectedCategory}
                 selectedElement={selectedElement}
                 href={"/article/" + item._id}
@@ -92,7 +105,11 @@ function Menu(props) {
         <div className="menu">
             <ul>
             <MenuCategory hrAfter title={"Все статьи"} index={0} selectedElement={-1} selectedCategory={selectedCategory} href="/" onClick={handleSelect}/>
-                {articles != null && articles.map(renderMenu)}
+            <div className="categoryTitle">Tags</div>
+            <MenuCategory title={"MobiCash"} index={1} selectedElement={-1} selectedCategory={selectedCategory} href="/?tag=MobiCash" onClick={handleSelect}/>
+            <MenuCategory hrAfter title={"Test"} index={2} selectedElement={-1} selectedCategory={selectedCategory} href="/?tag=Test" onClick={handleSelect}/>
+            <div className="categoryTitle">Articles</div>
+            {articles != null && articles.map(renderMenu)}
             </ul>
         </div>
     );

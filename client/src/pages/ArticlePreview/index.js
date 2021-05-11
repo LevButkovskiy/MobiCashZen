@@ -29,8 +29,9 @@ function ArticlePreview(props) {
         <div className="articlePreview">
                 {article != null &&
                     <Content>
-                        <div className="articlePreviewContent" dangerouslySetInnerHTML={{__html: article.rteData.en}}>
-                            
+                        <div className="articlePreviewContent">
+                            <div className="title">{article.title.en}</div>
+                            <div className="articlePreviewData" dangerouslySetInnerHTML={{__html: article.rteData.en}}></div>
                         </div>
                     </Content>
                 }

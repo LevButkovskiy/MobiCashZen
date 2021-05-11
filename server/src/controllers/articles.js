@@ -40,9 +40,9 @@ module.exports.getArticles = function (req, res) {
 
     let filter = {};
 
-    // if (req.query.eventId != null) {
-    //     filter.eventId = req.query.eventId;
-    // }
+    if (req.query.tag != null) {
+        filter = {"tags.title": req.query.tag}
+    }
 
     let options = {
         page: req.query.page ? req.query.page : 1,

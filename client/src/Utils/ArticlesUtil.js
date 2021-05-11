@@ -2,8 +2,13 @@ import { request, requestWithBody } from './RequestUtil';
 import { Response } from './ResponseUtil'
 
 //Get all articles request
-const articlesRequest = (callback) => {
-    let url = '/api/v1/articles/';
+const articlesRequest = (searchParams, callback) => {
+    let params = {}
+    if(searchParams != null) {
+        params = searchParams
+    }
+    
+    let url = '/api/v1/articles?' + new URLSearchParams(params)
     request(url, 'GET', function(success, data) {
         Response(callback, data)
     })
@@ -33,24 +38,9 @@ const deleteArticleRequest = (articleId, callback) => {
     })
 }
 
-// Get Articles
-// export const getArticles = (eventId, callback) => {
-//   articlesRequest(eventId, function(success, data) {
-//     if (success) {
-//       return callback(true, data);
-//     }
-//     else {
-//       return callback(false, {error: {
-//         key: data.error.key,
-//         message: data.error.message
-//       }});
-//     }
-//   })
-// }
-
 //Get all Articles
-export const getArticles = (callback) => {
-    articlesRequest(function(success, data) {
+export const getArticles = (searchParams, callback) => {
+    articlesRequest(searchParams, function(success, data) {
         Response(callback, data);
     })
 }

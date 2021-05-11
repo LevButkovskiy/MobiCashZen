@@ -12,13 +12,28 @@ function Articles(props) {
     const [t, i18n] = useTranslation();
 
     const [articles, setArticles] = useState(null);
+    const [tag, setTag] = useState(null);
 
     useEffect(() => {
         getArticlesHandler()
     }, []);
 
+    useEffect(() => {
+        getArticlesHandler()
+    }, [window.location.search]);
+
     const getArticlesHandler = () => {
-        getArticles(function(success, data) {
+        let filterTag = (new URLSearchParams(window.location.search)).get("tag");
+        let searchParams = {};
+        if (filterTag != null && filterTag != "") {
+            searchParams = {tag: filterTag}
+            setTag(filterTag)
+        }
+        else {
+            setTag(null)
+
+        }
+        getArticles(searchParams, function(success, data) {
             if (data.error == null) {
                 setArticles(data.docs)
             }
@@ -43,7 +58,7 @@ function Articles(props) {
 
     return (
         <div className="articles">
-            <Content title={t("ALL_ARTICLES.1")}>
+            <Content title={t("ALL_ARTICLES.1")} subtitle={tag ? ("?tag=" + tag) : null}>
                 <div className="settings">
                     <div className="new">
                         <Button onClick={()=>{props.history.push("/article/new")}} width>Добавить</Button>

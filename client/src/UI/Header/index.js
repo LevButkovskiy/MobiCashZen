@@ -7,7 +7,8 @@ function Header(props) {
 
     return (
         <div className="header">
-            <div className="title">{props.children}</div>
+            {props.subtitle && <div className="subtitle">{props.subtitle}</div>}
+            <div className="title" style={{paddingTop: props.subtitle ? "8px" : "40px"}}>{props.children}</div>
         </div>
     );
 }

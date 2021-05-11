@@ -28,6 +28,10 @@
     line-height: 22px;
     
     padding: 12px 8px 12px 24px;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .category[type="selected"] {
@@ -85,4 +89,13 @@
 .line {
     height: 1px;
     background: radial-gradient(50% 50% at 50% 50%, #7F7F7F 0%, rgba(127, 127, 127, 0) 100%);
+}
+
+.categoryTitle {
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: bold;
+    text-align: center;
+    
+    padding-top: 8px;
 }

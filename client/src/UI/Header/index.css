@@ -15,6 +15,25 @@
 
     color: white;
 
-    padding-top: 40px;
     padding-left: 32px;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.header .subtitle {
+    padding-top: 24px;
+    padding-left: 32px;
+
+    font-style: normal;
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 24px;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    color: white;
 }

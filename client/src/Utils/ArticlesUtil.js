@@ -53,7 +53,7 @@ export const getArticles = (callback) => {
     articlesRequest(function(success, data) {
         Response(callback, data);
     })
-  }
+}
 
 //Get one Article
 export const getArticle = (articleId, callback) => {

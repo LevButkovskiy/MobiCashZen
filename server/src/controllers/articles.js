@@ -60,25 +60,25 @@ module.exports.getArticles = function (req, res) {
     });
 }
 
-// module.exports.articleReadOne = function (req, res) {
-//     let id = req.params.id;
+module.exports.articleReadOne = function (req, res) {
+    let id = req.params.id;
 
-//     if (!id) {
-//         return sendNoId(res);
-//     }
+    if (!id) {
+        return sendNoId(res);
+    }
 
-//     Article
-//         .findById(id)
-//         .exec(function (err, article) {
-//             if (!article) {
-//                 return sendNoArticle(res);
-//             }
-//             if (err) {
-//                 return sendErr(res, err);
-//             }
-//             return sendOk(res, 200, article);
-//         });
-// }
+    Articles
+        .findById(id)
+        .exec(function (err, article) {
+            if (!article) {
+                return sendNoArticle(res);
+            }
+            if (err) {
+                return sendErr(res, err);
+            }
+            return sendOk(res, 200, article);
+        });
+}
 
 // module.exports.articleUpdateOne = function (req, res) {
 //     let id = req.params.id;

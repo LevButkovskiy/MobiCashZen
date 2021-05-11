@@ -3,6 +3,8 @@
     --mobiDarkGray: #7F7F7F;
     --mobiRed: #BE1E24;
     --mobiRedActive: rgba(190, 30, 36, 0.1);
+    --mobiNotActive: #EC1310;
+    --mobiGreen: #76B943;
     --mobiMenuColor: linear-gradient(0deg, rgba(3, 122, 255, 0.02), rgba(3, 122, 255, 0.02)), linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #FFFFFF;
     --mobiHeaderColor: linear-gradient(0deg, rgba(3, 122, 255, 0.1), rgba(3, 122, 255, 0.1)), linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), #FFFFFF;
     --mobiActive: #0064FF;

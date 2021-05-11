@@ -1,0 +1,65 @@
+.tagsMenu > .tag {
+    display: inline-block;
+    margin-right: 8px;
+    padding-left: 12px;
+
+    font-size: 12px;
+    line-height: 22px;
+    position: relative;
+}
+
+.tagsMenu > .tag::before {
+    content: "⬤";
+    color: red;
+
+    font-size: 8px;
+
+    bottom: 1px;
+    left: 0px;
+
+    position: absolute;
+}
+
+.tagsMenu[type="md"] > .tag {
+    display: inline-block;
+    margin-right: 8px;
+    padding-left: 16px;
+
+    font-size: 16px;
+    line-height: 22px;
+    position: relative;
+}
+
+.tagsMenu[type="md"] > .tag::before {
+    content: "⬤";
+    color: red;
+
+    font-size: 10px;
+
+    bottom: 1px;
+    left: 0px;
+
+    position: absolute;
+}
+
+.tagsMenu[type="lg"] > .tag {
+    display: inline-block;
+    margin-right: 8px;
+    padding-left: 20px;
+
+    font-size: 18px;
+    line-height: 22px;
+    position: relative;
+}
+
+.tagsMenu[type="lg"] > .tag::before {
+    content: "⬤";
+    color: red;
+
+    font-size: 12px;
+
+    bottom: 1px;
+    left: 0px;
+
+    position: absolute;
+}

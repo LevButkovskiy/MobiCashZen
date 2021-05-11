@@ -8,6 +8,8 @@ import PublicRoute from './Utils/PublicRoute';
 import Login from './pages/Login';
 import Articles from './pages/Articles';
 import ArticleModify from './pages/ArticleModify';
+import Article from './pages/Article';
+import ArticlePreview from './pages/ArticlePreview';
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
           <Switch>
             <PrivateRoute exact path="/" component={Articles}/>
             <PrivateRoute path="/article/new" component={ArticleModify}/>
+            <PrivateRoute exact path="/article/:id" component={Article}/>
+            <PrivateRoute path="/article/:id/preview" component={ArticlePreview}/>
             <PublicRoute path="/login" component={Login}/>
           </Switch>
         </BrowserRouter>

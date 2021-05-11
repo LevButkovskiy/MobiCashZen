@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useTranslation } from "react-i18next";
+import { useHistory } from 'react-router-dom';
 import { deleteArticle } from '../../Utils/ArticlesUtil';
 import './index.css';
 
+import Tags from '../../items/Tags';
+
 function ArticleItem(props) {
     const [t, i18n] = useTranslation();
-
-    const renderTags = (item, key) => {
-        return <li key={key} className="tag">{item.title}</li>
-    }
+    const history = useHistory()
 
     const menuClick = () => {
         deleteArticle(props.id, function(success, data) {
@@ -25,19 +25,14 @@ function ArticleItem(props) {
     return (
         <div className="articleItem" id={props.id}>
             <div className="content">
-
                 <div className="articleImage">
                     <img className="image" src={props.imageSrc} />
                 </div>
                 <div className="menu">
                     <img className="menuIcon" src="/images/menu.png" onClick={()=>{menuClick()}}/>
                 </div>
-                <div className="articleInfo">
-                    <div className="articleTags">
-                        <ul className="tagsMenu">
-                            {props.tags && props.tags.map(renderTags)}
-                        </ul>
-                    </div>
+                <div className="articleInfo" onClick={()=>{history.push("/article/" + props.id)}}>
+                    <Tags tags={props.tags}/>
                     <span className="title">{props.children}</span>
                     <span className="description">{props.description}</span>
                     <span className="dateTime">{props.dateTime}</span>

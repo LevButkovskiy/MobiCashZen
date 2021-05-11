@@ -14,6 +14,7 @@ POST /refreshToken - check refreshToken
  */
 
 router.get('/', artclesController.getArticles);
+router.get('/:id', artclesController.articleReadOne);
 router.post('/', artclesController.articleCreate);
 router.delete('/:id', artclesController.articleDeleteOne);
 

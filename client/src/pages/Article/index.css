@@ -1,0 +1,106 @@
+.article {
+    --articleInfoHeight: 20vw;
+}
+
+.articleData {
+    margin-top: 16px;
+    width: 100%;
+    height: var(--articleInfoHeight);
+
+    background: white;
+
+    position: relative;
+
+    border-radius: 4px;
+}
+
+.articleData > .articleImage {
+    display: inline-block;
+}
+
+.articleData > .articleImage > .image {
+    width: var(--articleInfoHeight);
+    height: var(--articleInfoHeight);
+
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.articleData > .articleInfo {
+    margin-left: calc(var(--articleInfoHeight) + 24px);
+    margin-top: 24px;
+
+    position: absolute;
+    top: 0;
+    
+    height: 100%;
+    width: calc(100% - var(--articleInfoHeight) - 8px);
+}
+
+.articleInfo > .previewButton {
+    position: absolute;
+
+    bottom: calc(24px + 16px); 
+    right: calc(16px + 16px);
+    
+    width: 150px;
+}
+
+.articleData > .articleInfo > .title {
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 38px;
+
+    width: 100%;
+    display: block;
+
+    white-space: nowrap;
+    overflow: hidden; 
+    text-overflow: ellipsis;
+}
+
+.articleData > .articleInfo > .description {
+    font-size: 14px;
+    line-height: 22px;
+
+    width: 100%;
+
+    display: block;
+
+    white-space: nowrap;
+    overflow: hidden; 
+    text-overflow: ellipsis
+}
+
+.articleInfo > .articleStatuses {
+    margin-bottom: 8px;
+}
+
+.articleStatuses > .status {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+.articleStatuses > .status[type="active"] {
+    color: var(--mobiGreen);
+}
+
+.articleStatuses > .status[type="notactive"] {
+    color: var(--mobiNotActive);
+}
+
+.articleStatuses > .date {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+
+    color: var(--mobiDarkGray);
+
+    margin-left: 16px;
+}
+
+.sectionTitle {
+    font-size: 24px;
+    line-height: 32px;
+}

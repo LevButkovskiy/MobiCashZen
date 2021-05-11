@@ -15,12 +15,19 @@
     margin-left: 24px;
 }
 
+.navBar .logo:hover {
+    cursor: pointer;
+}
+
 .navBar .title {
     margin-left: 8px;
     top: calc((var(--navBarHeight) - 22px) / 2);
     display: inline-block;
     position: absolute;
+}
 
+.navBar .title:hover {
+    cursor: pointer;
 }
 
 .navBar .title span {

@@ -1,8 +1,15 @@
 .data {
-    height: calc(100vh - var(--navBarHeight));
+    height: calc(100% - var(--navBarHeight));
     width: calc(100% - var(--menuWidth));
 
     display: inline-block;
 
     margin-left: var(--menuWidth);
+
+    background: #EDF0F2;
+}
+
+.data .info {
+    width: 100%;
+    padding: 24px;
 }

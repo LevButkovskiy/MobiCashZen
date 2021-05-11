@@ -1,0 +1,21 @@
+.settings {
+    width: 100%;
+}
+
+.settings > .new {
+    width: 200px;
+}
+
+.articlesData {
+    width: 100%;
+    margin-top: 24px;
+}
+
+.articlesData > .title {
+    font-size: 24px;
+    line-height: 32px;
+}
+
+.articlesData > .content {
+    margin-top: 8px;
+}

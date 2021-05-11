@@ -10,11 +10,25 @@ function Input(props) {
             <div className="title">
                 {props.children}
             </div>
-            <input
-                type={props.type}
-                {...props.value}
-                placeholder={props.placeholder}
-            />
+            {props.description && 
+                <div className="description">
+                    {props.description}
+                </div>
+            }
+            {props.type != "textarea" ?
+                <input
+                    style={{width: props.width || "100%"}}
+                    type={props.type}
+                    {...props.value}
+                    placeholder={props.placeholder}
+                />
+                :
+                <textarea
+                    type={props.type}
+                    {...props.value}
+                    placeholder={props.placeholder}
+                />
+            }
         </div>
     );
 }

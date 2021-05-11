@@ -12,11 +12,17 @@
     line-height: 156%;
 }
 
+.input .description {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 156%;
+
+    color: var(--mobiDarkGray);
+}
+
 .input input {
     margin-top: 4px;
     padding: 8px;
-
-    width: 100%;
 
     border: 1px solid #000000;
     box-sizing: border-box;
@@ -26,12 +32,37 @@
     line-height: 22px;
 }
 
+.input textarea {
+    min-width: 100%;
+    max-width: 100%;
+
+    min-height: calc(22px * 6);
+
+    margin-top: 4px;
+    padding: 8px;
+
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    border-radius: 2px;
+    
+    font-size: 14px;
+    line-height: 22px;
+}
+
 .input input::placeholder {
     opacity: 0.6;
 }
 
+.input textarea::placeholder {
+    opacity: 0.6;
+}
+
+.input textarea:hover {
+    border: 1px solid var(--mobiActive);
+    cursor: text;
+}
+
 .input input:hover {
     border: 1px solid var(--mobiActive);
-
     cursor: text;
 }

@@ -1,0 +1,18 @@
+.RTEinputItem {
+    margin-top: 12px;
+    margin-bottom: 12px;
+  }
+  
+  .RTEinputTitle {
+    text-align: left;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 156%;
+    font-weight: bold;
+  }
+  
+  .RTEinputContainer {
+    position:relative;
+    text-align: left;
+  }
+  

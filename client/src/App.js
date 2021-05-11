@@ -7,6 +7,7 @@ import PublicRoute from './Utils/PublicRoute';
 
 import Login from './pages/Login';
 import Articles from './pages/Articles';
+import ArticleModify from './pages/ArticleModify';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <BrowserRouter>
           <Switch>
             <PrivateRoute exact path="/" component={Articles}/>
+            <PrivateRoute path="/article/new" component={ArticleModify}/>
             <PublicRoute path="/login" component={Login}/>
           </Switch>
         </BrowserRouter>

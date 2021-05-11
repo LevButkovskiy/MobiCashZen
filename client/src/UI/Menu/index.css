@@ -1,6 +1,6 @@
 .menu {
     width: var(--menuWidth);
-    height: calc(100vh - var(--navBarHeight));
+    height: calc(100% - var(--navBarHeight));
     background: var(--mobiMenuColor);
 
     position: absolute;

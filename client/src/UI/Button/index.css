@@ -1,7 +1,7 @@
 .button button {
     width: 100%;
 
-    margin-top: 24px;
+    margin-top: 12px;
 
     background: var(--mobiAction);
     border: 1px solid rgba(0, 0, 0, 0.2);
@@ -20,4 +20,15 @@
     background: var(--mobiActive);
 
     cursor: pointer;
-  }
+}
+
+.button button[type="cancel"] {
+    border: 1px solid var(--mobiRed);
+    background: none;
+    color: var(--mobiRed);
+}
+
+.button button[type="cancel"]:hover {
+    border: 1px solid var(--mobiRed);
+    background: var(--mobiRedActive);
+}

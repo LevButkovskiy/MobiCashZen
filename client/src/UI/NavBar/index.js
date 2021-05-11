@@ -31,8 +31,8 @@ function NavBar(props) {
 
     return (
         <div className="navBar">
-            <img className="logo" src={logo} alt="logo"/>
-            <div className="title">
+            <img className="logo" src={logo} alt="logo" onClick={()=>{props.history.push("/")}}/>
+            <div className="title" onClick={()=>{props.history.push("/")}}>
                 <span>
                     <span className="bold">MobiCash</span>
                     &nbsp;

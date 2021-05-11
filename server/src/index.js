@@ -7,8 +7,10 @@ const cors = require('cors');
 const appUtil = require('./appUtil');
 
 const authAPIURL = '/api/v1/auth';
+const articlesAPIURL = '/api/v1/articles';
 
 var authActions = require('./routes/auth-actions');
+var articlesActions = require('./routes/articles-actions');
 
 require('./dbMongo')
 
@@ -33,6 +35,8 @@ app.get('/', (req,res) => {
 });
 
 app.use(authAPIURL, authActions);
+
+app.use(articlesAPIURL, articlesActions);
 
 app.use('/api/v1/*', function(req, res, next){
     let token = req.header('api-token');

@@ -1,9 +1,15 @@
+.articlePreviewContent {
+    --authorImageSize: 36px;
+}
+
 .articlePreviewData {
     background: white;
 
     padding: 24px;
+}
 
-    border-radius: 4px;
+.articlePreviewData > p >img {
+    max-width: 100%;
 }
 
 .articlePreviewContent > .title {
@@ -11,4 +17,64 @@
     line-height: 24px;
     font-weight: 500;
     margin-bottom: 8px;  
+}
+
+.articlePreviewContent > .authorInfo {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+
+    background: white;
+
+    padding-bottom: calc(var(--authorImageSize) * 2);
+
+    position: relative;
+}
+
+.articlePreviewContent > .authorInfo > .author {
+
+    font-size: 16px;
+    font-weight: 600;
+
+    position: absolute;
+
+    right: calc(var(--authorImageSize) + 24px + var(--authorImageSize) / 2);
+    top: calc(24px + var(--authorImageSize) / 3);
+}
+
+.articlePreviewContent > .authorInfo > .authorImage {
+    width: var(--authorImageSize);
+
+    position: absolute;
+
+    right: 24px;
+
+    top: 24px;
+
+    border-radius: calc(var(--authorImageSize) / 2);
+}
+
+.tagsPreview {
+    background: white;
+
+    padding: 24px;
+}
+
+.tagsPreviewMenu {
+    margin-top: 4px;
+}
+
+.tagsPreviewTitle {
+    margin-right: 6px;
+
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.tagPreview {
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.tagPreviewLink {
+    font-size: 14px;
 }

@@ -48,8 +48,8 @@ function Articles(props) {
             <ArticleItem
                 key={key}
                 id={item._id}
-                imageSrc="https://pchel.net/files/users/stanislav640/portfolio/original/3133032_sample-5.jpg"
-                description={item.rteData.en}
+                imageSrc={item.imagePath ? ("/api/v1/" + item.imagePath) : "https://pchel.net/files/users/stanislav640/portfolio/original/3133032_sample-5.jpg"}
+                description={item.description.en}
                 dateTime="10.05.2021 23:23"
                 tags={item.tags}
             >{item.title.en}</ArticleItem>

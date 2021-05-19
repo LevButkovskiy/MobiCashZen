@@ -2,7 +2,7 @@ import { requestWithBody } from "./RequestUtil";
 import { Response, CreateError } from "./ResponseUtil";
 
 export const getLogin = () => {
-    return sessionStorage.getItem('login') || null;
+    return localStorage.getItem('login') || null;
 }
 
 // return the token from the session storage
@@ -11,7 +11,7 @@ export const getToken = (callback) => {
     let expTime = Number(getExpTime());
 
     if(time < expTime) {
-        let token = sessionStorage.getItem('token');
+        let token = localStorage.getItem('token');
         if(token == null) {
             Response(callback, CreateError("NO_TOKEN", "No token in storage"))
         }
@@ -26,7 +26,6 @@ export const getToken = (callback) => {
                     if(password != null) {
                         setUserSession(data.authToken, data.refreshToken, data.expTime, data.user, password);
                         Response(callback, {token: data.authToken})
-
                     }
                     else {
                         removeUserSession()
@@ -50,31 +49,35 @@ export const getToken = (callback) => {
 
 // return the password from the session storage
 export const getPassword = () => {
-    return sessionStorage.getItem('password') || null;
+    return localStorage.getItem('password') || null;
 }
 
 export const getExpTime = () => {
-    return sessionStorage.getItem('expTime') || null;
+    return localStorage.getItem('expTime') || null;
 }
 
 export const getRefreshToken = () => {
-    return sessionStorage.getItem('refreshToken') || null;
+    return localStorage.getItem('refreshToken') || null;
+}
+
+export const getRole = () => {
+    return localStorage.getItem('role') || null;
 }
 
 // remove the token and user from the session storage
 export const removeUserSession = () => {
-    sessionStorage.removeItem('token');
-    sessionStorage.removeItem('refreshToken');
-    sessionStorage.removeItem('expTime');
-    sessionStorage.removeItem('login');
-    sessionStorage.removeItem('password');
+    localStorage.removeItem('token');
+    localStorage.removeItem('refreshToken');
+    localStorage.removeItem('expTime');
+    localStorage.removeItem('login');
+    localStorage.removeItem('password');
 }
 
 // set the token and user from the session storage
 export const setUserSession = (authToken, refreshToken, expTime, user, password) => {
-    sessionStorage.setItem('token', authToken);
-    sessionStorage.setItem('refreshToken', refreshToken);
-    sessionStorage.setItem('expTime', String(expTime));
-    sessionStorage.setItem('login', user);
-    sessionStorage.setItem('password', password);
+    localStorage.setItem('token', authToken);
+    localStorage.setItem('refreshToken', refreshToken);
+    localStorage.setItem('expTime', String(expTime));
+    localStorage.setItem('login', user);
+    localStorage.setItem('password', password);
 }

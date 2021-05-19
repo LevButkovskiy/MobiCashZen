@@ -1,0 +1,60 @@
+.filePicker {
+    text-align: left;
+}
+
+.imagePicker {
+    text-align: left;
+    margin-bottom: 8px;
+}
+
+.imagePickerTitle {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 156%;
+}
+
+.image {
+    max-width: 100%;
+    border-radius: 2px;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.inputFile {
+    display: none;
+}
+
+.inputItem {
+    width: 100%;
+}
+
+.deleteButtonIcon {
+    float: right;
+    margin-right: 8px;
+    opacity: 0.6;
+}
+
+.deleteButton:hover {
+    cursor: pointer;
+}
+
+.file-upload {
+    margin-top: 8px;
+    height: 24px;
+    text-align: left;
+}
+
+.file-upload label {
+    display: block;
+    cursor: pointer;
+    text-align: left;
+}
+
+.file-upload span {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 24px;
+    color: #0064FF;
+}
+  

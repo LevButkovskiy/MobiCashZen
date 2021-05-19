@@ -27,7 +27,6 @@ export const Response = (callback, data) => {
         ResponseError(callback, data)
     }
     else { 
-        console.log(data);
         ResponseSuccess(callback, data)
     }
 }

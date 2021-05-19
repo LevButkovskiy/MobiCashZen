@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { useTranslation } from "react-i18next";
 import './index.css';
 
+import { getLogin, getRole } from '../../Utils/UserUtil';
+
 import { Dropdown } from 'semantic-ui-react'
 
 import logo from '../../img/logo.svg';
 import UKFlag from '../../img/UKFlag.svg';
 import RUFlag from '../../img/RUFlag.svg';
-
 
 function NavBar(props) {
     const [t, i18n] = useTranslation();
@@ -38,6 +39,10 @@ function NavBar(props) {
                     &nbsp;
                     <span className="light">Zen</span>
                 </span>
+            </div>
+            <div className="profile">
+                <div className="username">{getLogin()}</div>
+                <div className="role">{getRole()}</div>
             </div>
             <Dropdown 
                 onChange={handleChangeLanguage}

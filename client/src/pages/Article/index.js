@@ -13,7 +13,6 @@ function Article(props) {
 
     const [article, setArticle] = useState(null);
 
-
     useEffect(() => {
         getArticleHandler(props.match.params.id)
     }, [props.match.params.id]);
@@ -33,7 +32,7 @@ function Article(props) {
         return (
             <div className="articleData">
                 <div className="articleImage">
-                    <img className="image" src={"https://pchel.net/files/users/stanislav640/portfolio/original/3133032_sample-5.jpg"} />
+                    <img className="image" src={article.imagePath ? ("/api/v1/" + article.imagePath) : "https://pchel.net/files/users/stanislav640/portfolio/original/3133032_sample-5.jpg"}/>
                 </div>
                 <div className="articleInfo">
                     <div className="articleStatuses">
@@ -42,7 +41,7 @@ function Article(props) {
                     </div>
                     <Tags size="md" tags={article.tags}/>
                     <span className="title">{article.title.en}</span>
-                    <span className="description">{"article.description"}</span>
+                    <span className="description">{article.description && article.description.en}</span>
                     <span className="dateTime">{article.dateTime}</span>
                     <div className="previewButton">
                         <Button onClick={()=>{props.history.push("/article/" + article._id + "/preview")}}>Preview</Button>

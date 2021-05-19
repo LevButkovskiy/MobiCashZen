@@ -18,6 +18,7 @@ function App() {
           <Switch>
             <PrivateRoute exact path="/" component={Articles}/>
             <PrivateRoute path="/article/new" component={ArticleModify}/>
+            <PrivateRoute path="/article/:id/edit" component={ArticleModify}/>
             <PrivateRoute exact path="/article/:id" component={Article}/>
             <PrivateRoute path="/article/:id/preview" component={ArticlePreview}/>
             <PublicRoute path="/login" component={Login}/>

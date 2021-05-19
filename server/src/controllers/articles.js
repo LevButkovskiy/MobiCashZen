@@ -27,17 +27,14 @@ var sendNoArticle = (res) => {
 
 var sendErr = (res, err) => {
     console.log(err);
-    sendJSONresponse(res, 405, err);
+    sendJSONresponse(res, 405, {error: {key: "SOMT", message: err}});
 }
 
 var sendOk = (res, status, content) => {
-    console.log(content);
     sendJSONresponse(res, status, content);
 }
 
 module.exports.getArticles = function (req, res) {
-    console.log("getArticles");
-
     let filter = {};
 
     if (req.query.tag != null) {
@@ -52,7 +49,7 @@ module.exports.getArticles = function (req, res) {
 
     Articles.paginate(filter, options, function (err, articles) {
         if (err) {
-            return sendErr(res, err);
+            return sendErr(res, err.msg);
         }
 
         return sendOk(res, 200, articles);
@@ -74,73 +71,82 @@ module.exports.articleReadOne = function (req, res) {
                 return sendNoArticle(res);
             }
             if (err) {
-                return sendErr(res, err);
+                return sendErr(res, err.msg);
             }
             return sendOk(res, 200, article);
         });
 }
 
-// module.exports.articleUpdateOne = function (req, res) {
-//     let id = req.params.id;
+module.exports.articleUpdateOne = function (req, res) {
+    let id = req.params.id;
 
-//     if (!id) {
-//         return sendNoId(res);
-//     }
+    if (!id) {
+        return sendNoId(res);
+    }
 
-//     Article
-//         .findById(id)
-//         .exec(function (err, article) {
-//             if (!article) {
-//                 return sendNoArticle(res);
-//             } else if (err) {
-//                 return sendErr(res, err);
-//             }
+    Articles
+        .findById(id)
+        .exec(function (err, article) {
+            if (!article) {
+                return sendNoArticle(res);
+            } else if (err) {
+                return sendErr(res, err.msg);
+            }
 
-//             article.title = {
-//                 ru: req.body.title.ru ? req.body.title.ru : article.title.ru,
-//                 en: req.body.title.en ? req.body.title.en : article.title.en
-//             }
-//             article.description = {
-//                 ru: req.body.description.ru ? req.body.description.ru : article.description.ru,
-//                 en: req.body.description.en ? req.body.description.en : article.description.en
-//             }
-//             article.URL = {
-//                 ru: req.body.URL.ru ? req.body.URL.ru : article.URL.ru,
-//                 en: req.body.URL.en ? req.body.URL.en : article.URL.en
-//             }
-//             article.rteData = {
-//                 ru: req.body.rteData.ru ? req.body.rteData.ru : article.rteData.ru,
-//                 en: req.body.rteData.en ? req.body.rteData.en : article.rteData.en
-//             }
-//             article.eventId = req.body.eventId ? req.body.eventId : article.eventId;
-//             article.props = req.body.props ? req.body.props : article.props;
+            article.author = {
+                ru: req.body.author.ru ? req.body.author.ru : article.author.ru,
+                en: req.body.author.en ? req.body.author.en : article.author.en
+            }
+            article.title = {
+                ru: req.body.title.ru ? req.body.title.ru : article.title.ru,
+                en: req.body.title.en ? req.body.title.en : article.title.en
+            }
+            article.rteData = {
+                ru: req.body.rteData.ru ? req.body.rteData.ru : article.rteData.ru,
+                en: req.body.rteData.en ? req.body.rteData.en : article.rteData.en
+            }
+            article.description = {
+                ru: req.body.description.ru ? req.body.description.ru : article.description.ru,
+                en: req.body.description.en ? req.body.description.en : article.description.en
+            }
+            article.tags = req.body.tags;
+            article.imagePath = req.body.imagePath ? req.body.imagePath : article.imagePath;
 
-//             article.save(function (err, article) {
-//                 if (err) {
-//                     return sendErr(res, err);
-//                 }
-//                 return sendOk(res, 202, article);
-//             });
-//         });
-// }
+            article.save(function (err, article) {
+                if (err) {
+                    return sendErr(res, err.msg);
+                }
+                return sendOk(res, 202, article);
+            });
+        });
+}
 
 module.exports.articleCreate = function (req, res) {
     let docs = {
+        author: {
+            ru: req.body.author.ru,
+            en: req.body.author.en
+        },
         title: {
-            ru: req.body.titleRu,
-            en: req.body.titleEn
+            ru: req.body.title.ru,
+            en: req.body.title.en
         },
         rteData: {
-            ru: req.body.rteDataRu,
-            en: req.body.rteDataEn
+            ru: req.body.rteData.ru,
+            en: req.body.rteData.en
+        },
+        description: {
+            ru: req.body.description.ru,
+            en: req.body.description.en
         },
         tags: req.body.tags,
+        imagePath: req.body.imagePath,
         props:  req.body.props
     };
 
     Articles.create(docs, function (err, article) {
         if (err) {
-            return sendErr(res, err);
+            return sendErr(res, err.msg);
         }
         return sendOk(res, 201, article);
     });
@@ -157,7 +163,7 @@ module.exports.articleDeleteOne = function (req, res) {
         .findByIdAndRemove(id)
         .exec(function (err, article) {
             if (err) {
-                return sendErr(res, err);
+                return sendErr(res, err.msg);
             }
             return sendOk(res, 200, article);
         });

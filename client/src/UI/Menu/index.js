@@ -73,6 +73,7 @@ function Menu(props) {
         if (url.length > 3) {
             let path = url[3];
             switch (path) {
+                case 'edit': setSelectedElement(0); break;
                 case 'preview': setSelectedElement(1); break;
                 default: setSelectedElement(-1);
             }
@@ -90,7 +91,7 @@ function Menu(props) {
                 selectedElement={selectedElement}
                 href={"/article/" + item._id}
                 onClick={handleSelect}>
-                    <MenuElement title="Info" index={0} selectedElement={selectedElement} href={"/article/" + item._id} onClick={handleSelect}/>
+                    <MenuElement title="Info" index={0} selectedElement={selectedElement} href={"/article/" + item._id + "/edit"} onClick={handleSelect}/>
                     <MenuElement title="Preview" index={1} selectedElement={selectedElement} href={"/article/" + item._id + "/preview"} onClick={handleSelect}/>
             </MenuCategory>)
         return <li>{item.title.en}</li>

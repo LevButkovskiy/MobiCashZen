@@ -8,9 +8,11 @@ const appUtil = require('./appUtil');
 
 const authAPIURL = '/api/v1/auth';
 const articlesAPIURL = '/api/v1/articles';
+const uploadsAPIURL = '/api/v1/uploads';
 
 var authActions = require('./routes/auth-actions');
 var articlesActions = require('./routes/articles-actions');
+var uploadsActions = require('./routes/uploads-actions');
 
 require('./dbMongo')
 
@@ -24,8 +26,8 @@ app.use((req, res, next) => {
 });
 
 app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'client', 'build')));
@@ -35,6 +37,7 @@ app.get('/', (req,res) => {
 });
 
 app.use(authAPIURL, authActions);
+app.use(uploadsAPIURL, uploadsActions);
 
 app.use(articlesAPIURL, articlesActions);
 

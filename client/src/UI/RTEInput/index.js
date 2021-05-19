@@ -7,7 +7,6 @@ import 'react-quill/dist/quill.snow.css';
 
 Quill.register('modules/imageResize', ImageResize)
 
-
 function RTEInput(props, { component: Component, ...children }) {
 
     const rteChangeHandler = (content, delta, source) => {
@@ -42,6 +41,7 @@ function RTEInput(props, { component: Component, ...children }) {
                 modules={modules}
                 theme="snow"
                 value={props.data.value}
+                defaultValue={props.data.value}
                 onChange={rteChangeHandler}
               />
             </div>

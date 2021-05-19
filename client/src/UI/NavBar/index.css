@@ -41,3 +41,27 @@
     right: 28px;
     position: fixed;
 }
+
+.profile {
+    float: right;
+    top: calc((var(--navBarHeight) - 22px) / 2 - 8px);
+    right: 100px;
+    position: absolute;
+}
+
+.username {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.role {
+    font-size: 12px;
+    font-weight: 500;
+    
+    text-align: right;
+}
+
+.profile:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}

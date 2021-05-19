@@ -22,6 +22,15 @@ const articleRequest = (articleId, callback) => {
     })
 }
 
+//Article update request
+const updateArticleRequest = (articleId, article, callback) => {
+    let url = '/api/v1/articles/' + articleId;
+    requestWithBody(url, 'PUT', JSON.stringify(article), function(success, data) {
+        Response(callback, data)
+    })
+}
+
+
 //Article create request
 const createArticleRequest = (article, callback) => {
     let url = '/api/v1/articles/';
@@ -47,16 +56,23 @@ export const getArticles = (searchParams, callback) => {
 
 //Get one Article
 export const getArticle = (articleId, callback) => {
-  articleRequest(articleId, function(success, data) {
-      Response(callback, data);
-  })
+    articleRequest(articleId, function(success, data) {
+        Response(callback, data);
+    })
+}
+
+//Update article
+export const updateArticle = (articleId, article, callback) => {
+    updateArticleRequest(articleId, article, function(success, data) {
+        Response(callback, data);
+    })
 }
 
 //Create article
 export const createArticle = (article, callback) => {
-  createArticleRequest(article, function(success, data) {
-      Response(callback, data);
-  })
+    createArticleRequest(article, function(success, data) {
+        Response(callback, data);
+    })
 }
 
 //Delete article
@@ -64,4 +80,4 @@ export const deleteArticle = (articleId, callback) => {
     deleteArticleRequest(articleId, function(success, data) {
         Response(callback, data);
     })
-  }
+}

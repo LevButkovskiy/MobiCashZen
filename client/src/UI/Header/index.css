@@ -9,6 +9,17 @@
     position:relative;
 }
 
+.header[type="nomenu"] {
+    background: var(--mobiHeaderColor);
+
+    width: 100%;
+    height: 35px;
+
+    user-select: text;
+
+    position:relative;
+}
+
 .header .title {
     font-style: normal;
     font-weight: bold;

@@ -49,7 +49,7 @@ function NavBar(props) {
                 className="langDropdown"
                 inline
                 options={langs}
-                defaultValue={langs[0].value}
+                defaultValue={i18n.language}
             />
         </div>
     );

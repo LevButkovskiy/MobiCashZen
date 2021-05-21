@@ -14,9 +14,9 @@ function Content(props) {
     return (
         <div className="content">
             <NavBar history={history}/>
-            <Menu/>
-            <div className="data">
-                {props.title && <Header subtitle={props.subtitle} selectorContent={props.selectorContent}>{props.title}</Header>}
+            {!props.nomenu && <Menu/>}
+            <div className="data" type={props.nomenu ? "nomenu" : null}>
+                <Header nomenu={props.nomenu} subtitle={props.subtitle} selectorContent={props.selectorContent}>{props.title}</Header>
                 <div className="info">
                     {props.children}
                 </div>

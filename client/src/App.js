@@ -10,6 +10,7 @@ import Articles from './pages/Articles';
 import ArticleModify from './pages/ArticleModify';
 import Article from './pages/Article';
 import ArticlePreview from './pages/ArticlePreview';
+import ArticleShow from './pages/ArticleShow';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <PrivateRoute path="/article/:id/edit" component={ArticleModify}/>
             <PrivateRoute exact path="/article/:id" component={Article}/>
             <PrivateRoute path="/article/:id/preview" component={ArticlePreview}/>
+            <PrivateRoute path="/article/:id" component={ArticleShow}/>
             <PublicRoute path="/login" component={Login}/>
           </Switch>
         </BrowserRouter>

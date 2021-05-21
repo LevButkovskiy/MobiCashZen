@@ -9,6 +9,17 @@
     background: #EDF0F2;
 }
 
+.data[type="nomenu"] {
+    height: calc(100% - var(--navBarHeight));
+    width: calc(100%);
+
+    display: inline-block;
+
+    margin-left: 0;
+
+    background: #EDF0F2;
+}
+
 .data .info {
     width: 100%;
     padding: 24px;

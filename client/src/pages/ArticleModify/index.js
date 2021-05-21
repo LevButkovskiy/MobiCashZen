@@ -10,6 +10,7 @@ import Content from '../../UI/Content';
 import Input from '../../UI/Input';
 import Button from '../../UI/Button';
 import RTEInput from '../../UI/RTEInput';
+import Switch from '../../UI/Switch';
 
 import FilePicker from '../../items/FilePicker';
 import LangSelector from '../../items/LangSelector';
@@ -25,7 +26,8 @@ function Articles(props) {
     const description = {ru: useFormInput(''), en: useFormInput('')};
     const tags = useFormInput('');
     const rteData = {ru: useFormInput(''), en: useFormInput('')};
-    
+    const [internal, setInternal] = useState(true);
+
     const [image, setImage] = useState(null);
     const [imageData, setImageData] = useState(null);
 
@@ -47,6 +49,7 @@ function Articles(props) {
                 description.ru.setValue(data.description.ru);
                 rteData.en.setValue(data.rteData.en);
                 rteData.ru.setValue(data.rteData.ru);
+                setInternal(data.internal)
                 let tagsStr = "";
                 data.tags.forEach((element, index) => {
                     tagsStr += element.title;
@@ -107,7 +110,36 @@ function Articles(props) {
                 ru: description.ru.value
             },
             tags: packedTags,
-            imagePath: imagePath
+            imagePath: imagePath,
+            internal: internal
+        }
+
+        if (i18n.language  == "ru") {
+            if (title.en.value == "") {
+                packedArticle.title.en = title.ru.value
+            }
+            if (description.en.value == "") {
+                packedArticle.description.en = description.ru.value
+            }
+            if (rteData.en.value == "") {
+                packedArticle.rteData.en = rteData.ru.value
+            }
+            if (author.en.value == "") {
+                packedArticle.author.en = author.ru.value
+            }
+        } else if (i18n.language  == "en") {
+            if (title.ru.value == "") {
+                packedArticle.title.ru = title.en.value
+            }
+            if (description.ru.value == "") {
+                packedArticle.description.ru = description.en.value
+            }
+            if (rteData.ru.value == "") {
+                packedArticle.rteData.ru = rteData.en.value
+            }
+            if (author.ru.value == "") {
+                packedArticle.author.ru = author.en.value
+            }
         }
 
         createArticle(packedArticle, function(success, data) {
@@ -167,7 +199,8 @@ function Articles(props) {
                 ru: description.ru.value
             },
             tags: packedTags,
-            imagePath: imagePath
+            imagePath: imagePath,
+            internal: internal
         }
 
         updateArticle(props.match.params.id, packedArticle, function(success, data) {
@@ -188,7 +221,6 @@ function Articles(props) {
             >
                 <div className="field">
                     <Input
-                        first
                         type="text"
                         placeholder={t("ARTICLE_AUTHOR.1")}
                         value={getLocale(author, currentLanguage)}
@@ -211,6 +243,12 @@ function Articles(props) {
                     >
                         {t("DESCRIPTION.1")}
                     </Input>
+                    <Switch
+                        value={internal}
+                        onChange={(e)=>{setInternal(!internal)}}
+                    >
+                        Internal
+                    </Switch>
                     <Input
                         type="text"
                         placeholder={t("ARTICLE_TAGS.1")}

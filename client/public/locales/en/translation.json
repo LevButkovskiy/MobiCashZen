@@ -38,6 +38,9 @@
   "PREVIEW": {
     "1": "Preview"
   },
+  "SHOW": {
+    "1": "Show"
+  },
   "ACTIVE": {
     "1": "Active"
   },
@@ -56,10 +59,13 @@
   "TAGS_INPUT_DESCRIPTION": {
     "1": "Are entered separated by commas"
   },
+  "FOR_ME": {
+    "1": "For me"
+  },
   "DATA": {
     "1": "Content"
   },
-  "Image": {
+  "IMAGE": {
     "1": "Image"
   },
   "FOUNDED": {

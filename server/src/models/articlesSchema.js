@@ -9,6 +9,7 @@ var articlesSchema = new mongoose.Schema({
   description:    {ru: String, en: String},
   tags:           [{title: String}],
   imagePath:      String,
+  internal:       {type: Boolean, default: true},
   props:          [String]
 });
 

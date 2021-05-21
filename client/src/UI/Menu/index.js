@@ -44,9 +44,14 @@ function Menu(props) {
 
         if(tag != null) {
             switch(tag) {
-                case "MobiCash": setSelectedCategory(1); setSelectedElement(-1); break;
-                case "Test": setSelectedCategory(2); setSelectedElement(-1); break;
+                case "MobiCash": setSelectedCategory(2); setSelectedElement(-1); break;
+                case "Test": setSelectedCategory(3); setSelectedElement(-1); break;
             }
+            return;
+        }
+        if(url.length > 1 && url[1] == "personal") {
+            setSelectedCategory(1);
+            setSelectedElement(-1);
             return;
         }
         if (url.length > 2) {
@@ -58,7 +63,7 @@ function Menu(props) {
             }
             articles.forEach((item, index) => {
                 if (articleId === item._id) {
-                    setSelectedCategory(index + 3);
+                    setSelectedCategory(index + 4);
                     activeElement();
                     return;
                 }
@@ -76,6 +81,7 @@ function Menu(props) {
             switch (path) {
                 case 'edit': setSelectedElement(0); break;
                 case 'preview': setSelectedElement(1); break;
+                case 'show': setSelectedElement(2); break;
                 default: setSelectedElement(-1);
             }
         } else {
@@ -86,14 +92,16 @@ function Menu(props) {
     const renderMenu = (item, key) => {
         return (
             <MenuCategory
+                key={key}
                 title={getLocale(item.title, i18n.language)}
-                index={key + 3}
+                index={key + 4}
                 selectedCategory={selectedCategory}
                 selectedElement={selectedElement}
                 href={"/article/" + item._id}
                 onClick={handleSelect}>
-                    <MenuElement title="Info" index={0} selectedElement={selectedElement} href={"/article/" + item._id + "/edit"} onClick={handleSelect}/>
-                    <MenuElement title="Preview" index={1} selectedElement={selectedElement} href={"/article/" + item._id + "/preview"} onClick={handleSelect}/>
+                    <MenuElement title={t("INFORMATION.1")}  index={0} selectedElement={selectedElement} href={"/article/" + item._id + "/edit"} onClick={handleSelect}/>
+                    <MenuElement title={t("PREVIEW.1")} index={1} selectedElement={selectedElement} href={"/article/" + item._id + "/preview"} onClick={handleSelect}/>
+                    <MenuElement title={t("SHOW.1")} index={2} selectedElement={selectedElement} href={"/article/" + item._id + "/show"} onClick={handleSelect}/>
             </MenuCategory>)
     }
 
@@ -105,10 +113,11 @@ function Menu(props) {
     return (
         <div className="menu">
             <ul>
-            <MenuCategory hrAfter title={t("ALL_ARTICLES.1")} index={0} selectedElement={-1} selectedCategory={selectedCategory} href="/" onClick={handleSelect}/>
+            <MenuCategory title={t("ALL_ARTICLES.1")} index={0} selectedElement={-1} selectedCategory={selectedCategory} href="/" onClick={handleSelect}/>
+            <MenuCategory hrAfter title={t("FOR_ME.1")} index={1} selectedElement={-1} selectedCategory={selectedCategory} href="/personal" onClick={handleSelect}/>
             <div className="categoryTitle">{t("TAGS.1")}</div>
-            <MenuCategory title={"MobiCash"} index={1} selectedElement={-1} selectedCategory={selectedCategory} href="/?tag=MobiCash" onClick={handleSelect}/>
-            <MenuCategory hrAfter title={"Test"} index={2} selectedElement={-1} selectedCategory={selectedCategory} href="/?tag=Test" onClick={handleSelect}/>
+            <MenuCategory title={"MobiCash"} index={2} selectedElement={-1} selectedCategory={selectedCategory} href="/?tag=MobiCash" onClick={handleSelect}/>
+            <MenuCategory hrAfter title={"Test"} index={3} selectedElement={-1} selectedCategory={selectedCategory} href="/?tag=Test" onClick={handleSelect}/>
             <div className="categoryTitle">{t("ARTICLES.1")}</div>
             {articles != null && articles.map(renderMenu)}
             </ul>

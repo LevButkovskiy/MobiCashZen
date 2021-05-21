@@ -24,11 +24,15 @@ function Articles(props) {
     }, [window.location.search]);
 
     const getArticlesHandler = () => {
+        let url = window.location.pathname.split('/');        
         let filterTag = (new URLSearchParams(window.location.search)).get("tag");
         let searchParams = {};
         if (filterTag != null && filterTag != "") {
             searchParams = {tag: filterTag}
             setTag(filterTag)
+        }
+        else if(url.length > 1 && url[1] == "personal") {
+            searchParams.internal = "true"
         }
         else {
             setTag(null)

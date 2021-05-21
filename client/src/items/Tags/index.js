@@ -8,7 +8,7 @@ function ArticleItem(props) {
     const history = useHistory()
 
     const renderTags = (item, key) => {
-        return <li key={key} className="tag">{item.title}</li>
+        return <li key={key} className="tag"><a href={"/?tag=" + item.title}>{item.title}</a></li>
     }
 
     return (

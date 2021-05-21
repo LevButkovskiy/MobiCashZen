@@ -27,7 +27,7 @@ var sendNoArticle = (res) => {
 
 var sendErr = (res, err) => {
     console.log(err);
-    sendJSONresponse(res, 405, {error: {key: "SOMT", message: err}});
+    sendJSONresponse(res, 405, {error: {key: "ERROR_SOMETHING_WENT_WRORNG", message: err}});
 }
 
 var sendOk = (res, status, content) => {
@@ -41,16 +41,22 @@ module.exports.getArticles = function (req, res) {
         filter = {"tags.title": req.query.tag}
     }
 
+    if (req.query.internal != null) {
+        filter = {"internal": "true"}
+    }
+
     let options = {
         page: req.query.page ? req.query.page : 1,
         limit: req.query.limit ? req.query.limit : 99999,
-        sort: req.query.sort ? req.query.sort : "title",
+        sort: req.query.sort ? req.query.sort : "title"
     }
-
+    
+    console.log(filter)
     Articles.paginate(filter, options, function (err, articles) {
         if (err) {
             return sendErr(res, err.msg);
         }
+        console.log(articles)
 
         return sendOk(res, 200, articles);
 
@@ -110,6 +116,7 @@ module.exports.articleUpdateOne = function (req, res) {
                 en: req.body.description.en ? req.body.description.en : article.description.en
             }
             article.tags = req.body.tags;
+            article.internal = req.body.internal;
             article.imagePath = req.body.imagePath ? req.body.imagePath : article.imagePath;
 
             article.save(function (err, article) {
@@ -140,6 +147,7 @@ module.exports.articleCreate = function (req, res) {
             en: req.body.description.en
         },
         tags: req.body.tags,
+        internal: req.body.internal,
         imagePath: req.body.imagePath,
         props:  req.body.props
     };

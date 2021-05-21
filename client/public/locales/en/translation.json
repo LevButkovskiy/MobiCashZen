@@ -1,4 +1,10 @@
 {
+  "LANG_RUS": {
+    "1": "Russian"
+  },
+  "LANG_ENG": {
+    "1": "English"
+  },
   "SIGN_IN": {
     "1": "Sign In"
   },
@@ -17,6 +23,54 @@
   "PASSWORD": {
     "1": "Password"
   },
+  "CANCEL": {
+    "1": "Cancel"
+  },
+  "SAVE": {
+    "1": "Save"
+  },
+  "DELETE": {
+    "1": "Delete"
+  },
+  "INFORMATION": {
+    "1": "Information"
+  },
+  "PREVIEW": {
+    "1": "Preview"
+  },
+  "ACTIVE": {
+    "1": "Active"
+  },
+  "AUTHOR": {
+    "1": "Author"
+  },
+  "TITLE": {
+    "1": "Title"
+  },
+  "DESCRIPTION": {
+    "1": "Description"
+  },
+  "TAGS": {
+    "1": "Tags"
+  },
+  "TAGS_INPUT_DESCRIPTION": {
+    "1": "Are entered separated by commas"
+  },
+  "DATA": {
+    "1": "Content"
+  },
+  "Image": {
+    "1": "Image"
+  },
+  "FOUNDED": {
+    "1": "Founded"
+  },
+  "ARTICLE": {
+    "1": "Article"
+  },
+  "ARTICLES": {
+    "1": "Articles"
+  },
   "SCAN_FOR_LOGIN": {
     "1": "To enter the portal, scan"
   },
@@ -25,5 +79,35 @@
   },
   "ALL_ARTICLES": {
     "1": "All articles"
+  },
+  "ARTICLE_CREATING": {
+    "1": "Creating article"
+  },
+  "ARTICLE_EDITING": {
+    "1": "Editing article"
+  },
+  "ADD_ARTICLE": {
+    "1": "Add article"
+  },
+  "ARTICLE_AUTHOR": {
+    "1": "Article author"
+  },
+  "ARTICLE_TITLE": {
+    "1": "Article title"
+  },
+  "ARTICLE_DESCRIPTION": {
+    "1": "Article description"
+  },
+  "ARTICLE_TAGS": {
+    "1": "Tags for article"
+  },
+  "ARTICLE_DATA": {
+    "1": "Article content"
+  },
+  "ADD_PHOTO": {
+    "1": "Add image"
+  },
+  "DELETE_IMAGE_Q": {
+    "1": "Delete image?"
   }
 }

@@ -9,6 +9,13 @@ function Header(props) {
         <div className="header">
             {props.subtitle && <div className="subtitle">{props.subtitle}</div>}
             <div className="title" style={{paddingTop: props.subtitle ? "8px" : "40px"}}>{props.children}</div>
+            {props.selectorContent &&
+                <div className="statusSelector">
+                    <div>
+                      {props.selectorContent}
+                    </div>
+                </div>
+            }
         </div>
     );
 }

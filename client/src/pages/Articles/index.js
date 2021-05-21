@@ -7,6 +7,7 @@ import Content from '../../UI/Content';
 import Button from '../../UI/Button';
 
 import ArticleItem from '../../items/ArticleItem';
+import { getLocale } from '../../Utils/Hoocks';
 
 function Articles(props) {
     const [t, i18n] = useTranslation();
@@ -49,10 +50,11 @@ function Articles(props) {
                 key={key}
                 id={item._id}
                 imageSrc={item.imagePath ? ("/api/v1/" + item.imagePath) : "https://pchel.net/files/users/stanislav640/portfolio/original/3133032_sample-5.jpg"}
-                description={item.description.en}
+                description={getLocale(item.description, i18n.language)}
                 dateTime="10.05.2021 23:23"
+                author={getLocale(item.author, i18n.language)}
                 tags={item.tags}
-            >{item.title.en}</ArticleItem>
+            >{getLocale(item.title, i18n.language)}</ArticleItem>
         )
     }
 
@@ -61,13 +63,13 @@ function Articles(props) {
             <Content title={t("ALL_ARTICLES.1")} subtitle={tag ? ("?tag=" + tag) : null}>
                 <div className="settings">
                     <div className="new">
-                        <Button onClick={()=>{props.history.push("/article/new")}} width>Добавить</Button>
+                        <Button onClick={()=>{props.history.push("/article/new")}} width>{t("ADD_ARTICLE.1")}</Button>
                     </div>
                 </div>
                 <div className="articlesData">
                     {articles != null && 
                         <>
-                            <span className="title">Найдено: {articles.length} статьи</span>
+                            <span className="title">{t("FOUNDED.1")}: {articles.length} {t("ARTICLE.1")}</span>
                             <div className="content">
                                 {articles.map(renderArticles)}
                             </div>

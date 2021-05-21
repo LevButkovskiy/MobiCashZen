@@ -19,6 +19,10 @@
     margin-bottom: 8px;  
 }
 
+.articlePreviewContent > .description {
+    margin-bottom: 8px;
+}
+
 .articlePreviewContent > .authorInfo {
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;

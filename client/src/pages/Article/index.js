@@ -36,7 +36,7 @@ function Article(props) {
                 </div>
                 <div className="articleInfo">
                     <div className="articleStatuses">
-                        <span className="status" type="active">{"Active"}</span>
+                        <span className="status" type="active">{t("ACTIVE.1")}</span>
                         <span className="date">24.05.2021 23:23</span>
                     </div>
                     <Tags size="md" tags={article.tags}/>
@@ -44,7 +44,7 @@ function Article(props) {
                     <span className="description">{article.description && article.description.en}</span>
                     <span className="dateTime">{article.dateTime}</span>
                     <div className="previewButton">
-                        <Button onClick={()=>{props.history.push("/article/" + article._id + "/preview")}}>Preview</Button>
+                        <Button onClick={()=>{props.history.push("/article/" + article._id + "/preview")}}>{t("PREVIEW.1")}</Button>
                     </div>
                 </div>
             </div>
@@ -56,7 +56,7 @@ function Article(props) {
                 <Content title={article && article.title.en}>
                 {article != null &&
                     <div className="articleContent">
-                        <span className="sectionTitle">Information</span>
+                        <span className="sectionTitle">{t("INFORMATION.1")}</span>
                         {renderArticleInfo()}
                     </div>
                 }

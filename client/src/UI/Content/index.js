@@ -16,7 +16,7 @@ function Content(props) {
             <NavBar history={history}/>
             <Menu/>
             <div className="data">
-                {props.title && <Header subtitle={props.subtitle}>{props.title}</Header>}
+                {props.title && <Header subtitle={props.subtitle} selectorContent={props.selectorContent}>{props.title}</Header>}
                 <div className="info">
                     {props.children}
                 </div>

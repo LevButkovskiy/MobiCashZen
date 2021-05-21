@@ -12,3 +12,13 @@ export const useFormInput = (initialValue) => {
         onChange: handleChange
     }
 }
+export const getLocale = (item, language) => {
+    if (item !== undefined) {
+        switch (language) {
+            case "ru": return item.ru || item.en;
+            case "en": return item.en;
+            default: return item.en;
+        }
+    }
+    return "";
+}

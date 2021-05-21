@@ -1,0 +1,31 @@
+.selector {
+    margin: 0;
+    margin-left: 32px;
+    margin-bottom: 4px;
+    padding: 0;
+    color: white;
+}
+  
+.selectorElement {
+    display: inline;
+    padding: 8px 24px;
+
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 22px;
+    text-align: center;
+
+    font-weight: 600;
+}
+  
+.selectorElement[isSelected="true"] {
+    background-color: #BE1E24
+}
+  
+.selectorBlock {
+    width: 100%;
+    height: 33px;
+    padding-top: 6px;
+    background: rgba(0, 0, 0, 0.3);
+}

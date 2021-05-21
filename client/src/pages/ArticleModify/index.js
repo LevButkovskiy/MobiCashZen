@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from "react-i18next";
-import { useFormInput } from '../../Utils/Hoocks';
+import { useFormInput, getLocale } from '../../Utils/Hoocks';
 import { getArticle, updateArticle, createArticle } from '../../Utils/ArticlesUtil';
 import { saveImage } from '../../Utils/FilePicker';
 import { getLogin } from '../../Utils/UserUtil';
@@ -12,17 +12,19 @@ import Button from '../../UI/Button';
 import RTEInput from '../../UI/RTEInput';
 
 import FilePicker from '../../items/FilePicker';
+import LangSelector from '../../items/LangSelector';
 
 function Articles(props) {
     const [t, i18n] = useTranslation();
+    const [currentLanguage, setCurrentLanguage] = useState(i18n.language);
 
     const [isEdit, setIsEdit] = useState(false);
 
-    const author = useFormInput(getLogin());
-    const title = useFormInput('');
-    const description = useFormInput('');
-    const tags = useFormInput('')
-    const rteData = useFormInput('');
+    const author = {ru: useFormInput(getLogin()), en: useFormInput(getLogin())};
+    const title = {ru: useFormInput(''), en: useFormInput('')};
+    const description = {ru: useFormInput(''), en: useFormInput('')};
+    const tags = useFormInput('');
+    const rteData = {ru: useFormInput(''), en: useFormInput('')};
     
     const [image, setImage] = useState(null);
     const [imageData, setImageData] = useState(null);
@@ -37,10 +39,14 @@ function Articles(props) {
     const articleRequest = () => {
         getArticle(props.match.params.id, function(success, data) {
             if (success) {
-                author.setValue(data.author.en);
-                title.setValue(data.title.en);
-                description.setValue(data.description.en);
-                rteData.setValue(data.rteData.en);
+                author.en.setValue(data.author.en);
+                author.ru.setValue(data.author.ru);
+                title.en.setValue(data.title.en);
+                title.ru.setValue(data.title.ru);
+                description.en.setValue(data.description.en);
+                description.ru.setValue(data.description.ru);
+                rteData.en.setValue(data.rteData.en);
+                rteData.ru.setValue(data.rteData.ru);
                 let tagsStr = "";
                 data.tags.forEach((element, index) => {
                     tagsStr += element.title;
@@ -85,20 +91,20 @@ function Articles(props) {
 
         let packedArticle = {
             author: {
-                en: author.value,
-                ru: author.value
+                en: author.en.value,
+                ru: author.ru.value
             },
             title: {
-                en: title.value,
-                ru: title.value
+                en: title.en.value,
+                ru: title.ru.value
             },
             rteData: {
-                en: rteData.value,
-                ru: rteData.value
+                en: rteData.en.value,
+                ru: rteData.ru.value
             },
             description: {
-                en: description.value,
-                ru: description.value
+                en: description.en.value,
+                ru: description.ru.value
             },
             tags: packedTags,
             imagePath: imagePath
@@ -145,20 +151,20 @@ function Articles(props) {
 
         let packedArticle = {
             author: {
-                en: author.value,
-                ru: author.value
+                en: author.en.value,
+                ru: author.ru.value
             },
             title: {
-                en: title.value,
-                ru: title.value
+                en: title.en.value,
+                ru: title.ru.value
             },
             rteData: {
-                en: rteData.value,
-                ru: rteData.value
+                en: rteData.en.value,
+                ru: rteData.ru.value
             },
             description: {
-                en: description.value,
-                ru: description.value
+                en: description.en.value,
+                ru: description.ru.value
             },
             tags: packedTags,
             imagePath: imagePath
@@ -176,13 +182,50 @@ function Articles(props) {
 
     return (
         <div className="articleModify">
-            <Content title="New Article (localize)">
+            <Content
+                title={isEdit ? t("ARTICLE_EDITING.1") : t("ARTICLE_CREATING.1")}
+                selectorContent={<LangSelector currentLanguage={currentLanguage} setCurrentLanguage={setCurrentLanguage}/>}
+            >
                 <div className="field">
-                    <Input first type="text" placeholder="Author (localize)" value={author} width="30%">Author (localize)</Input>
-                    <Input type="text" placeholder="Article title (localize)" value={title} width="60%">Title (localize)</Input>
-                    <Input type="textarea" placeholder="Article description (localize)" value={description}>Description (localize)</Input>
-                    <Input type="text" placeholder="Type tags here" description="Вводятся через запятую" value={tags} width="100%">Tags</Input>
-                    <RTEInput placeholder="Article description (localize)" data={rteData}>Data (localize)</RTEInput>
+                    <Input
+                        first
+                        type="text"
+                        placeholder={t("ARTICLE_AUTHOR.1")}
+                        value={getLocale(author, currentLanguage)}
+                        width="30%"
+                    >
+                        {t("AUTHOR.1")}
+                    </Input>
+                    <Input
+                        type="text"
+                        placeholder={t("ARTICLE_TITLE.1")}
+                        value={getLocale(title, currentLanguage)}
+                        width="60%"
+                    >
+                        {t("TITLE.1")}
+                    </Input>
+                    <Input 
+                        type="textarea"
+                        placeholder={t("ARTICLE_DESCRIPTION.1")}
+                        value={getLocale(description, currentLanguage)}
+                    >
+                        {t("DESCRIPTION.1")}
+                    </Input>
+                    <Input
+                        type="text"
+                        placeholder={t("ARTICLE_TAGS.1")}
+                        description={t("TAGS_INPUT_DESCRIPTION.1")}
+                        value={tags}
+                        width="100%"
+                    >
+                        {t("TAGS.1")}
+                    </Input>
+                    <RTEInput
+                        placeholder={t("ARTICLE_DATA.1")}
+                        data={getLocale(rteData, currentLanguage)}
+                    >
+                        {t("DATA.1")}
+                    </RTEInput>
                     <FilePicker
                         title={t("IMAGE.1")}
                         image={image}
@@ -197,10 +240,10 @@ function Articles(props) {
                 </div>
                 <div className="actions">
                     <div className="action">
-                        <Button onClick={isEdit ? updateArticleClick : createArticleClick}>Save</Button>
+                        <Button onClick={isEdit ? updateArticleClick : createArticleClick}>{t("SAVE.1")}</Button>
                     </div>
                     <div className="action">
-                        <Button cancel onClick={()=>{props.history.goBack()}}>Cancel</Button>
+                        <Button cancel onClick={()=>{props.history.goBack()}}>{t("CANCEL.1")}</Button>
                     </div>
                 </div>
             </Content>

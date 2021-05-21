@@ -13,7 +13,6 @@ function ArticleItem(props) {
     const menuClick = () => {
         deleteArticle(props.id, function(success, data) {
             if (data.error == null) {
-                console.log("article " + data._id + " deleted");
                 window.location.reload();
             }
             else {
@@ -35,7 +34,7 @@ function ArticleItem(props) {
                     <Tags tags={props.tags}/>
                     <span className="title">{props.children}</span>
                     <span className="description">{props.description}</span>
-                    <span className="dateTime">{props.dateTime}</span>
+                    <span className="dateTime">{props.author} ● {props.dateTime}</span>
                 </div>
             </div>
         </div>

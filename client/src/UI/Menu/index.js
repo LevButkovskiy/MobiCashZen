@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from "react-i18next";
 import { useHistory } from 'react-router-dom';
 import { getArticles } from '../../Utils/ArticlesUtil';
+import { getLocale } from '../../Utils/Hoocks';
 import './index.css';
 
 function Menu(props) {
@@ -85,7 +86,7 @@ function Menu(props) {
     const renderMenu = (item, key) => {
         return (
             <MenuCategory
-                title={item.title.en}
+                title={getLocale(item.title, i18n.language)}
                 index={key + 3}
                 selectedCategory={selectedCategory}
                 selectedElement={selectedElement}
@@ -94,7 +95,6 @@ function Menu(props) {
                     <MenuElement title="Info" index={0} selectedElement={selectedElement} href={"/article/" + item._id + "/edit"} onClick={handleSelect}/>
                     <MenuElement title="Preview" index={1} selectedElement={selectedElement} href={"/article/" + item._id + "/preview"} onClick={handleSelect}/>
             </MenuCategory>)
-        return <li>{item.title.en}</li>
     }
 
     const handleSelect = (e) => {
@@ -105,11 +105,11 @@ function Menu(props) {
     return (
         <div className="menu">
             <ul>
-            <MenuCategory hrAfter title={"Все статьи"} index={0} selectedElement={-1} selectedCategory={selectedCategory} href="/" onClick={handleSelect}/>
-            <div className="categoryTitle">Tags</div>
+            <MenuCategory hrAfter title={t("ALL_ARTICLES.1")} index={0} selectedElement={-1} selectedCategory={selectedCategory} href="/" onClick={handleSelect}/>
+            <div className="categoryTitle">{t("TAGS.1")}</div>
             <MenuCategory title={"MobiCash"} index={1} selectedElement={-1} selectedCategory={selectedCategory} href="/?tag=MobiCash" onClick={handleSelect}/>
             <MenuCategory hrAfter title={"Test"} index={2} selectedElement={-1} selectedCategory={selectedCategory} href="/?tag=Test" onClick={handleSelect}/>
-            <div className="categoryTitle">Articles</div>
+            <div className="categoryTitle">{t("ARTICLES.1")}</div>
             {articles != null && articles.map(renderMenu)}
             </ul>
         </div>

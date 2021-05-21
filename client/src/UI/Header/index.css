@@ -5,6 +5,8 @@
     height: var(--headerHeight);
 
     user-select: text;
+
+    position:relative;
 }
 
 .header .title {
@@ -36,4 +38,16 @@
     text-overflow: ellipsis;
 
     color: white;
+}
+
+.statusSelector {
+    width: 100%;
+    border-bottom: 2px solid var(--mobiRed);
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+}
+
+.statusSelector:hover {
+    cursor: pointer;
 }

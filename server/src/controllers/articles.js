@@ -37,10 +37,6 @@ var sendOk = (res, status, content) => {
 module.exports.getArticles = function (req, res) {
     let filter = {};
 
-    if (req.query.allowedGroup != null) {
-        filter = {"$or": [{"allowedGroups": 0}, {"allowedGroups": req.query.allowedGroup}]}
-    }
-
     if (req.query.tag != null) {
         filter["tags.title"] = req.query.tag
     }
@@ -48,6 +44,25 @@ module.exports.getArticles = function (req, res) {
     if (req.query.internal != null) {
         filter.internal = "true"
     }
+
+    if (req.query.search != null && req.query.search != "") {
+        if (req.query.allowedGroup != null) {
+            filter["$and"] = [
+                {"$or": [{"allowedGroups": 0}, {"allowedGroups": req.query.allowedGroup}]},
+                {"$or": [{"title.en": {"$regex": req.query.search}}, {"title.ru": {"$regex": req.query.search}}]}
+            ]
+        }
+        else {
+            filter["$or"] = [{"title.en": {"$regex": req.query.search}}, {"title.ru": {"$regex": req.query.search}}]
+        }
+    }
+    else {
+        if (req.query.allowedGroup != null) {
+            filter["$or"] = [{"allowedGroups": 0}, {"allowedGroups": req.query.allowedGroup}]
+        }
+    }
+
+    console.log(filter);
 
     let options = {
         page: req.query.page ? req.query.page : 1,

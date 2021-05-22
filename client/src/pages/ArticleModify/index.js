@@ -46,10 +46,7 @@ function Articles(props) {
     const groupsRequest = (mode) => {
         getUsersGroups(function(success, data) {
             if(success) {
-                let groups = data;
-                groups.push({_id: -1, title: {ru: "Никому", en: "NoOne"}})
                 setAllGroups(data);
-                console.log(mode);
                 mode && articleRequest(data);
             }
         })

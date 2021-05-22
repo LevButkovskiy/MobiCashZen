@@ -11,14 +11,16 @@ import Content from '../../UI/Content';
 import Button from '../../UI/Button';
 
 import Tags from '../../items/Tags';
+import LangSelector from '../../items/LangSelector';
 import ArticleShowItem from '../../items/ArticleShowItem';
 
 function Article(props) {
     const [t, i18n] = useTranslation();
+    const [currentLanguage, setCurrentLanguage] = useState(i18n.language);
 
     const [article, setArticle] = useState(null);
     const [allGroups, setAllGroups] = useState(null);
-    const [showPreview, setShowPreview] = useState(null);
+    const [showPreview, setShowPreview] = useState(false);
 
     useEffect(() => {
         getArticleHandler(props.match.params.id)
@@ -52,8 +54,9 @@ function Article(props) {
                         <span className="date">{dateFormatter(article.publishDate)}</span>
                     </div>
                     <Tags size="md" tags={article.tags}/>
-                    <span className="title">{article.title.en}</span>
-                    <span className="description">{article.description && article.description.en}</span>
+                    <span className="author">{getLocale(article.author, currentLanguage)}</span>
+                    <span className="title">{getLocale(article.title, currentLanguage)}</span>
+                    <span className="description">{getLocale(article.description, currentLanguage)}</span>
                     <span className="dateTime">{article.dateTime}</span>
                     <div className={isSuperAdmin() ? "buttonGroup" : "previewButton"}>
                         <Button inline={isSuperAdmin()} onClick={()=>{props.history.push("/article/" + article._id + "/preview")}}>{t("PREVIEW.1")}</Button>
@@ -65,24 +68,27 @@ function Article(props) {
     }
 
     const renderArticleAllowedGroups = (item, key) => {
-        return <li className="allowedGroup" key={key}>{getLocale(allGroups.find(el => {return el._id == item}).title, i18n.language)}</li>
+        return <li className="allowedGroup" key={key}>{getLocale(allGroups.find(el => {return el._id == item}).title, currentLanguage)}</li>
     }
 
     return (
         <div className="article">
-                <Content title={article && article.title.en}>
+                <Content
+                    title={article && article.title.en}
+                    selectorContent={<LangSelector currentLanguage={currentLanguage} setCurrentLanguage={setCurrentLanguage}/>}                  
+                >
                 {article != null && allGroups &&
                     <div className="articleContent">
                         <div className="sectionTitle"><span className="title">{t("INFORMATION.1")}</span></div>
                         {renderArticleInfo()}
                         {article.internal && <>
-                            <div className="sectionTitle"><span className="title">{t("ALLOWED_GROUPS.1")}</span></div>
+                            <div className="sectionTitle"><span className="title">{t("AVAILABILITY.1")}</span></div>
                             <ul className="allowedGroups">
                                 {article.allowedGroups.map(renderArticleAllowedGroups)}
                             </ul>
                         </>}
                         <div className="sectionTitle"><span className="title">{t("PREVIEW.1")}</span></div>
-                        {showPreview && <ArticleShowItem article={article} currentLanguage={i18n.language}/>}
+                        {showPreview && <ArticleShowItem article={article} currentLanguage={currentLanguage}/>}
                         <div className="showPreviewButton">
                             <Button onClick={()=>{setShowPreview(!showPreview)}}>{showPreview ? t("HIDE_PREVIEW.1") : t("SHOW_PREVIEW.1")}</Button>
                         </div>

@@ -18,9 +18,11 @@ function NavBar(props) {
     const [allGroups, setAllGroups] = useState(null);
 
     useEffect(() => {
-        getUsersGroups(function(success, data) {
-            setAllGroups(data);
-        })
+        if(getLogin()) {
+            getUsersGroups(function(success, data) {
+                setAllGroups(data);
+            })
+        }
     }, []);
 
     const langs = [

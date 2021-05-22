@@ -83,6 +83,13 @@
     text-overflow: ellipsis
 }
 
+.articleInfo > .author {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+
 .articleInfo > .articleStatuses {
     margin-bottom: 8px;
 }

@@ -25,13 +25,15 @@ function Login(props) {
         })
 
         requestWithBody('/api/v1/auth/login', 'POST', body, function(success, data) {
-            setUserSession(data.authToken, data.refreshToken, data.expTime, data.user, password.value, 'User', 6);
-            props.history.push('/');
+            if(success) {
+                setUserSession(data.authToken, data.refreshToken, data.expTime, data.user, password.value, 'User', 6);
+                props.history.push('/');
+            }
         })
     }
 
     return (
-        <Content>
+        <Content nomenu>
             <div className="login">
                 <div className="inputForm">
                     <div className="loginByUser">
@@ -48,7 +50,7 @@ function Login(props) {
                             value={password}
                         >{t("PASSWORD.1")}</Input>
                         <Button
-                            onClick={handleLogin}
+                            onClick={()=>handleLogin()}
                         >{t("LOG_IN.1")}</Button>
                     </div>
                     <div className="loginByQR">

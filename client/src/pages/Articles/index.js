@@ -5,9 +5,10 @@ import './index.css';
 
 import Content from '../../UI/Content';
 import Button from '../../UI/Button';
+import Input from '../../UI/Input';
 
 import ArticleItem from '../../items/ArticleItem';
-import { getLocale } from '../../Utils/Hoocks';
+import { getLocale, useFormInput } from '../../Utils/Hoocks';
 import { getGroupId, isSuperAdmin } from '../../Utils/UserUtil';
 
 function Articles(props) {
@@ -17,6 +18,8 @@ function Articles(props) {
     const [tag, setTag] = useState(null);
     const [title, setTitle] = useState("ALL_ARTICLES.1")
 
+    const search = useFormInput('');
+
     useEffect(() => {
         getArticlesHandler();
     }, []);
@@ -25,7 +28,7 @@ function Articles(props) {
         getArticlesHandler();
     }, [window.location.href]);
 
-    const getArticlesHandler = () => {
+    const getArticlesHandler = (search = null) => {
         setTitle("ALL_ARTICLES.1")
         let url = window.location.pathname.split('/');       
         let filterTag = (new URLSearchParams(window.location.search)).get("tag");
@@ -38,11 +41,15 @@ function Articles(props) {
             setTag(null)
         }
 
-        if(!isSuperAdmin()) {
+        if (!isSuperAdmin()) {
             searchParams.allowedGroup = getGroupId();
         }
 
-        if(url.length > 1 && url[1] == "personal" || !isSuperAdmin()) {
+        if (search) {
+            searchParams.search = search;
+        }
+
+        if (url.length > 1 && url[1] == "personal" || !isSuperAdmin()) {
             searchParams.internal = "true";
             if (url[1] == "personal") {
                 setTitle("FOR_ME.1");
@@ -75,12 +82,20 @@ function Articles(props) {
         )
     }
 
+    const onSearchChange = (e) => {
+        search.setValue(e.target.value);
+        getArticlesHandler(e.target.value);
+    }
+
     return (
         <div className="articles">
             <Content title={t(title)} subtitle={tag ? ("?tag=" + tag) : null}>
                 <div className="settings">
                     <div className="new">
                         <Button onClick={()=>{props.history.push("/article/new")}} width>{t("ADD_ARTICLE.1")}</Button>
+                    </div>
+                    <div className="search">
+                        <Input type="text" placeholder="Type text" value={{value: search.value, onChange:onSearchChange}}>Search</Input>
                     </div>
                 </div>
                 <div className="articlesData">

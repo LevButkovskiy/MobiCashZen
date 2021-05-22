@@ -122,6 +122,9 @@
   "ALLOWED_GROUPS": {
     "1": "Allowed for groups"
   },
+  "AVAILABILITY": {
+    "1": "Availability"
+  },
   "INTERNAL_ARTICLE": {
     "1": "Internal article"
   },

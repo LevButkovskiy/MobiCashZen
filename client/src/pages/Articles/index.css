@@ -1,5 +1,7 @@
 .settings {
     width: 100%;
+
+    position: relative;
 }
 
 .settings > .new {
@@ -18,4 +20,12 @@
 
 .articlesData > .content {
     margin-top: 8px;
+}
+
+.settings > .search {
+    position: absolute;
+    top: -26px;
+    width: 300px;
+
+    left: 222px;
 }

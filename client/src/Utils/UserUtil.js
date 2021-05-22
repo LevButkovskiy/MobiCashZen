@@ -29,20 +29,17 @@ export const getToken = (callback) => {
                     }
                     else {
                         removeUserSession()
-                        window.location.href = '/login';
                         Response(callback, CreateError("NO_PASSWORD", "No password in storage"))
                     }
                 }
                 else {
                     //Refresh token expired
                     removeUserSession()
-                    window.location.href = '/login';
                 }
             })
         }
         else {
             removeUserSession()
-            window.location.href = '/login';
         }
     }
 }
@@ -82,7 +79,7 @@ export const removeUserSession = () => {
     localStorage.removeItem('role');
     localStorage.removeItem('groupId');
 
-    window.location = "/login";
+    window.location.href = "/login";
 }
 
 // set the token and user from the session storage

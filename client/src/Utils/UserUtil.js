@@ -66,7 +66,12 @@ export const isSuperAdmin = () => {
 }
 
 export const getGroupId = () => {
-    return localStorage.getItem('groupId') || 0;
+    let groupId = localStorage.getItem('groupId');
+    if(groupId == "undefined" || groupId == null) {
+        removeUserSession()
+        return;
+    }
+    return groupId || 0;
 }
 
 // remove the token and user from the session storage

@@ -41,6 +41,34 @@ app.use(uploadsAPIURL, uploadsActions);
 
 app.use(articlesAPIURL, articlesActions);
 
+app.get('/', (req,res) => {
+    res.sendFile(path.join(__dirname, '../../client/build/index.html'));
+});
+  
+app.get('/login', (req,res) => {
+    res.sendFile(path.join(__dirname, '../../client/build/index.html'));
+});
+
+app.get('/articles', (req,res) => {
+    res.sendFile(path.join(__dirname, '../../client/build/index.html'));
+});
+
+app.get('/articles/*', (req,res) => {
+    res.sendFile(path.join(__dirname, '../../client/build/index.html'));
+});
+
+app.get('/static/*', (req,res) => {
+    res.sendFile(path.join(__dirname, '../../client/build/' + req.path));
+});
+
+app.get('/images/*', (req,res) => {
+    res.sendFile(path.join(__dirname, '../../client/build/' + req.path));
+});
+
+app.get('/locales/*', (req,res) => {
+    res.sendFile(path.join(__dirname, '../../client/build/' + req.path));
+});
+
 app.use('/api/v1/*', function(req, res, next){
     let token = req.header('api-token');
   

@@ -32,10 +32,6 @@ app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'client', 'build')));
 
-app.get('/', (req,res) => {
-    res.send("Hello world");
-});
-
 app.use(authAPIURL, authActions);
 app.use(uploadsAPIURL, uploadsActions);
 

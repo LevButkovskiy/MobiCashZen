@@ -136,7 +136,12 @@ function Articles(props) {
 
         let allowedGroups = [];
         groupsList && groupsList.forEach(e => allowedGroups.push(e._id));
+
+        if(allowedGroups.length == 0) {
+            allowedGroups.push(0);
+        }
         packedArticle.allowedGroups = allowedGroups;
+        
 
         if (i18n.language  == "ru") {
             if (title.en.value == "") {
@@ -196,7 +201,6 @@ function Articles(props) {
         let tagsArr = tags.value != "" ? tags.value.replace(', ', ',').split(',') : [];
         let packedTags = null;
 
-        console.log(tagsArr)
         if (tagsArr.length > 0) {
             packedTags = [];
             tagsArr.forEach(element => {
@@ -229,6 +233,10 @@ function Articles(props) {
 
         let allowedGroups = [];
         groupsList && groupsList.forEach(e => allowedGroups.push(e._id));
+
+        if(allowedGroups.length == 0 || groupsList == null) {
+            allowedGroups.push(0);
+        }
         packedArticle.allowedGroups = allowedGroups;
 
         updateArticle(props.match.params.id, packedArticle, function(success, data) {

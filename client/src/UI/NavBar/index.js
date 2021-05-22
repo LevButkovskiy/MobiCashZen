@@ -44,6 +44,11 @@ function NavBar(props) {
         removeUserSession();
     }
 
+    const createRole = () => {
+        let id = getGroupId();
+        return allGroups[id];
+    }
+
     return (
         <div className="navBar">
             <img className="logo" src={logo} alt="logo" onClick={()=>{props.history.push("/")}}/>
@@ -55,18 +60,18 @@ function NavBar(props) {
                 </span>
             </div>
             <div className="profileDropdown">
-            {getLogin() && allGroups ?
+            {getLogin() && allGroups &&
                 <NavDropdown style={{color: "#fff"}} alignRight
                     title={
                         <>
                         <div className="username">{getRole() + " " + getLogin()}</div>
-                        <span className="role">{getLocale(allGroups[getGroupId()].title, i18n.language)}</span>
+                        <span className="role">{getLocale(createRole().title, i18n.language)}</span>
                         </>
                     }>
                     <NavDropdown.Item as="button" onClick={() => {
                         handleLogout()
                     }}>{t('LOGOUT.1')}</NavDropdown.Item>
-                </NavDropdown> : <></>}
+                </NavDropdown>}
             </div>
             <div className="langDropdown">
                 <NavDropdown alignRight

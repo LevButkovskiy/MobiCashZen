@@ -37,17 +37,18 @@ var sendOk = (res, status, content) => {
 module.exports.getArticles = function (req, res) {
     let filter = {};
 
+    if (req.query.allowedGroup != null) {
+        filter = {"$or": [{"allowedGroups": 0}, {"allowedGroups": req.query.allowedGroup}]}
+    }
+
     if (req.query.tag != null) {
-        filter = {"tags.title": req.query.tag}
+        filter["tags.title"] = req.query.tag
     }
 
     if (req.query.internal != null) {
         filter.internal = "true"
     }
 
-    if (req.query.allowedGroup != null) {
-        filter["allowedGroups"] = req.query.allowedGroup
-    }
     let options = {
         page: req.query.page ? req.query.page : 1,
         limit: req.query.limit ? req.query.limit : 99999,

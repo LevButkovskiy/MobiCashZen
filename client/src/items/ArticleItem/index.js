@@ -5,6 +5,7 @@ import { deleteArticle } from '../../Utils/ArticlesUtil';
 import './index.css';
 
 import Tags from '../../items/Tags';
+import { isSuperAdmin } from '../../Utils/UserUtil';
 
 function ArticleItem(props) {
     const [t, i18n] = useTranslation();
@@ -30,7 +31,7 @@ function ArticleItem(props) {
                 <div className="menu">
                     <img className="menuIcon" src="/images/menu.png" onClick={()=>{menuClick()}}/>
                 </div>
-                <div className="articleInfo" onClick={()=>{history.push("/article/" + props.id)}}>
+                <div className="articleInfo" onClick={()=>{history.push(isSuperAdmin() ? "/article/" + props.id : "/article/" + props.id + "/show")}}>
                     <Tags tags={props.tags}/>
                     <span className="title">{props.children}</span>
                     <span className="description">{props.description}</span>

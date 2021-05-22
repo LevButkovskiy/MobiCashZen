@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from "react-i18next";
 import { getArticle } from '../../Utils/ArticlesUtil';
 import { getLocale } from '../../Utils/Hoocks';
+import { getUsersGroups, isSuperAdmin } from '../../Utils/UserUtil';
+import { dateFormatter } from '../../Utils/Formatter';
+
 import './index.css';
 
 import Content from '../../UI/Content';
 import Button from '../../UI/Button';
 
 import Tags from '../../items/Tags';
-import { getUsersGroups, isSuperAdmin } from '../../Utils/UserUtil';
 
 function Article(props) {
     const [t, i18n] = useTranslation();
@@ -45,7 +47,7 @@ function Article(props) {
                 <div className="articleInfo">
                     <div className="articleStatuses">
                         <span className="status" type="active">{t("ACTIVE.1")}</span>
-                        <span className="date">24.05.2021 23:23</span>
+                        <span className="date">{dateFormatter(article.publishDate)}</span>
                     </div>
                     <Tags size="md" tags={article.tags}/>
                     <span className="title">{article.title.en}</span>

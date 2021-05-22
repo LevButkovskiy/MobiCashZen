@@ -11,6 +11,7 @@ var articlesSchema = new mongoose.Schema({
   imagePath:      String,
   internal:       {type: Boolean, default: true},
   allowedGroups:  [{type: Number}],
+  publishDate:    Date,
   props:          [String]
 });
 

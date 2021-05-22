@@ -1,5 +1,7 @@
 .articlePreviewContent {
     --authorImageSize: 36px;
+
+    user-select: text;
 }
 
 .articlePreviewData {
@@ -10,6 +12,66 @@
 
 .articlePreviewData > p >img {
     max-width: 100%;
+}
+
+
+.articleDate {
+    text-align: right;
+    margin-bottom: 4px;
+
+    color: var(--mobiGray);
+}
+
+.articlePreviewContent > .articlePreviewHeader {
+    border-bottom: 2px solid var(--mobiRed);
+    width: 100%;
+
+    padding: 8px 12px;
+
+    background: rgba(0, 0, 0, 0.15);
+
+    position: relative;
+}
+
+.articlePreviewContent > .articlePreviewHeader > .title {
+    font-size: 22px;
+    line-height: 24px;
+    font-weight: 700;
+    margin-bottom: 8px;  
+}
+
+.articlePreviewContent > .articlePreviewHeader > .description {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.articlePreviewContent > .articlePreviewHeader > .articlePreviewImage {
+    float: left;
+    width: 50px; 
+    margin-right: 16px;
+}
+
+.articlePreviewContent > .articlePreviewHeader > .authorInfo {
+    position: absolute;
+    top: 20%;
+    right: 12px;
+}
+
+.articlePreviewContent > .articlePreviewHeader > .authorInfo > .author {
+    font-size: 16px;
+    font-weight: 600;
+
+    display: inline-block;
+
+    margin-right: 16px;
+}
+
+.articlePreviewContent > .articlePreviewHeader > .authorInfo > .authorImage {
+    width: var(--authorImageSize);
+
+    border-radius: 4px;
+
+    display: inline-block;
 }
 
 .articlePreviewContent > .title {
@@ -58,9 +120,12 @@
 }
 
 .tagsPreview {
-    background: white;
+    background: rgba(0, 0, 0, 0.15);
+    border-top: 2px solid var(--mobiRed);
 
-    padding: 24px;
+    padding: 12px 24px;
+
+    user-select: none;
 }
 
 .tagsPreviewMenu {

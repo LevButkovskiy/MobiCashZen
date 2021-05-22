@@ -1,0 +1,105 @@
+.articleShow {
+    user-select: text;
+}
+
+.articleShowContent {
+    --authorImageSize: 36px;
+}
+
+.articleShowData {
+    background: white;
+
+    padding: 24px;
+}
+
+.articleShowData > p > img {
+    max-width: 100%;
+}
+
+.articleDate {
+    text-align: right;
+    margin-bottom: 4px;
+
+    color: var(--mobiGray);
+}
+
+.articleShowContent > .articleShowHeader {
+    border-bottom: 2px solid var(--mobiRed);
+    width: 100%;
+
+    padding: 8px 12px;
+
+    background: rgba(0, 0, 0, 0.15);
+
+    position: relative;
+}
+
+.articleShowContent > .articleShowHeader > .title {
+    font-size: 22px;
+    line-height: 24px;
+    font-weight: 700;
+    margin-bottom: 8px;  
+}
+
+.articleShowContent > .articleShowHeader > .description {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.articleShowContent > .articleShowHeader > .articleShowImage {
+    float: left;
+    width: 50px; 
+    margin-right: 16px;
+}
+
+.articleShowContent > .articleShowHeader > .authorInfo {
+    position: absolute;
+    top: 20%;
+    right: 12px;
+}
+
+.articleShowContent > .articleShowHeader > .authorInfo > .author {
+    font-size: 16px;
+    font-weight: 600;
+
+    display: inline-block;
+
+    margin-right: 16px;
+}
+
+.articleShowContent > .articleShowHeader > .authorInfo > .authorImage {
+    width: var(--authorImageSize);
+
+    border-radius: 4px;
+
+    display: inline-block;
+}
+
+.tagsShow {
+    background: rgba(0, 0, 0, 0.15);
+    border-top: 2px solid var(--mobiRed);
+
+    padding: 12px 24px;
+
+    user-select: none;
+}
+
+.tagsShowMenu {
+    margin-top: 4px;
+}
+
+.tagsShowTitle {
+    margin-right: 6px;
+
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.tagShow {
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.tagShowLink {
+    font-size: 12px;
+}

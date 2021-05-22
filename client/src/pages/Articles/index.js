@@ -68,7 +68,7 @@ function Articles(props) {
                 id={item._id}
                 imageSrc={item.imagePath ? ("/api/v1/" + item.imagePath) : "/images/defaultImage.png"}
                 description={getLocale(item.description, i18n.language)}
-                dateTime="10.05.2021 23:23"
+                dateTime={item.publishDate}
                 author={getLocale(item.author, i18n.language)}
                 tags={item.tags}
             >{getLocale(item.title, i18n.language)}</ArticleItem>

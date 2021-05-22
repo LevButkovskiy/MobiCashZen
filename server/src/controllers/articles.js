@@ -122,6 +122,7 @@ module.exports.articleUpdateOne = function (req, res) {
             article.internal = req.body.internal;
             article.imagePath = req.body.imagePath ? req.body.imagePath : article.imagePath;
             article.allowedGroups = req.body.allowedGroups ? req.body.allowedGroups : article.allowedGroups;
+            article.publishDate = req.body.publishDate ? req.body.publishDate : article.publishDate;
 
             article.save(function (err, article) {
                 if (err) {
@@ -153,7 +154,8 @@ module.exports.articleCreate = function (req, res) {
         tags: req.body.tags,
         internal: req.body.internal,
         imagePath: req.body.imagePath,
-        allowedGroups:  req.body.allowedGroups
+        allowedGroups:  req.body.allowedGroups,
+        publishDate: req.body.publishDate
     };
 
     Articles.create(docs, function (err, article) {

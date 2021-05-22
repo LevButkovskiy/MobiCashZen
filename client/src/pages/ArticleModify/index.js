@@ -31,6 +31,7 @@ function Articles(props) {
     const [internal, setInternal] = useState(true);
     const [groupsList, setGroupsList] = useState(null);
     const [allGroups, setAllGroups] = useState(null);
+    const [publishDate, setPublishDate] = useState(null);
 
     const [image, setImage] = useState(null);
     const [imageData, setImageData] = useState(null);
@@ -65,7 +66,8 @@ function Articles(props) {
                 description.ru.setValue(data.description.ru);
                 rteData.en.setValue(data.rteData.en);
                 rteData.ru.setValue(data.rteData.ru);
-                setInternal(data.internal)
+                setInternal(data.internal);
+                setPublishDate(data.publishDate);
                 let tagsStr = "";
                 data.tags && data.tags.forEach((element, index) => {
                     tagsStr += element.title;
@@ -131,7 +133,8 @@ function Articles(props) {
             },
             tags: packedTags,
             imagePath: imagePath,
-            internal: internal
+            internal: internal,
+            publishDate: new Date()
         }
 
         let allowedGroups = [];
@@ -229,6 +232,10 @@ function Articles(props) {
             tags: packedTags,
             imagePath: imagePath,
             internal: internal
+        }
+
+        if (publishDate == null) {
+            packedArticle.publishDate = new Date();
         }
 
         let allowedGroups = [];

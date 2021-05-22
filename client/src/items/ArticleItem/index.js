@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { useTranslation } from "react-i18next";
 import { useHistory } from 'react-router-dom';
 import { deleteArticle } from '../../Utils/ArticlesUtil';
+import { isSuperAdmin } from '../../Utils/UserUtil';
+import { dateFormatter } from '../../Utils/Formatter';
 import './index.css';
 
 import Tags from '../../items/Tags';
-import { isSuperAdmin } from '../../Utils/UserUtil';
+
 
 function ArticleItem(props) {
     const [t, i18n] = useTranslation();
@@ -35,7 +37,7 @@ function ArticleItem(props) {
                     <Tags tags={props.tags}/>
                     <span className="title">{props.children}</span>
                     <span className="description">{props.description}</span>
-                    <span className="dateTime">{props.author} ● {props.dateTime}</span>
+                    <span className="dateTime">{props.author} ● {dateFormatter(props.dateTime)}</span>
                 </div>
             </div>
         </div>

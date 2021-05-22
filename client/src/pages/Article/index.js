@@ -11,12 +11,14 @@ import Content from '../../UI/Content';
 import Button from '../../UI/Button';
 
 import Tags from '../../items/Tags';
+import ArticleShowItem from '../../items/ArticleShowItem';
 
 function Article(props) {
     const [t, i18n] = useTranslation();
 
     const [article, setArticle] = useState(null);
     const [allGroups, setAllGroups] = useState(null);
+    const [showPreview, setShowPreview] = useState(null);
 
     useEffect(() => {
         getArticleHandler(props.match.params.id)
@@ -46,7 +48,7 @@ function Article(props) {
                 </div>
                 <div className="articleInfo">
                     <div className="articleStatuses">
-                        <span className="status" type="active">{t("ACTIVE.1")}</span>
+                        <span className="status" type="active">{article.internal ? t("INTERNAL_ARTICLE.1") : t("FOR_EXPORT.1")}</span>
                         <span className="date">{dateFormatter(article.publishDate)}</span>
                     </div>
                     <Tags size="md" tags={article.tags}/>
@@ -63,7 +65,7 @@ function Article(props) {
     }
 
     const renderArticleAllowedGroups = (item, key) => {
-        return <li className="allowedGroup" key={key}>{getLocale(allGroups[item].title, i18n.language)}</li>
+        return <li className="allowedGroup" key={key}>{getLocale(allGroups.find(el => {return el._id == item}).title, i18n.language)}</li>
     }
 
     return (
@@ -79,6 +81,11 @@ function Article(props) {
                                 {article.allowedGroups.map(renderArticleAllowedGroups)}
                             </ul>
                         </>}
+                        <div className="sectionTitle"><span className="title">{t("PREVIEW.1")}</span></div>
+                        {showPreview && <ArticleShowItem article={article} currentLanguage={i18n.language}/>}
+                        <div className="showPreviewButton">
+                            <Button onClick={()=>{setShowPreview(!showPreview)}}>{showPreview ? t("HIDE_PREVIEW.1") : t("SHOW_PREVIEW.1")}</Button>
+                        </div>
                     </div>
                 }
 

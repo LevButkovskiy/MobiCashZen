@@ -54,6 +54,13 @@ module.exports.checkRefreshToken = function (req, res) {
 module.exports.getUsersGroups = function (req, res) {
     let groups = [
         {
+            _id: -1,
+            title: {
+                ru: "Никому",
+                en: "NoOne"
+            }
+        },
+        {
             _id: 0,
             title: {
                 ru: "Все департаменты",

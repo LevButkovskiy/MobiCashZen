@@ -81,8 +81,8 @@ function Menu(props) {
             let path = url[3];
             switch (path) {
                 case 'edit': setSelectedElement(0); break;
-                case 'preview': setSelectedElement(1); break;
-                case 'show': setSelectedElement(2); break;
+                // case 'preview': setSelectedElement(1); break;
+                case 'show': setSelectedElement(1); break;
                 default: setSelectedElement(-1);
             }
         } else {
@@ -101,8 +101,8 @@ function Menu(props) {
                 href={"/article/" + item._id}
                 onClick={handleSelect}>
                     <MenuElement title={t("INFORMATION.1")}  index={0} selectedElement={selectedElement} href={"/article/" + item._id + "/edit"} onClick={handleSelect}/>
-                    <MenuElement title={t("PREVIEW.1")} index={1} selectedElement={selectedElement} href={"/article/" + item._id + "/preview"} onClick={handleSelect}/>
-                    <MenuElement title={t("SHOW.1")} index={2} selectedElement={selectedElement} href={"/article/" + item._id + "/show"} onClick={handleSelect}/>
+                    {/* <MenuElement title={t("PREVIEW.1")} index={1} selectedElement={selectedElement} href={"/article/" + item._id + "/preview"} onClick={handleSelect}/> */}
+                    <MenuElement title={t("SHOW.1")} index={1} selectedElement={selectedElement} href={"/article/" + item._id + "/show"} onClick={handleSelect}/>
             </MenuCategory>)
     }
 

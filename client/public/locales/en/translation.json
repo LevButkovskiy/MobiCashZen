@@ -122,6 +122,18 @@
   "ALLOWED_GROUPS": {
     "1": "Allowed for groups"
   },
+  "INTERNAL_ARTICLE": {
+    "1": "Internal article"
+  },
+  "FOR_EXPORT": {
+    "1": "For export"
+  },
+  "SHOW_PREVIEW": {
+    "1": "Show preview"
+  },
+  "HIDE_PREVIEW": {
+    "1": "Hide preview"
+  },
   "ADD_PHOTO": {
     "1": "Add image"
   },

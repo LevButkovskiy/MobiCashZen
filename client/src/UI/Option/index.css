@@ -1,0 +1,11 @@
+.mobiCashOption {
+    padding-left: 8px;
+    width: 100%;
+    padding: 8px;
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    box-sizing: border-box;
+    border-radius: 2px;
+    height: 20px;
+  }
+  

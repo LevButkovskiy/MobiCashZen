@@ -15,7 +15,7 @@ function Button(props) {
     }
 
     return (
-        <div className="button">
+        <div className="button" type={props.inline ? "inline" : null}>
             <button
                 onClick={props.onClick}
                 type={buttonType()}

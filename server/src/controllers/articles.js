@@ -42,19 +42,21 @@ module.exports.getArticles = function (req, res) {
     }
 
     if (req.query.internal != null) {
-        filter = {"internal": "true"}
+        filter.internal = "true"
     }
 
+    if (req.query.allowedGroup != null) {
+        filter["allowedGroups"] = req.query.allowedGroup
+    }
     let options = {
         page: req.query.page ? req.query.page : 1,
         limit: req.query.limit ? req.query.limit : 99999,
         sort: req.query.sort ? req.query.sort : "title"
     }
     
-    console.log(filter)
     Articles.paginate(filter, options, function (err, articles) {
         if (err) {
-            return sendErr(res, err.msg);
+            return sendErr(res, err);
         }
         console.log(articles)
 
@@ -118,6 +120,7 @@ module.exports.articleUpdateOne = function (req, res) {
             article.tags = req.body.tags;
             article.internal = req.body.internal;
             article.imagePath = req.body.imagePath ? req.body.imagePath : article.imagePath;
+            article.allowedGroups = req.body.allowedGroups ? req.body.allowedGroups : article.allowedGroups;
 
             article.save(function (err, article) {
                 if (err) {
@@ -149,7 +152,7 @@ module.exports.articleCreate = function (req, res) {
         tags: req.body.tags,
         internal: req.body.internal,
         imagePath: req.body.imagePath,
-        props:  req.body.props
+        allowedGroups:  req.body.allowedGroups
     };
 
     Articles.create(docs, function (err, article) {

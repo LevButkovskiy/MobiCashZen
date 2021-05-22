@@ -1,0 +1,72 @@
+.multyplySelectItem {
+    user-select: none;
+  }
+  
+  .multyplySelectTitle {
+    text-align: left;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 156%;
+    font-weight: bold;
+  }
+  
+  .multyplySelectDescription {
+    padding: 4px 0;
+    text-align: left;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 16px;
+    opacity: 0.6;
+  }
+  
+  .multyplySelectContainer {
+    position: relative;
+  }
+  
+  .multyplyListItem {
+      display: inline-block;
+  
+      padding: 0px 8px;
+      border: 1px solid rgba(0, 0, 0, 0.4);
+  
+      border-radius: 11px;
+  
+      margin: 8px 4px;
+  
+      background: #0064FF;
+      color: white;
+  
+      font-size: 14px;
+      line-height: 22px;
+  }
+  
+  .multyplyList {
+      border: 1px solid rgba(0, 0, 0, 0.4);
+  
+      max-height: 50px;
+      overflow-x: scroll;
+      overflow-y: hidden;
+  
+      list-style:none;
+  
+      white-space: nowrap;
+  }
+  
+  .multyplyItem {
+      margin-top: 4px;
+      margin-bottom: -17px;
+  }
+  
+  .removeListItemIcon {
+      width: 16px;
+      margin-left: 8px;
+      padding: 4px;
+  }
+  
+  .removeListItemIcon:hover {
+      background: rgba(0, 0, 0, 0.2);
+  
+      border-radius: 10px;
+  }
+  

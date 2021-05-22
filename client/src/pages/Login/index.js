@@ -25,7 +25,7 @@ function Login(props) {
         })
 
         requestWithBody('/api/v1/auth/login', 'POST', body, function(success, data) {
-            setUserSession(data.authToken, data.refreshToken, data.expTime, data.user, password.value);
+            setUserSession(data.authToken, data.refreshToken, data.expTime, data.user, password.value, 'User', 6);
             props.history.push('/');
         })
     }

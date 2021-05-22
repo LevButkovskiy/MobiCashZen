@@ -3,7 +3,7 @@
 }
 
 .articleData {
-    margin-top: 16px;
+    margin-top: 12px;
     width: 100%;
     height: var(--articleInfoHeight);
 
@@ -37,6 +37,15 @@
     
     height: 100%;
     width: calc(100% - var(--articleInfoHeight) - 8px);
+}
+
+.articleInfo > .buttonGroup {
+    position: absolute;
+
+    bottom: calc(24px + 16px); 
+    right: calc(16px + 16px);
+    
+    width: 350px;
 }
 
 .articleInfo > .previewButton {
@@ -103,6 +112,25 @@
 }
 
 .sectionTitle {
+    margin-top: 16px;
+}
+
+.sectionTitle > .title {
     font-size: 24px;
     line-height: 32px;
+}
+
+.allowedGroups {
+    background: white;
+    padding: 24px;
+    margin-top: 12px;
+
+    border-radius: 4px;
+}
+
+.allowedGroup {
+    margin-left: 16px;
+    margin-bottom: 8px;
+
+    font-size: 14px;
 }

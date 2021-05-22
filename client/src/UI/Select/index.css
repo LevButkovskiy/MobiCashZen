@@ -1,0 +1,67 @@
+.selectItem {
+    margin-bottom: 8px;
+  }
+  
+  .selectTitle {
+    text-align: left;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 156%;
+    font-weight: bold;
+  }
+  
+  .selectDescription {
+    padding: 4px 0;
+    text-align: left;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 16px;
+    opacity: 0.6;
+  }
+  
+  .selectContainer {
+    position: relative;
+  }
+  
+  .select {
+    margin-top: 4px;
+    font-size: 14px;
+    padding: 8px;
+    padding-right: 24px;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    box-sizing: border-box;
+    border-radius: 2px;
+    display: block;
+    color: #0064FF;
+    /* background: url("/images/arrowDown.png") no-repeat calc(100% - 10px) #fff; */
+    background-size: 7px 4px;
+  }
+  
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+  
+  .select[icon="true"] {
+    width: calc(100% - 24px);
+  }
+  
+  .select:hover {
+    cursor: pointer;
+    border: 1px solid rgba(0, 100, 255, 0.4);
+  }
+  
+  .select:onClick {
+    border: 1px solid #0064FF;
+  }
+  
+  .select[status="error"] {
+    border: 1px solid #FF0000;
+  }
+  
+  .select[status="success"] {
+    border: 1px solid #76B943;
+  }
+  

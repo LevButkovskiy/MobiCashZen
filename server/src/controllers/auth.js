@@ -50,3 +50,108 @@ module.exports.checkRefreshToken = function (req, res) {
         }
     });
 };
+
+module.exports.getUsersGroups = function (req, res) {
+    let groups = [
+        {
+            _id: 0,
+            title: {
+                ru: "Все департаменты",
+                en: "All departments"
+            }
+        },
+        {
+            _id: 1,
+            title: {
+                ru: "Административный департамент",
+                en: "Administrative department"
+            }
+        },
+        {
+            _id: 2,
+            title: {
+                ru: "Департамент автоматизации",
+                en: "Automation Department"
+            }
+        },
+        {
+            _id: 3,
+            title: {
+                ru: "Департамент клиентов",
+                en: "Customer Department"
+            }
+        },
+        {
+            _id: 4,
+            title: {
+                ru: "Департамент разработок",
+                en: "Development Department"
+            }
+        },
+        {
+            _id: 5,
+            title: {
+                ru: "Коммерческий департамент",
+                en: "Commercial department"
+            }
+        },
+        {
+            _id: 6,
+            title: {
+                ru: "Процессинговый департамент",
+                en: "Processing department"
+            }
+        },
+        {
+            _id: 7,
+            title: {
+                ru: "Департамент поддержки бизнеса",
+                en: "Business Support Department"
+            }
+        },
+        {
+            _id: 8,
+            title: {
+                ru: "Региональные дирекции",
+                en: "Regional directorates"
+            }
+        },
+        {
+            _id: 9,
+            title: {
+                ru: "Управление кадровых ресурсов",
+                en: "Human Resources Management"
+            }
+        },
+        {
+            _id: 10,
+            title: {
+                ru: "Управление розничного бизнеса",
+                en: "Retail Business Department"
+            }
+        },
+        {
+            _id: 11,
+            title: {
+                ru: "Управление программных продуктов TranzWare",
+                en: "TranzWare Software Management"
+            }
+        },
+        {
+            _id: 12,
+            title: {
+                ru: "Управление программных продуктов TranzAxis",
+                en: "TranzAxis Software Management"
+            }
+        },
+        {
+            _id: 13,
+            title: {
+                ru: "Управление программных продуктов MobiCash",
+                en: "MobiCash Software Management"
+            }
+        },
+    ]
+
+    return sendJSONresponse(res, 200, groups)
+};

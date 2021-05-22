@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useFormInput, getLocale } from '../../Utils/Hoocks';
 import { getArticle, updateArticle, createArticle } from '../../Utils/ArticlesUtil';
 import { saveImage } from '../../Utils/FilePicker';
-import { getLogin } from '../../Utils/UserUtil';
+import { getLogin, getUsersGroups } from '../../Utils/UserUtil';
 import './index.css';
 
 import Content from '../../UI/Content';
@@ -11,6 +11,8 @@ import Input from '../../UI/Input';
 import Button from '../../UI/Button';
 import RTEInput from '../../UI/RTEInput';
 import Switch from '../../UI/Switch';
+import MultyplySelect from '../../UI/MultyplySelect';
+import Option from '../../UI/Option';
 
 import FilePicker from '../../items/FilePicker';
 import LangSelector from '../../items/LangSelector';
@@ -27,6 +29,8 @@ function Articles(props) {
     const tags = useFormInput('');
     const rteData = {ru: useFormInput(''), en: useFormInput('')};
     const [internal, setInternal] = useState(true);
+    const [groupsList, setGroupsList] = useState(null);
+    const [allGroups, setAllGroups] = useState(null);
 
     const [image, setImage] = useState(null);
     const [imageData, setImageData] = useState(null);
@@ -35,10 +39,22 @@ function Articles(props) {
         let url = window.location.pathname.split('/');
         let mode = url[url.length-1] === "edit" ? true : false;
         setIsEdit(mode);
-        mode && articleRequest();
+        groupsRequest(mode);
     }, []);
 
-    const articleRequest = () => {
+    const groupsRequest = (mode) => {
+        getUsersGroups(function(success, data) {
+            if(success) {
+                let groups = data;
+                groups.push({_id: -1, title: {ru: "Никому", en: "NoOne"}})
+                setAllGroups(data);
+                console.log(mode);
+                mode && articleRequest(data);
+            }
+        })
+    }
+
+    const articleRequest = (allGroups) => {
         getArticle(props.match.params.id, function(success, data) {
             if (success) {
                 author.en.setValue(data.author.en);
@@ -51,12 +67,16 @@ function Articles(props) {
                 rteData.ru.setValue(data.rteData.ru);
                 setInternal(data.internal)
                 let tagsStr = "";
-                data.tags.forEach((element, index) => {
+                data.tags && data.tags.forEach((element, index) => {
                     tagsStr += element.title;
                     index != data.tags.length - 1 && (tagsStr += ",")
                 })
                 tags.setValue(tagsStr);
                 setImage(data.imagePath ? ('/api/v1/' + data.imagePath) : null);
+
+                let groups = [];
+                data.allowedGroups.forEach(e => {groups.push(allGroups.find(aE => {return aE._id == e}))});
+                setGroupsList(groups)
             }
             else {
                 console.log(data.error.message)
@@ -113,6 +133,10 @@ function Articles(props) {
             imagePath: imagePath,
             internal: internal
         }
+
+        let allowedGroups = [];
+        groupsList && groupsList.forEach(e => allowedGroups.push(e._id));
+        packedArticle.allowedGroups = allowedGroups;
 
         if (i18n.language  == "ru") {
             if (title.en.value == "") {
@@ -203,6 +227,10 @@ function Articles(props) {
             internal: internal
         }
 
+        let allowedGroups = [];
+        groupsList && groupsList.forEach(e => allowedGroups.push(e._id));
+        packedArticle.allowedGroups = allowedGroups;
+
         updateArticle(props.match.params.id, packedArticle, function(success, data) {
             if (data.error == null) {
                 props.history.push('/article/' + props.match.params.id)
@@ -213,77 +241,92 @@ function Articles(props) {
         })
     }
 
+    const renderGroupsOptions = (item, index) => {
+        return (
+            <Option key={index} value={item._id}>{getLocale(item.title, i18n.language)}</Option>
+        )
+    }
+
     return (
         <div className="articleModify">
             <Content
                 title={isEdit ? t("ARTICLE_EDITING.1") : t("ARTICLE_CREATING.1")}
                 selectorContent={<LangSelector currentLanguage={currentLanguage} setCurrentLanguage={setCurrentLanguage}/>}
             >
-                <div className="field">
-                    <Input
-                        type="text"
-                        placeholder={t("ARTICLE_AUTHOR.1")}
-                        value={getLocale(author, currentLanguage)}
-                        width="30%"
-                    >
-                        {t("AUTHOR.1")}
-                    </Input>
-                    <Input
-                        type="text"
-                        placeholder={t("ARTICLE_TITLE.1")}
-                        value={getLocale(title, currentLanguage)}
-                        width="60%"
-                    >
-                        {t("TITLE.1")}
-                    </Input>
-                    <Input 
-                        type="textarea"
-                        placeholder={t("ARTICLE_DESCRIPTION.1")}
-                        value={getLocale(description, currentLanguage)}
-                    >
-                        {t("DESCRIPTION.1")}
-                    </Input>
-                    <Switch
-                        value={internal}
-                        onChange={(e)=>{setInternal(!internal)}}
-                    >
-                        Internal
-                    </Switch>
-                    <Input
-                        type="text"
-                        placeholder={t("ARTICLE_TAGS.1")}
-                        description={t("TAGS_INPUT_DESCRIPTION.1")}
-                        value={tags}
-                        width="100%"
-                    >
-                        {t("TAGS.1")}
-                    </Input>
-                    <RTEInput
-                        placeholder={t("ARTICLE_DATA.1")}
-                        data={getLocale(rteData, currentLanguage)}
-                    >
-                        {t("DATA.1")}
-                    </RTEInput>
-                    <FilePicker
-                        title={t("IMAGE.1")}
-                        image={image}
-                        setImage={setImage}
-                        imageData={imageData}
-                        setImageData={setImageData}
-                        width="25%"
-                        accept="image/*"
-                    >
-                        + {t("ADD_PHOTO.1")}
-                    </FilePicker>
-                </div>
-                <div className="actions">
-                    <div className="action">
-                        <Button onClick={isEdit ? updateArticleClick : createArticleClick}>{t("SAVE.1")}</Button>
+                    {allGroups && <div className="field">
+                        <Input
+                            type="text"
+                            placeholder={t("ARTICLE_AUTHOR.1")}
+                            value={getLocale(author, currentLanguage)}
+                            width="30%"
+                        >
+                            {t("AUTHOR.1")}
+                        </Input>
+                        <Input
+                            type="text"
+                            placeholder={t("ARTICLE_TITLE.1")}
+                            value={getLocale(title, currentLanguage)}
+                            width="60%"
+                        >
+                            {t("TITLE.1")}
+                        </Input>
+                        <Input 
+                            type="textarea"
+                            placeholder={t("ARTICLE_DESCRIPTION.1")}
+                            value={getLocale(description, currentLanguage)}
+                        >
+                            {t("DESCRIPTION.1")}
+                        </Input>
+                        <Switch
+                            value={internal}
+                            onChange={(e)=>{setInternal(!internal)}}
+                        >
+                            Internal
+                        </Switch>
+                        {internal && <MultyplySelect
+                            title={t("ALLOWED_GROUPS.1")}
+                            list={groupsList}
+                            setList={setGroupsList}
+                            fullList={allGroups}
+                            width="100%"
+                        >
+                            {allGroups.map(renderGroupsOptions)}
+                        </MultyplySelect>}
+                        <Input
+                            type="text"
+                            placeholder={t("ARTICLE_TAGS.1")}
+                            description={t("TAGS_INPUT_DESCRIPTION.1")}
+                            value={tags}
+                            width="100%"
+                        >
+                            {t("TAGS.1")}
+                        </Input>
+                        <RTEInput
+                            placeholder={t("ARTICLE_DATA.1")}
+                            data={getLocale(rteData, currentLanguage)}
+                        >
+                            {t("DATA.1")}
+                        </RTEInput>
+                        <FilePicker
+                            title={t("IMAGE.1")}
+                            image={image}
+                            setImage={setImage}
+                            imageData={imageData}
+                            setImageData={setImageData}
+                            width="25%"
+                            accept="image/*"
+                        >
+                            + {t("ADD_PHOTO.1")}
+                        </FilePicker>
+                    </div>}
+                    <div className="actions">
+                        <div className="action">
+                            <Button onClick={isEdit ? updateArticleClick : createArticleClick}>{t("SAVE.1")}</Button>
+                        </div>
+                        <div className="action">
+                            <Button cancel onClick={()=>{props.history.goBack()}}>{t("CANCEL.1")}</Button>
+                        </div>
                     </div>
-                    <div className="action">
-                        <Button cancel onClick={()=>{props.history.goBack()}}>{t("CANCEL.1")}</Button>
-                    </div>
-                </div>
             </Content>
         </div>
     );

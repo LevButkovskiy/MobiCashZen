@@ -10,6 +10,7 @@ var articlesSchema = new mongoose.Schema({
   tags:           [{title: String}],
   imagePath:      String,
   internal:       {type: Boolean, default: true},
+  allowedGroups:  [{type: Number}],
   props:          [String]
 });
 

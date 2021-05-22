@@ -1,4 +1,4 @@
-import { requestWithBody } from "./RequestUtil";
+import { request, requestWithBody } from "./RequestUtil";
 import { Response, CreateError } from "./ResponseUtil";
 
 export const getLogin = () => {
@@ -64,6 +64,14 @@ export const getRole = () => {
     return localStorage.getItem('role') || null;
 }
 
+export const isSuperAdmin = () => {
+    return localStorage.getItem('role') == "Manager";
+}
+
+export const getGroupId = () => {
+    return localStorage.getItem('groupId') || 0;
+}
+
 // remove the token and user from the session storage
 export const removeUserSession = () => {
     localStorage.removeItem('token');
@@ -71,13 +79,32 @@ export const removeUserSession = () => {
     localStorage.removeItem('expTime');
     localStorage.removeItem('login');
     localStorage.removeItem('password');
+    localStorage.removeItem('role');
+    localStorage.removeItem('groupId');
+
+    window.location = "/login";
 }
 
 // set the token and user from the session storage
-export const setUserSession = (authToken, refreshToken, expTime, user, password) => {
+export const setUserSession = (authToken, refreshToken, expTime, user, password, role, groupId) => {
     localStorage.setItem('token', authToken);
     localStorage.setItem('refreshToken', refreshToken);
     localStorage.setItem('expTime', String(expTime));
     localStorage.setItem('login', user);
     localStorage.setItem('password', password);
+    localStorage.setItem('role', role);
+    localStorage.setItem('groupId', groupId)
+}
+
+
+export const getUsersGroups = (callback) => {
+    let url = '/api/v1/auth/groups';
+    let storedGroups = sessionStorage.getItem('groups')
+    if (storedGroups != null) {
+        Response(callback, JSON.parse(storedGroups))
+    }
+    request(url, 'GET', function(success, data) {
+        sessionStorage.setItem('groups', JSON.stringify(data))
+        Response(callback, data)
+    })
 }

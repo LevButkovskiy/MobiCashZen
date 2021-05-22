@@ -5,6 +5,9 @@
   "LANG_ENG": {
     "1": "English"
   },
+  "LANGUAGE_ICON": {
+    "1": "https://cdn1.iconfinder.com/data/icons/world-flags-circular/1000/Flag_of_United_Kingdom_-_Circle-512.png"
+  },
   "SIGN_IN": {
     "1": "Sign In"
   },
@@ -13,6 +16,9 @@
   },
   "LOGIN": {
     "1": "Login"
+  },
+  "LOGOUT": {
+    "1": "LogOut"
   },
   "MOBIPASS_LOGIN": {
     "1": "MobiPass Login"
@@ -38,6 +44,9 @@
   "PREVIEW": {
     "1": "Preview"
   },
+  "EDIT": {
+    "1": "Edit"
+  },
   "SHOW": {
     "1": "Show"
   },
@@ -60,7 +69,7 @@
     "1": "Are entered separated by commas"
   },
   "FOR_ME": {
-    "1": "For me"
+    "1": "For reading"
   },
   "DATA": {
     "1": "Content"
@@ -109,6 +118,9 @@
   },
   "ARTICLE_DATA": {
     "1": "Article content"
+  },
+  "ALLOWED_GROUPS": {
+    "1": "Allowed for groups"
   },
   "ADD_PHOTO": {
     "1": "Add image"

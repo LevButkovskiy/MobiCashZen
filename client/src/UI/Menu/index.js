@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useHistory } from 'react-router-dom';
 import { getArticles } from '../../Utils/ArticlesUtil';
 import { getLocale } from '../../Utils/Hoocks';
+import { isSuperAdmin } from '../../Utils/UserUtil';
 import './index.css';
 
 function Menu(props) {
@@ -110,16 +111,37 @@ function Menu(props) {
         history.push(link)
     }
 
+    const renderCategories = () => {
+        if (isSuperAdmin()) {
+            return (
+                <>
+                    <MenuCategory title={t("ALL_ARTICLES.1")} index={0} selectedElement={-1} selectedCategory={selectedCategory} href="/" onClick={handleSelect}/>
+                    <MenuCategory hrAfter title={t("FOR_ME.1")} index={1} selectedElement={-1} selectedCategory={selectedCategory} href="/personal" onClick={handleSelect}/>
+                    <div className="categoryTitle">{t("TAGS.1")}</div>
+                    <MenuCategory title={"MobiCash"} index={2} selectedElement={-1} selectedCategory={selectedCategory} href="/?tag=MobiCash" onClick={handleSelect}/>
+                    <MenuCategory hrAfter title={"Test"} index={3} selectedElement={-1} selectedCategory={selectedCategory} href="/?tag=Test" onClick={handleSelect}/>
+                    <div className="categoryTitle">{t("ARTICLES.1")}</div>
+                    {articles != null && articles.map(renderMenu)}
+                </>
+            )
+        }
+        else {
+            return (
+                <>
+                    <MenuCategory title={t("ALL_ARTICLES.1")} index={0} selectedElement={-1} selectedCategory={selectedCategory} href="/" onClick={handleSelect}/>
+                    <MenuCategory hrAfter title={t("FOR_ME.1")} index={1} selectedElement={-1} selectedCategory={selectedCategory} href="/personal" onClick={handleSelect}/>
+                    <div className="categoryTitle">{t("TAGS.1")}</div>
+                    <MenuCategory title={"MobiCash"} index={2} selectedElement={-1} selectedCategory={selectedCategory} href="/?tag=MobiCash" onClick={handleSelect}/>
+                    <MenuCategory hrAfter title={"Test"} index={3} selectedElement={-1} selectedCategory={selectedCategory} href="/?tag=Test" onClick={handleSelect}/>
+                </>
+            )
+        }
+    }
+
     return (
         <div className="menu">
             <ul>
-            <MenuCategory title={t("ALL_ARTICLES.1")} index={0} selectedElement={-1} selectedCategory={selectedCategory} href="/" onClick={handleSelect}/>
-            <MenuCategory hrAfter title={t("FOR_ME.1")} index={1} selectedElement={-1} selectedCategory={selectedCategory} href="/personal" onClick={handleSelect}/>
-            <div className="categoryTitle">{t("TAGS.1")}</div>
-            <MenuCategory title={"MobiCash"} index={2} selectedElement={-1} selectedCategory={selectedCategory} href="/?tag=MobiCash" onClick={handleSelect}/>
-            <MenuCategory hrAfter title={"Test"} index={3} selectedElement={-1} selectedCategory={selectedCategory} href="/?tag=Test" onClick={handleSelect}/>
-            <div className="categoryTitle">{t("ARTICLES.1")}</div>
-            {articles != null && articles.map(renderMenu)}
+                {renderCategories()}
             </ul>
         </div>
     );

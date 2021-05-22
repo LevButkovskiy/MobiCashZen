@@ -32,3 +32,10 @@
     border: 1px solid var(--mobiRed);
     background: var(--mobiRedActive);
 }
+
+.button[type="inline"] {
+    display: inline-block;
+
+    width: 45%;
+    margin-left: 12px;
+}

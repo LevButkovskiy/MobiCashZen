@@ -7,6 +7,16 @@
     user-select: none;
 }
 
+.nav-link {
+    text-decoration: none;
+    color: white;
+}
+
+.nav-link:hover {
+    opacity: 0.7;
+    color: white;
+}
+
 .navBar .logo {
     width: 40px;
     height: 40px;
@@ -37,16 +47,27 @@
 
 .langDropdown {
     float: right;
-    top: calc((var(--navBarHeight) - 22px) / 2);
-    right: 28px;
-    position: fixed;
+    top: calc((var(--navBarHeight) - var(--navBarHeight) / 2) / 2);
+    right: 24px;
+    position: absolute;
+
+    z-index: 2;
+}
+
+.profileDropdown {
+    float: right;
+    top: calc((var(--navBarHeight) - var(--navBarHeight) / 2) / 3);
+    right: 84px;
+    position: absolute;
+    
+
+    z-index: 2;
 }
 
 .profile {
     float: right;
     top: calc((var(--navBarHeight) - 22px) / 2 - 8px);
-    right: 100px;
-    position: absolute;
+    right: 120px;
 }
 
 .username {

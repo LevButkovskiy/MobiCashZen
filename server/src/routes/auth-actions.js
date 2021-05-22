@@ -15,5 +15,6 @@ POST /refreshToken - check refreshToken
 
 router.post('/login', authController.userLogin);
 router.post('/refreshToken', authController.checkRefreshToken);
+router.get('/groups', authController.getUsersGroups);
 
 module.exports = router;

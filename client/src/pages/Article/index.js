@@ -23,7 +23,8 @@ function Article(props) {
     const [showPreview, setShowPreview] = useState(false);
 
     useEffect(() => {
-        getArticleHandler(props.match.params.id)
+        getArticleHandler(props.match.params.id);
+        setShowPreview(false);
     }, [props.match.params.id]);
 
     const getArticleHandler = (id) => {
@@ -88,7 +89,7 @@ function Article(props) {
                             </ul>
                         </>}
                         <div className="sectionTitle"><span className="title">{t("PREVIEW.1")}</span></div>
-                        {showPreview && <ArticleShowItem article={article} currentLanguage={currentLanguage}/>}
+                        {showPreview && <ArticleShowItem preview article={article} currentLanguage={currentLanguage}/>}
                         <div className="showPreviewButton">
                             <Button onClick={()=>{setShowPreview(!showPreview)}}>{showPreview ? t("HIDE_PREVIEW.1") : t("SHOW_PREVIEW.1")}</Button>
                         </div>

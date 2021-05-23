@@ -42,6 +42,7 @@ module.exports.userLogin = function (req, res) {
             }
 
             let userData = user[0];
+            console.log(userData);
             if (!userData) {
                 let docs = {
                     linkTx: login,
@@ -65,23 +66,14 @@ module.exports.userLogin = function (req, res) {
                     });
                 });
             }
-            else {
-                userData.linkTx = req.body.linkTx;
-                userData.groupId = 13;
-                userData.role = 'User';
-    
-                userData.save(function (err, updatedUser) {
-                    if (err) {
-                        return sendErr(res, err);
-                    }
-                    return sendOk(res, 200, {
-                        authToken: token.authToken,
-                        expTime: token.expTime,
-                        refreshToken: token.refreshToken,
-                        user: updatedUser.linkTx,
-                        role: updatedUser.role,
-                        groupId: updatedUser.groupId
-                    });
+            else {    
+                return sendOk(res, 200, {
+                    authToken: token.authToken,
+                    expTime: token.expTime,
+                    refreshToken: token.refreshToken,
+                    user: userData.linkTx,
+                    role: userData.role,
+                    groupId: userData.groupId
                 });
             }
         });

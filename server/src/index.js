@@ -16,7 +16,7 @@ var articlesActions = require('./routes/articles-actions');
 var uploadsActions = require('./routes/uploads-actions');
 var userActions = require('./routes/user-actions');
 
-require('./dbMongo')
+require('./dbMongo');
 
 var app = express();
 
@@ -33,6 +33,8 @@ app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'client', 'build')));
+
+app.use('/admin', require('./controllers/admin'))
 
 app.use(authAPIURL, authActions);
 app.use(uploadsAPIURL, uploadsActions);

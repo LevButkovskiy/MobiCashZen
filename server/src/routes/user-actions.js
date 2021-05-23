@@ -9,8 +9,12 @@ router.use(bodyParser.json());
 /*
 Router for  /api/v1/auth
 
-POST /login   - login in portal
-POST /refreshToken - check refreshToken
+GET /           - get all Users
+PUT /history    - put history of view on User
+GET /read       - read User by link
+PUT /:id        - update User
+POST /          - create User
+DELETE /:id     - delete User
  */
 
 router.get('/', userController.getUsers);

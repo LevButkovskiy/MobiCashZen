@@ -7,10 +7,13 @@ var artclesController = require('../controllers/articles');
 router.use(bodyParser.json());
 
 /*
-Router for  /api/v1/auth
+Router for  /api/v1/articles
 
-POST /login   - login in portal
-POST /refreshToken - check refreshToken
+GET /       - get all Articles
+GET /:id    - read one Article
+PUT /:id    - update one article
+POST /      - create Article
+DELETE /:id - delete Article
  */
 
 router.get('/', artclesController.getArticles);

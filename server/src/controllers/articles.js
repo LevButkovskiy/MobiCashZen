@@ -5,7 +5,7 @@ var sendJSONresponse = function (res, status, content) {
     res.json(content);
 };
 
-var sendNoId = (res) => {
+var sendNoId = (req, res) => {
     console.log('No article specified');
     sendJSONresponse(res, 404, {
         error: {
@@ -15,7 +15,7 @@ var sendNoId = (res) => {
     });
 }
 
-var sendNoArticle = (res) => {
+var sendNoArticle = (req, res) => {
     console.log("Article not found");
     sendJSONresponse(res, 404, {
         error: {
@@ -25,12 +25,12 @@ var sendNoArticle = (res) => {
     });
 }
 
-var sendErr = (res, err) => {
+var sendErr = (req, res, err) => {
     console.log(err);
     sendJSONresponse(res, 405, {error: {key: "ERROR_SOMETHING_WENT_WRORNG", message: err}});
 }
 
-var sendOk = (res, status, content) => {
+var sendOk = (req, res, content, status = 200) => {
     sendJSONresponse(res, status, content);
 }
 
@@ -70,18 +70,21 @@ module.exports.getArticles = function (req, res) {
         }
     }
 
+    
     let options = {
         page: req.query.page ? req.query.page : 1,
         limit: req.query.limit ? req.query.limit : 99999,
         sort: req.query.sort ? req.query.sort : "title"
     }
+    options.select = "+key";
+
     
     Articles.paginate(filter, options, function (err, articles) {
         if (err) {
-            return sendErr(res, err);
+            return sendErr(req, res, err);
         }
 
-        return sendOk(res, 200, articles);
+        return sendOk(req, res, articles);
 
     });
 }
@@ -90,19 +93,19 @@ module.exports.articleReadOne = function (req, res) {
     let id = req.params.id;
 
     if (!id) {
-        return sendNoId(res);
+        return sendNoId(req, res);
     }
 
     Articles
         .findById(id)
         .exec(function (err, article) {
             if (!article) {
-                return sendNoArticle(res);
+                return sendNoArticle(req, res);
             }
             if (err) {
-                return sendErr(res, err.msg);
+                return sendErr(req, res, err.msg);
             }
-            return sendOk(res, 200, article);
+            return sendOk(req, res, article);
         });
 }
 
@@ -110,16 +113,16 @@ module.exports.articleUpdateOne = function (req, res) {
     let id = req.params.id;
 
     if (!id) {
-        return sendNoId(res);
+        return sendNoId(req, res);
     }
 
     Articles
         .findById(id)
         .exec(function (err, article) {
             if (!article) {
-                return sendNoArticle(res);
+                return sendNoArticle(req, res);
             } else if (err) {
-                return sendErr(res, err.msg);
+                return sendErr(req, res, err.msg);
             }
 
             article.author = {
@@ -146,9 +149,9 @@ module.exports.articleUpdateOne = function (req, res) {
 
             article.save(function (err, article) {
                 if (err) {
-                    return sendErr(res, err.msg);
+                    return sendErr(req, res, err.msg);
                 }
-                return sendOk(res, 202, article);
+                return sendOk(req, res, article, 202);
             });
         });
 }
@@ -180,9 +183,9 @@ module.exports.articleCreate = function (req, res) {
 
     Articles.create(docs, function (err, article) {
         if (err) {
-            return sendErr(res, err.msg);
+            return sendErr(req, res, err.msg);
         }
-        return sendOk(res, 201, article);
+        return sendOk(req, res, article, 201);
     });
 }
 
@@ -190,16 +193,120 @@ module.exports.articleDeleteOne = function (req, res) {
     let id = req.params.id;
 
     if (!id) {
-        return sendNoId(res);
+        return sendNoId(req, res);
     }
 
     Articles
         .findByIdAndRemove(id)
         .exec(function (err, article) {
             if (err) {
-                return sendErr(res, err.msg);
+                return sendErr(req, res, err.msg);
             }
-            return sendOk(res, 200, article);
+            return sendOk(req, res, article);
+        });
+}
+
+
+module.exports.export = function (req, res) {
+    Articles
+        .find({internal: false})
+        .select("author title rteData description tags imagePath publishDate")
+        .exec(function (err, articles) {
+            if (!articles || !articles[0]) {
+                return sendNoArticle(req, res);
+            }
+            if (err) {
+                return sendErr(req, res, {error: {
+                    key: "ERROR_TRY_AGAIN_LATER",
+                    message: err
+                }})
+            }
+            // if (articles[0].eventId.key !== req.header("key")){
+            //     return sendErr(req, res, {error: {
+            //         key: "ERROR_TRY_AGAIN_LATER",
+            //         message: "Invalid key"
+            //     }})
+            // }
+            articles_export = []
+            articles.map((item, key) => {
+                dd = String(item.publishDate.getDate()).padStart(2, '0');
+                mm = String(item.publishDate.getMonth() + 1).padStart(2, '0'); //January is 0!
+                yyyy = item.publishDate.getFullYear();
+
+                today = yyyy + '-' + mm + '-' + dd;
+                article = {
+                    _id: item._id,
+                    publishDate : item.publishDate,
+                    author : req.header("language") === "ru" ? item.author.ru : item.author.en,
+                    title : req.header("language") === "ru" ? item.title.ru : item.title.en,
+                    subtitle: req.header("language") === "ru" ? item.description.ru : item.description.en,
+                    data: req.header("language") === "ru" ? item.rteData.ru : item.rteData.en,
+                    imagePath : item.imagePath
+                }
+
+                articles_export.push(article);
+            })
+            content = {
+                TimeFormat: "h:mma",
+                LB_TIMEZONE: "The articles time is shown as GMT+2",
+                ARTICLES: articles_export,
+            }
+
+            sendOk(req, res, content);
+        });
+}
+
+module.exports.exportOne = function (req, res) {
+    let id = req.params.id;
+
+    if (!id) {
+        return sendNoId(req, res)
+    }
+    Articles
+        .find({_id: id})
+        .exec(function (err, articles) {
+            if (!articles || !articles[0]) {
+                return sendNoArticle(req, res);
+            }
+            if (err) {
+                return sendErr(req, res, {error: {
+                    key: "ERROR_TRY_AGAIN_LATER",
+                    message: err
+                }})
+            }
+            console.log(articles[0]);
+            if (articles[0].key !== req.header("key")){
+                return sendErr(req, res, {error: {
+                    key: "ERROR_TRY_AGAIN_LATER",
+                    message: "Invalid key"
+                }})
+            }
+            articles_export = []
+            articles.map((item, key) => {
+                dd = String(item.publishDate.getDate()).padStart(2, '0');
+                mm = String(item.publishDate.getMonth() + 1).padStart(2, '0'); //January is 0!
+                yyyy = item.publishDate.getFullYear();
+
+                today = yyyy + '-' + mm + '-' + dd;
+                article = {
+                    _id: item._id,
+                    publishDate : item.publishDate,
+                    author : req.header("language") === "ru" ? item.author.ru : item.author.en,
+                    title : req.header("language") === "ru" ? item.title.ru : item.title.en,
+                    subtitle: req.header("language") === "ru" ? item.description.ru : item.description.en,
+                    data: req.header("language") === "ru" ? item.rteData.ru : item.rteData.en,
+                    imagePath : item.imagePath
+                }
+
+                articles_export.push(article);
+            })
+            content = {
+                TimeFormat: "h:mma",
+                LB_TIMEZONE: "The articles time is shown as GMT+2",
+                ARTICLES: articles_export,
+            }
+
+            sendOk(req, res, content);
         });
 }
 

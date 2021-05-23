@@ -73,6 +73,7 @@ function Articles(props) {
         return (
             <ArticleItem
                 key={key}
+                exportKey={item.key}
                 id={item._id}
                 imageSrc={item.imagePath ? ("/api/v1/" + item.imagePath) : "/images/defaultImage.png"}
                 description={getLocale(item.description, i18n.language)}

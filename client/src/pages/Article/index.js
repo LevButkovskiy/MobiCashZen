@@ -60,7 +60,7 @@ function Article(props) {
                     <span className="description">{getLocale(article.description, currentLanguage)}</span>
                     <span className="dateTime">{article.dateTime}</span>
                     <div className={isSuperAdmin() ? "buttonGroup" : "previewButton"}>
-                        <Button inline={isSuperAdmin()} onClick={()=>{props.history.push("/article/" + article._id + "/preview")}}>{t("PREVIEW.1")}</Button>
+                        <Button inline={isSuperAdmin()} onClick={()=>{props.history.push("/article/" + article._id + "/show")}}>{t("SHOW.1")}</Button>
                         {isSuperAdmin() && <Button inline onClick={()=>{props.history.push("/article/" + article._id + "/edit")}}>{t("EDIT.1")}</Button>}
                     </div>
                 </div>
@@ -75,7 +75,7 @@ function Article(props) {
     return (
         <div className="article">
                 <Content
-                    title={article && article.title.en}
+                    title={article && getLocale(article.title, i18n.language)}
                     selectorContent={<LangSelector currentLanguage={currentLanguage} setCurrentLanguage={setCurrentLanguage}/>}                  
                 >
                 {article != null && allGroups &&

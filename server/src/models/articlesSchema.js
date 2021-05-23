@@ -12,7 +12,11 @@ var articlesSchema = new mongoose.Schema({
   internal:       {type: Boolean, default: true},
   allowedGroups:  [{type: Number}],
   publishDate:    Date,
-  props:          [String]
+  key:{
+    type: String,
+    select: false,
+    default: mongoose.Types.ObjectId
+  }
 });
 
 articlesSchema.plugin(mongoosePaginate);

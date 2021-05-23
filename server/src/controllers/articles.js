@@ -46,14 +46,22 @@ module.exports.getArticles = function (req, res) {
     }
 
     if (req.query.search != null && req.query.search != "") {
+        let searchArr = [
+            {"title.en": {"$regex": req.query.search}},
+            {"title.ru": {"$regex": req.query.search}},
+            {"tags.title": {"$regex": req.query.search}},
+            {"description.en": {"$regex": req.query.search}},
+            {"description.ru": {"$regex": req.query.search}}
+        ];
+
         if (req.query.allowedGroup != null) {
             filter["$and"] = [
                 {"$or": [{"allowedGroups": 0}, {"allowedGroups": req.query.allowedGroup}]},
-                {"$or": [{"title.en": {"$regex": req.query.search}}, {"title.ru": {"$regex": req.query.search}}]}
+                {"$or": searchArr}
             ]
         }
         else {
-            filter["$or"] = [{"title.en": {"$regex": req.query.search}}, {"title.ru": {"$regex": req.query.search}}]
+            filter["$or"] = searchArr;
         }
     }
     else {
@@ -61,8 +69,6 @@ module.exports.getArticles = function (req, res) {
             filter["$or"] = [{"allowedGroups": 0}, {"allowedGroups": req.query.allowedGroup}]
         }
     }
-
-    console.log(filter);
 
     let options = {
         page: req.query.page ? req.query.page : 1,
@@ -74,7 +80,6 @@ module.exports.getArticles = function (req, res) {
         if (err) {
             return sendErr(res, err);
         }
-        console.log(articles)
 
         return sendOk(res, 200, articles);
 

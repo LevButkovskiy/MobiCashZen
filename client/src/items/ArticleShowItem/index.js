@@ -10,8 +10,15 @@ function ArticleShowItem(props) {
     const [t, i18n] = useTranslation();
     const history = useHistory();
 
+    const [isLiked, setIsLiked] = useState(sessionStorage.getItem('isLiked') == "true" ? true : false)
+
     const renderTags = (item, key) => {
-        return <li className="tagShow"><a className="tagShowLink" href={"/?tag=" + item.title}>{item.title}</a></li>
+        return <li key={key} className="tagShow"><a className="tagShowLink" href={"/?tag=" + item.title}>{item.title}</a></li>
+    }
+
+    const addToSaved = () =>{ 
+        setIsLiked(!isLiked)
+        sessionStorage.setItem('isLiked', !isLiked)
     }
 
     return (
@@ -32,6 +39,8 @@ function ArticleShowItem(props) {
                 <ul className="tagsShowMenu">
                     {props.article.tags.map(renderTags)}
                 </ul>
+
+                <div className="isLiked" onClick={addToSaved}><span>{t("ADD_TO_SAVED.1")}</span><img src={!isLiked ? "/images/bookmark.png" : "/images/bookmark_red.png"}/></div>
             </div>
         </div>
     );

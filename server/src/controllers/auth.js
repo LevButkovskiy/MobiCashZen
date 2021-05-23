@@ -1,9 +1,19 @@
 const appUtil = require('../appUtil');
+var User = require('../models/userSchema');
 
 var sendJSONresponse = function(res, status, content) {
     res.status(status);
     res.json(content);
 };
+
+var sendErr = (res, err) => {
+    console.log(err);
+    sendJSONresponse(res, 405, {error: {key: "ERROR_SOMETHING_WENT_WRORNG", message: err}});
+}
+
+var sendOk = (res, status, content) => {
+    sendJSONresponse(res, status, content);
+}
 
 module.exports.userLogin = function (req, res) {
     console.log('User login', req.body);
@@ -23,12 +33,58 @@ module.exports.userLogin = function (req, res) {
 
     let token = appUtil.getToken(login);
     res.set('api-token', token);
-    return sendJSONresponse(res, 200, {
-        authToken: token.authToken,
-        expTime: token.expTime,
-        refreshToken: token.refreshToken,
-        user: login
-    });
+
+    User
+        .find({linkTx: login})
+        .exec(function (err, user) {
+            if (err) {
+                return sendErr(res, err);
+            }
+
+            let userData = user[0];
+            if (!userData) {
+                let docs = {
+                    linkTx: login,
+                    groupId: 13,
+                    role: 'User',
+                    historyOfView: []
+                };
+            
+                User.create(docs, function (err, newUser) {
+                    if (err) {
+                        return sendErr(res, err);
+                    }
+
+                    return sendOk(res, 200, {
+                        authToken: token.authToken,
+                        expTime: token.expTime,
+                        refreshToken: token.refreshToken,
+                        user: newUser.linkTx,
+                        role: newUser.role,
+                        groupId: newUser.groupId
+                    });
+                });
+            }
+            else {
+                userData.linkTx = req.body.linkTx;
+                userData.groupId = 13;
+                userData.role = 'User';
+    
+                userData.save(function (err, updatedUser) {
+                    if (err) {
+                        return sendErr(res, err);
+                    }
+                    return sendOk(res, 200, {
+                        authToken: token.authToken,
+                        expTime: token.expTime,
+                        refreshToken: token.refreshToken,
+                        user: updatedUser.linkTx,
+                        role: updatedUser.role,
+                        groupId: updatedUser.groupId
+                    });
+                });
+            }
+        });
 }
 
 module.exports.checkRefreshToken = function (req, res) {

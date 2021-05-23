@@ -1,5 +1,12 @@
 .filePicker {
     text-align: left;
+    margin-top: 18px;
+}
+
+.inputItem .inputTitle {
+    font-weight: 800;
+    font-size: 12px;
+    line-height: 156%;
 }
 
 .imagePicker {

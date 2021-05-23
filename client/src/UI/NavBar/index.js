@@ -48,7 +48,13 @@ function NavBar(props) {
 
     const createRole = () => {
         let id = getGroupId();
-        return allGroups[id];
+        let title = allGroups[id];
+        if(title != undefined && title != "undefined") {
+            return title;
+        }
+        else {
+            return {en: "", ru: ""}
+        }
     }
 
     return (

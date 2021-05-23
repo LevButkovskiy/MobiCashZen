@@ -116,7 +116,7 @@ function Menu(props) {
             return (
                 <>
                     <MenuCategory title={t("ALL_ARTICLES.1")} index={0} selectedElement={-1} selectedCategory={selectedCategory} href="/" onClick={handleSelect}/>
-                    <MenuCategory hrAfter title={t("FOR_ME.1")} index={1} selectedElement={-1} selectedCategory={selectedCategory} href="/personal" onClick={handleSelect}/>
+                    <MenuCategory hrAfter title={t("SAVED_ARTICLES.1")} index={1} selectedElement={-1} selectedCategory={selectedCategory} href="/personal" onClick={handleSelect}/>
                     <div className="categoryTitle">{t("TAGS.1")}</div>
                     <MenuCategory title={"MobiCash"} index={2} selectedElement={-1} selectedCategory={selectedCategory} href="/?tag=MobiCash" onClick={handleSelect}/>
                     <MenuCategory hrAfter title={"Test"} index={3} selectedElement={-1} selectedCategory={selectedCategory} href="/?tag=Test" onClick={handleSelect}/>
@@ -129,7 +129,7 @@ function Menu(props) {
             return (
                 <>
                     <MenuCategory title={t("ALL_ARTICLES.1")} index={0} selectedElement={-1} selectedCategory={selectedCategory} href="/" onClick={handleSelect}/>
-                    <MenuCategory hrAfter title={t("FOR_ME.1")} index={1} selectedElement={-1} selectedCategory={selectedCategory} href="/personal" onClick={handleSelect}/>
+                    <MenuCategory hrAfter title={t("SAVED_ARTICLES.1")} index={1} selectedElement={-1} selectedCategory={selectedCategory} href="/personal" onClick={handleSelect}/>
                     <div className="categoryTitle">{t("TAGS.1")}</div>
                     <MenuCategory title={"MobiCash"} index={2} selectedElement={-1} selectedCategory={selectedCategory} href="/?tag=MobiCash" onClick={handleSelect}/>
                     <MenuCategory hrAfter title={"Test"} index={3} selectedElement={-1} selectedCategory={selectedCategory} href="/?tag=Test" onClick={handleSelect}/>

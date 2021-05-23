@@ -4,7 +4,7 @@
     background: white;
     padding: 8px 12px;
 
-    height: 116px;
+    min-height: 116px;
 
     margin-bottom: 8px;
 
@@ -27,7 +27,7 @@
 }
 
 .articleItem .articleImage {
-    display: inline-block;
+    position: absolute;
 }
 
 .articleItem > .content > .articleImage > .image {
@@ -39,10 +39,7 @@
 
 .articleItem .articleInfo {
     display: inline-block;
-    margin-left: 8px;
-
-    position: absolute;
-    top: 0;
+    margin-left: 108px;
     
     height: 100%;
     width: calc(100% - 100px - 8px);
@@ -74,7 +71,26 @@
     text-overflow: ellipsis
 }
 
-.articleInfo > .dateTime {
+.articleInfo > .percentage {
+    font-size: 12px;
+    color: var(--mobiDarkGray);
+
+    width: 100%;
+
+    display: block;
+
+    white-space: nowrap;
+    overflow: hidden; 
+    text-overflow: ellipsis;
+}
+
+.articleInfo > .dateBlock {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+}
+
+.articleInfo > .dateBlock > .dateTime {
     font-size: 12px;
 
     width: 100%;

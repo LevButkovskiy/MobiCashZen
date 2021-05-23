@@ -9,10 +9,12 @@ const appUtil = require('./appUtil');
 const authAPIURL = '/api/v1/auth';
 const articlesAPIURL = '/api/v1/articles';
 const uploadsAPIURL = '/api/v1/uploads';
+const userAPIURL = '/api/v1/user';
 
 var authActions = require('./routes/auth-actions');
 var articlesActions = require('./routes/articles-actions');
 var uploadsActions = require('./routes/uploads-actions');
+var userActions = require('./routes/user-actions');
 
 require('./dbMongo')
 
@@ -36,6 +38,7 @@ app.use(authAPIURL, authActions);
 app.use(uploadsAPIURL, uploadsActions);
 
 app.use(articlesAPIURL, articlesActions);
+app.use(userAPIURL, userActions);
 
 app.get('/', (req,res) => {
     res.sendFile(path.join(__dirname, '../../client/build/index.html'));
@@ -45,11 +48,11 @@ app.get('/login', (req,res) => {
     res.sendFile(path.join(__dirname, '../../client/build/index.html'));
 });
 
-app.get('/articles', (req,res) => {
+app.get('/article', (req,res) => {
     res.sendFile(path.join(__dirname, '../../client/build/index.html'));
 });
 
-app.get('/articles/*', (req,res) => {
+app.get('/article/*', (req,res) => {
     res.sendFile(path.join(__dirname, '../../client/build/index.html'));
 });
 

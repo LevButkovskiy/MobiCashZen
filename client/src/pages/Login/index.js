@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useTranslation } from "react-i18next";
 import { useFormInput } from '../../Utils/Hoocks';
 import { requestWithBody } from '../../Utils/RequestUtil';
@@ -26,7 +26,7 @@ function Login(props) {
 
         requestWithBody('/api/v1/auth/login', 'POST', body, function(success, data) {
             if(success) {
-                setUserSession(data.authToken, data.refreshToken, data.expTime, data.user, password.value, 'User', 6);
+                setUserSession(data.authToken, data.refreshToken, data.expTime, data.user, password.value, data.role, data.groupId);
                 props.history.push('/');
             }
         })

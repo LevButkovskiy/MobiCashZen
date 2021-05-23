@@ -86,6 +86,18 @@
   "ARTICLES": {
     "1": "Articles"
   },
+  "ARTICLES_EI": {
+    "1": "Articles"
+  },
+  "SEARCH": {
+    "1": "Search"
+  },
+  "READED": {
+    "1": "Readed"
+  },
+  "SEARCH_PLACEHOLDER": {
+    "1": "By title, description, tags"
+  }, 
   "SCAN_FOR_LOGIN": {
     "1": "To enter the portal, scan"
   },
@@ -139,6 +151,12 @@
   },
   "ADD_PHOTO": {
     "1": "Add image"
+  },
+  "ADD_TO_SAVED": {
+    "1": "Add to saved"
+  },
+  "SAVED_ARTICLES": {
+    "1": "Saved articles"
   },
   "DELETE_IMAGE_Q": {
     "1": "Delete image?"

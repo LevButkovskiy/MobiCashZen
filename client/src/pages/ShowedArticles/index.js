@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from "react-i18next";
 import { getArticles } from '../../Utils/ArticlesUtil';
 import { getLocale, useFormInput } from '../../Utils/Hoocks';
-import { getGroupId, isSuperAdmin } from '../../Utils/UserUtil';
+import { getGroupId, getShowedArticles, isSuperAdmin } from '../../Utils/UserUtil';
 import { stringByNum } from '../../Utils/Formatter';
 import './index.css';
 
@@ -16,8 +16,7 @@ function Articles(props) {
     const [t, i18n] = useTranslation();
 
     const [articles, setArticles] = useState(null);
-    const [tag, setTag] = useState(null);
-    const [title, setTitle] = useState("ALL_ARTICLES.1")
+    const [title, setTitle] = useState("SAVED_ARTICLES.1")
 
     const search = useFormInput('');
 
@@ -30,17 +29,8 @@ function Articles(props) {
     }, [window.location.href]);
 
     const getArticlesHandler = (search = null) => {
-        setTitle("ALL_ARTICLES.1")
         let url = window.location.pathname.split('/');       
-        let filterTag = (new URLSearchParams(window.location.search)).get("tag");
         let searchParams = {};
-        if (filterTag != null && filterTag != "") {
-            searchParams.tag = filterTag;
-            setTag(filterTag)
-        }
-        else {
-            setTag(null)
-        }
 
         if (!isSuperAdmin()) {
             searchParams.allowedGroup = getGroupId();
@@ -50,18 +40,24 @@ function Articles(props) {
             searchParams.search = search;
         }
 
-        if (url.length > 1 && url[1] == "personal" || !isSuperAdmin()) {
-            searchParams.internal = "true";
-            if (url[1] == "personal") {
-                setTitle("FOR_ME.1");
-                setTag(null);
-            }
-        }
-
-
-        getArticles(searchParams, function(success, data) {
+        getShowedArticles(function(success, data) {
             if (data.error == null) {
-                setArticles(data.docs);
+                let articles = [];
+                data.historyOfView.map(el=> {
+                    if(el.isLiked) {
+                        articles.push({
+                            articleId: el.articleId._id,
+                            imagePath: el.articleId.imagePath,
+                            title: el.articleId.title,
+                            description: el.articleId.description,
+                            publishDate: el.articleId.publishDate,
+                            author: el.articleId.author,
+                            tags: el.articleId.tags,
+                            percentage: el.percentage,
+                        })
+                    }
+                })
+                setArticles(articles);
             }
             else {
                 console.log(data.error.message);
@@ -70,15 +66,17 @@ function Articles(props) {
     }
 
     const renderArticles = (item, key) => {
+        console.log(item);
         return (
             <ArticleItem
                 key={key}
-                id={item._id}
+                id={item.articleId}
                 imageSrc={item.imagePath ? ("/api/v1/" + item.imagePath) : "/images/defaultImage.png"}
                 description={getLocale(item.description, i18n.language)}
                 dateTime={item.publishDate}
                 author={getLocale(item.author, i18n.language)}
                 tags={item.tags}
+                percentage={item.percentage}
             >{getLocale(item.title, i18n.language)}</ArticleItem>
         )
     }
@@ -90,7 +88,7 @@ function Articles(props) {
 
     return (
         <div className="articles">
-            <Content title={t(title)} subtitle={tag ? ("?tag=" + tag) : null}>
+            <Content title={t(title)}>
                 <div className="settings">
                     <div className="new">
                         <Button onClick={()=>{props.history.push("/article/new")}} width>{t("ADD_ARTICLE.1")}</Button>

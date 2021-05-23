@@ -37,7 +37,10 @@ function ArticleItem(props) {
                     <Tags tags={props.tags}/>
                     <span className="title">{props.children}</span>
                     <span className="description">{props.description}</span>
-                    <span className="dateTime">{props.author} ● {dateFormatter(props.dateTime)}</span>
+                    {props.percentage && <span className="percentage">{t("READED.1")} {props.percentage}%</span>}
+                    <div className="dateBlock">
+                        <span className="dateTime">{props.author} ● {dateFormatter(props.dateTime)}</span>
+                    </div>
                 </div>
             </div>
         </div>

@@ -34,7 +34,7 @@
     border-radius: 2px;
     display: block;
     color: #0064FF;
-    /* background: url("/images/arrowDown.png") no-repeat calc(100% - 10px) #fff; */
+    background: url(../../img/arrowDown.png) no-repeat calc(100% - 10px) #fff;
     background-size: 7px 4px;
   }
   

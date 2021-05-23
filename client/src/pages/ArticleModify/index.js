@@ -319,6 +319,13 @@ function Articles(props) {
                         >
                             {t("DATA.1")}
                         </RTEInput>
+                        <Input 
+                            type="textarea"
+                            placeholder={t("ARTICLE_DATA.1") + "HTML"}
+                            value={getLocale(rteData, currentLanguage)}
+                        >
+                            HTML
+                        </Input>
                         <FilePicker
                             title={t("IMAGE.1")}
                             image={image}

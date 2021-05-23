@@ -9,7 +9,7 @@ import Login from './pages/Login';
 import Articles from './pages/Articles';
 import ArticleModify from './pages/ArticleModify';
 import Article from './pages/Article';
-import ArticlePreview from './pages/ArticlePreview';
+import ShowedArticles from './pages/ShowedArticles';
 import ArticleShow from './pages/ArticleShow';
 
 function App() {
@@ -18,12 +18,11 @@ function App() {
         <BrowserRouter>
           <Switch>
             <PrivateRoute exact path="/" component={Articles}/>
-            <PrivateRoute exact path="/personal" component={Articles}/>
+            <PrivateRoute exact path="/personal" component={ShowedArticles}/>
             <PrivateRoute path="/article/new" component={ArticleModify}/>
             <PrivateRoute path="/article/:id/edit" component={ArticleModify}/>
             <PrivateRoute exact path="/article/:id" component={Article}/>
-            {/* <PrivateRoute path="/article/:id/preview" component={ArticlePreview}/> */}
-            <PrivateRoute path="/article/:id" component={ArticleShow}/>
+            <PrivateRoute path="/article/:id/show" component={ArticleShow}/>
             <PublicRoute path="/login" component={Login}/>
           </Switch>
         </BrowserRouter>

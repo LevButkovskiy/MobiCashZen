@@ -22,9 +22,11 @@ export const getToken = (callback) => {
         if (refreshToken) {    
             requestWithBody('/api/v1/auth/refreshToken', 'POST', JSON.stringify({refreshToken: refreshToken}), function (success, data) {
                 if(success) {
-                    let password = getPassword();                    
+                    let password = getPassword(); 
+                    let role = getRole();
+                    let groupId = getGroupId();
                     if(password != null) {
-                        setUserSession(data.authToken, data.refreshToken, data.expTime, data.user, password);
+                        setUserSession(data.authToken, data.refreshToken, data.expTime, data.user, password, role, groupId);
                         Response(callback, {token: data.authToken})
                     }
                     else {
@@ -107,6 +109,30 @@ export const getUsersGroups = (callback) => {
     }
     request(url, 'GET', function(success, data) {
         sessionStorage.setItem('groups', JSON.stringify(data))
+        Response(callback, data)
+    })
+}
+
+export const addViewHistory = (linkTx, articleId, lastPos, percentage, isLiked, callback) => {
+    let url = '/api/v1/user/history';
+
+    let packedData = {
+        linkTx: linkTx,
+        articleId: articleId,
+        lastPos: lastPos,
+        percentage: percentage,
+        isLiked: isLiked
+    }
+
+    requestWithBody(url, 'PUT', JSON.stringify(packedData), function(success, data) {
+        Response(callback, data)
+    })
+}
+
+export const getShowedArticles = (callback) => {
+    let url = '/api/v1/user/read' + "?linkTx=" + getLogin();
+
+    request(url, 'GET', function(success, data) {
         Response(callback, data)
     })
 }

@@ -18,7 +18,7 @@
 }
 
 body {
-    background-color: #EDF0F2;
+    background: var(--mobiMenuColor);
 }
 
 span .bold {

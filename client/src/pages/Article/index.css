@@ -145,7 +145,5 @@
 .showPreviewButton {
     width: 200px;
 
-    position: absolute;
-    right: calc(50% - 225px);
-    text-align: right;
+    margin-left: calc(50% - 100px);
 }

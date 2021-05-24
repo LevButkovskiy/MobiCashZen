@@ -1,3 +1,7 @@
+.tags {
+    margin-bottom: 8px;
+}
+
 .tagsMenu > .tag {
     display: inline-block;
     margin-right: 8px;

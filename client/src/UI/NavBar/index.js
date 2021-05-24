@@ -56,7 +56,7 @@ function NavBar(props) {
                     title={
                         <>
                         <div className="username">{getRole() + " " + getLogin()}</div>
-                        <span className="role">{getLocale(createRole().title, i18n.language)}</span>
+                        <div className="role">{getLocale(createRole().title, i18n.language)}</div>
                         </>
                     }>
                     <NavDropdown.Item as="button" onClick={() => {

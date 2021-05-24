@@ -15,7 +15,9 @@ function ArticleShowItem(props) {
         getShowedArticles(function(success, data) {
             if (data.error == null) {
                 let article = data.historyOfView.find(el => {return el.articleId._id === props.article._id})
-                setIsLiked(article.isLiked)
+                if(article){
+                    setIsLiked(article.isLiked)
+                }
             }
             else {
                 console.log(data.error.message);

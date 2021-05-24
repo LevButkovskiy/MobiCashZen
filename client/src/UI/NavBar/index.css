@@ -56,18 +56,12 @@
 
 .profileDropdown {
     float: right;
-    top: calc((var(--navBarHeight) - var(--navBarHeight) / 2) / 3);
+    top: calc((var(--navBarHeight) - var(--navBarHeight) / 2) / 3 - 8px);
     right: 84px;
     position: absolute;
     
 
     z-index: 2;
-}
-
-.profile {
-    float: right;
-    top: calc((var(--navBarHeight) - 22px) / 2 - 8px);
-    right: 120px;
 }
 
 .username {
@@ -80,6 +74,9 @@
     font-weight: 500;
     
     text-align: right;
+
+    display: inline-block;
+
 }
 
 .profile:hover {

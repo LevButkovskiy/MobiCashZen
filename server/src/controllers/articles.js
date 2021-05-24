@@ -1,4 +1,5 @@
 var Articles = require('../models/articlesSchema');
+const mobiLogger = require('../mobiLogger');
 
 var sendJSONresponse = function (res, status, content) {
     res.status(status);
@@ -6,17 +7,17 @@ var sendJSONresponse = function (res, status, content) {
 };
 
 var sendNoId = (req, res) => {
-    console.log('No article specified');
+    mobiLogger.error(req, 404, [404, "ERROR_WRONG_REQUEST", "Not found, id is required"])
     sendJSONresponse(res, 404, {
         error: {
-            key: "ERROR_ARTICLE_NOTFOUND",
-            message: "Article not found"
+            key: "ERROR_WRONG_REQUEST",
+            message: "Not found, id is required"
         }
     });
 }
 
 var sendNoArticle = (req, res) => {
-    console.log("Article not found");
+    mobiLogger.error(req, 404, [404, "ERROR_ARTICLE_NOTFOUND", "Article not found"])
     sendJSONresponse(res, 404, {
         error: {
             key: "ERROR_ARTICLE_NOTFOUND",
@@ -26,11 +27,12 @@ var sendNoArticle = (req, res) => {
 }
 
 var sendErr = (req, res, err) => {
-    console.log(err);
+    mobiLogger.error(req, 405, [err.key, err.message])
     sendJSONresponse(res, 405, {error: {key: "ERROR_SOMETHING_WENT_WRORNG", message: err}});
 }
 
 var sendOk = (req, res, content, status = 200) => {
+    mobiLogger.info(req, status)
     sendJSONresponse(res, status, content);
 }
 
@@ -70,7 +72,6 @@ module.exports.getArticles = function (req, res) {
         }
     }
 
-    
     let options = {
         page: req.query.page ? req.query.page : 1,
         limit: req.query.limit ? req.query.limit : 99999,
@@ -85,7 +86,6 @@ module.exports.getArticles = function (req, res) {
         }
 
         return sendOk(req, res, articles);
-
     });
 }
 

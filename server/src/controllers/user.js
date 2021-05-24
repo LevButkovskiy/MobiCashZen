@@ -1,12 +1,23 @@
 var User = require('../models/userSchema');
+const mobiLogger = require('../mobiLogger');
 
 var sendJSONresponse = function (res, status, content) {
     res.status(status);
     res.json(content);
 };
 
-var sendNoId = (res) => {
-    console.log('No user specified');
+var sendNoId = (req, res) => {
+    mobiLogger.error(req, 405, ["ERROR_WRONG_REQUEST", "Not found, id is required"])
+    sendJSONresponse(res, 405, {
+        error: {
+            key: "ERROR_WRONG_REQUEST",
+            message: "Not found, id is required"
+        }
+    });
+}
+
+var sendNoUser = (req, res) => {
+    mobiLogger.error(req, 404, ["ERROR_USER_NOTFOUND", "User not found"])
     sendJSONresponse(res, 404, {
         error: {
             key: "ERROR_USER_NOTFOUND",
@@ -15,22 +26,13 @@ var sendNoId = (res) => {
     });
 }
 
-var sendNoUser = (res) => {
-    console.log("User not found");
-    sendJSONresponse(res, 404, {
-        error: {
-            key: "ERROR_USER_NOTFOUND",
-            message: "User not found"
-        }
-    });
-}
-
-var sendErr = (res, err) => {
-    console.log(err);
+var sendErr = (req, res, err) => {
+    mobiLogger.error(req, 405, [err.key, err.message])
     sendJSONresponse(res, 405, {error: {key: "ERROR_SOMETHING_WENT_WRORNG", message: err}});
 }
 
-var sendOk = (res, status, content) => {
+var sendOk = (req, res, content, status = 200) => {
+    mobiLogger.info(req, status)
     sendJSONresponse(res, status, content);
 }
 
@@ -45,10 +47,10 @@ module.exports.getUsers = function (req, res) {
     
     User.paginate(filter, options, function (err, users) {
         if (err) {
-            return sendErr(res, err);
+            return sendErr(req, res, err);
         }
 
-        return sendOk(res, 200, users);
+        return sendOk(req, res, users);
 
     });
 }
@@ -57,7 +59,7 @@ module.exports.userReadOne = function (req, res) {
     let linkTx = req.query.linkTx;
 
     if (!linkTx) {
-        return sendNoId(res);
+        return sendNoId(req, res);
     }
 
     let filter = {}
@@ -68,12 +70,12 @@ module.exports.userReadOne = function (req, res) {
         .populate("historyOfView.articleId", "title author description imagePath publishDate tags")
         .exec(function (err, user) {
             if (!user) {
-                return sendNoUser(res);
+                return sendNoUser(req, res);
             }
             if (err) {
-                return sendErr(res, err);
+                return sendErr(req, res, err);
             }
-            return sendOk(res, 200, user[0]);
+            return sendOk(req, res, user[0]);
         });
 }
 
@@ -81,16 +83,16 @@ module.exports.userUpdateOne = function (req, res) {
     let id = req.params.id;
 
     if (!id) {
-        return sendNoId(res);
+        return sendNoId(req, res);
     }
 
     User
         .findById(id)
         .exec(function (err, user) {
             if (!user) {
-                return sendNoUser(res);
+                return sendNoUser(req, res);
             } else if (err) {
-                return sendErr(res, err);
+                return sendErr(req, res, err);
             }
 
             user.linkTx = req.body.linkTx ? req.body.linkTx : user.linkTx;
@@ -99,9 +101,9 @@ module.exports.userUpdateOne = function (req, res) {
 
             user.save(function (err, user) {
                 if (err) {
-                    return sendErr(res, err);
+                    return sendErr(req, res, err);
                 }
-                return sendOk(res, 202, user);
+                return sendOk(req, res, user, 202);
             });
         });
 }
@@ -110,16 +112,16 @@ module.exports.userUpdateHistoryOfView = function (req, res) {
     let linkTx = req.body.linkTx;
 
     if (!linkTx) {
-        return sendNoId(res);
+        return sendNoId(req, res);
     }
 
     User
         .find({linkTx: linkTx})
         .exec(function (err, user) {
             if (!user) {
-                return sendNoUser(res);
+                return sendNoUser(req, res);
             } else if (err) {
-                return sendErr(res, err);
+                return sendErr(req, res, err);
             }
             
             let userData = user[0];
@@ -143,9 +145,9 @@ module.exports.userUpdateHistoryOfView = function (req, res) {
 
             userData.save(function (err, savedUser) {
                 if (err) {
-                    return sendErr(res, err.msg);
+                    return sendErr(req, res, err.msg);
                 }
-                return sendOk(res, 202, savedUser);
+                return sendOk(req, res, savedUser, 202);
             });
         });
 }
@@ -160,9 +162,9 @@ module.exports.userCreate = function (req, res) {
 
     User.create(docs, function (err, user) {
         if (err) {
-            return sendErr(res, err);
+            return sendErr(req, res, err);
         }
-        return sendOk(res, 201, user);
+        return sendOk(req, res, user, 201);
     });
 }
 
@@ -170,15 +172,15 @@ module.exports.userDeleteOne = function (req, res) {
     let id = req.params.id;
 
     if (!id) {
-        return sendNoId(res);
+        return sendNoId(req, res);
     }
 
     User
         .findByIdAndRemove(id)
         .exec(function (err, user) {
             if (err) {
-                return sendErr(res, err);
+                return sendErr(req, res, err);
             }
-            return sendOk(res, 200, user);
+            return sendOk(req, res, user);
         });
 }

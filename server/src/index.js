@@ -6,6 +6,8 @@ var cookieParser = require('cookie-parser');
 const cors = require('cors');
 const appUtil = require('./appUtil');
 
+var log4js = require("log4js");
+
 const authAPIURL = '/api/v1/auth';
 const articlesAPIURL = '/api/v1/articles';
 const uploadsAPIURL = '/api/v1/uploads';
@@ -36,6 +38,42 @@ app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'client', 'build')));
 
+var maskSensitiveData = function(msg) {
+    if (msg){
+        return  msg.replace( /([Pp][Ii][Nn]\d*[=]"?)[0-9A-Fa-f%]*(.?)/g, "$1****$2" ).
+        replace( /([Pp][Ii][Nn]\d*)[>][^<]*[<]/g, "$1****$2" ).
+        replace( /([0-9A-Fa-f]{6})[0-9A-Fa-f]*([0-9A-Fa-f]{4})/g, "$1****$2" ).
+        replace( /([Cc][Vv][Vv]\d*)[=]\d*/g, "$1=****" ).
+        replace( /([Cc][Vv][Vv]\d*)[>]\d*[<]/g, "$1>****<" ).
+        replace( /([Pp][Aa][Ss][Ss][Ww][Oo][Rr][Dd][^:]*)[:]\w*["'][^"']*["']/g, "$1=\"****\"" );
+    }
+    return msg;
+}
+
+log4js.configure({
+    appenders: {
+        app: { type: 'file', filename: process.env.LOGFILE || 'MobiCashZen.log', maxLogSize: 10485760, backups: 3, compress: true,
+            layout: {
+                type    : "pattern",
+                pattern : process.env.LOGPATTERN || '%d{yyyy-MM-dd hh:mm:ss} %x{body}',
+                tokens: {
+                    body : function() {
+                        var msg = ''
+                        arguments[0].data.forEach((el)=>{
+                            msg += el
+                        })
+                        return maskSensitiveData(msg);
+                    }
+                }
+            }
+        }
+    },
+    categories: {
+        default: { appenders: [ 'app' ], level: process.env.LOGLEVEL || 'trace'}
+    }
+});
+
+
 app.use('/admin', require('./controllers/admin'))
 
 app.use(authAPIURL, authActions);
@@ -44,6 +82,7 @@ app.use(uploadsAPIURL, uploadsActions);
 app.use(articlesAPIURL, articlesActions);
 app.use(userAPIURL, userActions);
 app.use(publicAPIURL, publicActions);
+
 
 
 app.get('/', (req,res) => {

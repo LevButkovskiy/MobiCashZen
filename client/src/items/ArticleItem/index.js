@@ -33,14 +33,15 @@ function ArticleItem(props) {
                     <img className="menuIcon" src="/images/menu.png" alt="menuIcon" onClick={()=>{menuClick()}}/>
                 </div>
                 <div className="articleInfo" onClick={()=>{history.push(isSuperAdmin() ? "/article/" + props.id : "/article/" + props.id + "/show")}}>
-                    <Tags tags={props.tags}/>
                     <span className="title">{props.children}</span>
                     <span className="description">{props.description}</span>
                     <span className="description">{props.exportKey}</span>
                     {props.percentage && <span className="percentage">{t("READED.1")} {props.percentage}%</span>}
                     <div className="dateBlock">
-                        <span className="dateTime">{props.author} ● {dateFormatter(props.dateTime)}</span>
+                        <span className="dateTime">{props.author} | {dateFormatter(props.dateTime)}</span>
                     </div>
+                    <Tags tags={props.tags}/>
+
                 </div>
             </div>
         </div>

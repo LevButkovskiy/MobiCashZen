@@ -8,10 +8,10 @@ import Button from '../../UI/Button';
 function FilePicker(props) {
     const deleteIcon = "/images/delete.png";
 
-    const [t, i18n] = useTranslation();
+    const [t, ] = useTranslation();
   
     const [show, setShow] = useState(false);
-    const [showPopover, setShowPopover] = useState(false);
+    const [, setShowPopover] = useState(false);
   
     const handleClose = () => setShow(false);
     const handleShow = () => {setShowPopover(false); setShow(true)}
@@ -38,7 +38,7 @@ function FilePicker(props) {
                     <div className="imagePicker">
                         {props.imageData != null &&
                             <div className="deleteButton" onClick={handleShow}>
-                                <img className="deleteButtonIcon" src={deleteIcon} width="14px"/>
+                                <img className="deleteButtonIcon" alt="deleteIcon" src={deleteIcon} width="14px"/>
                             </div>
                         }
                         <div className="file-upload" style={{width: props.width}}>
@@ -50,7 +50,7 @@ function FilePicker(props) {
                     </div>
                 </div>
             </div>
-            {props.image != "" && props.image != null && <img className="image" height={props.imageMaxHeight} src={props.image} alt="preloadImage"/>}
+            {props.image !== "" && props.image != null && <img className="image" height={props.imageMaxHeight} src={props.image} alt="preloadImage"/>}
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>{t("DELETE_IMAGE_Q.1")}</Modal.Title>

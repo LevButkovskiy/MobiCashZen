@@ -1,11 +1,7 @@
-import React, { useState } from 'react';
-import { useTranslation } from "react-i18next";
-import { useHistory } from 'react-router-dom';
+import React from 'react';
 import './index.css';
 
 function ArticleItem(props) {
-    const [t, i18n] = useTranslation();
-    const history = useHistory()
 
     const renderTags = (item, key) => {
         return <li key={key} className="tag"><a href={"/?tag=" + item.title}>{item.title}</a></li>

@@ -5,11 +5,7 @@ import './index.css';
 
 import { getLogin, getRole, getUsersGroups, removeUserSession, getGroupId } from '../../Utils/UserUtil';
 
-import { Dropdown } from 'semantic-ui-react'
-
 import logo from '../../img/logo.svg';
-import UKFlag from '../../img/UKFlag.svg';
-import RUFlag from '../../img/RUFlag.svg';
 import { getLocale } from '../../Utils/Hoocks';
 
 function NavBar(props) {
@@ -25,19 +21,6 @@ function NavBar(props) {
         }
     }, []);
 
-    const langs = [
-        {
-            key: 'en',
-            value: 'en',
-            image: { avatar: true, src: UKFlag },
-        },
-        {
-            key: 'ru',
-            value: 'ru',
-            image: { avatar: true, src: RUFlag },
-        },
-    ]
-
     const handleChangeLanguage = (lang) => {
         i18n.changeLanguage(lang);
     }
@@ -49,7 +32,7 @@ function NavBar(props) {
     const createRole = () => {
         let id = getGroupId();
         let title = allGroups[id];
-        if(title != undefined && title != "undefined") {
+        if(title !== undefined && title !== "undefined") {
             return title;
         }
         else {

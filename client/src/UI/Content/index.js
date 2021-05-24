@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { useTranslation } from "react-i18next";
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import './index.css';
 
@@ -8,7 +7,6 @@ import Menu from '../../UI/Menu';
 import Header from '../../UI/Header';
 
 function Content(props) {
-    const [t, i18n] = useTranslation();
     const history = useHistory()
 
     return (

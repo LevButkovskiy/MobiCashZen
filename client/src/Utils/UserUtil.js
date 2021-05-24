@@ -2,7 +2,13 @@ import { request, requestWithBody } from "./RequestUtil";
 import { Response, CreateError } from "./ResponseUtil";
 
 export const getLogin = () => {
-    return localStorage.getItem('login') || null;
+    let login = localStorage.getItem('login');
+    
+    if (!login || login === "undefined") {
+        console.log(login);
+        return null;
+    }
+    return login;
 }
 
 // return the token from the session storage
@@ -64,12 +70,12 @@ export const getRole = () => {
 }
 
 export const isSuperAdmin = () => {
-    return localStorage.getItem('role') == "Manager";
+    return localStorage.getItem('role') === "Manager";
 }
 
 export const getGroupId = () => {
     let groupId = localStorage.getItem('groupId');
-    if(groupId == "undefined" || groupId == null) {
+    if(groupId === "undefined" || groupId == null) {
         removeUserSession()
         return;
     }
@@ -130,7 +136,7 @@ export const addViewHistory = (linkTx, articleId, lastPos, percentage, isLiked, 
 }
 
 export const getShowedArticles = (callback) => {
-    let url = '/api/v1/user/read' + "?linkTx=" + getLogin();
+    let url = `/api/v1/user/read?linkTx=${getLogin()}`;
 
     request(url, 'GET', function(success, data) {
         Response(callback, data)

@@ -47,7 +47,7 @@ function Article(props) {
         return (
             <div className="articleData">
                 <div className="articleImage">
-                    <img className="image" src={article.imagePath ? ("/api/v1/" + article.imagePath) : "/images/defaultImage.png"}/>
+                    <img className="image" alt="articleImage" src={article.imagePath ? ("/api/v1/" + article.imagePath) : "/images/defaultImage.png"}/>
                 </div>
                 <div className="articleInfo">
                     <div className="articleStatuses">
@@ -69,7 +69,7 @@ function Article(props) {
     }
 
     const renderArticleAllowedGroups = (item, key) => {
-        return <li className="allowedGroup" key={key}>{getLocale(allGroups.find(el => {return el._id == item}).title, currentLanguage)}</li>
+        return <li className="allowedGroup" key={key}>{getLocale(allGroups.find(el => {return el._id === item}).title, currentLanguage)}</li>
     }
 
     return (

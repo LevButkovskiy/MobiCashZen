@@ -10,7 +10,7 @@ Quill.register('modules/imageResize', ImageResize)
 function RTEInput(props, { component: Component, ...children }) {
 
     const rteChangeHandler = (content, delta, source) => {
-        if(source == "user") {
+        if(source === "user") {
             props.data.setValue(content)            
         }
     }

@@ -1,10 +1,7 @@
-import React, { useState } from 'react';
-import { useTranslation } from "react-i18next";
+import React from 'react';
 import './index.css';
 
 function Header(props) {
-    const [t, i18n] = useTranslation();
-
     return (
         <div className="header" type={props.nomenu ? "nomenu" : null}>
             {props.subtitle && <div className="subtitle">{props.subtitle}</div>}

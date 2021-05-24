@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
-import { useTranslation } from "react-i18next";
+import React from 'react';
 import './index.css';
 
-function Button(props) {
-    const [t, i18n] = useTranslation();
+function Button(props) {    
     
     const buttonType = () => {
         if(props.cancel) {

@@ -10,26 +10,25 @@ import Content from '../../UI/Content';
 import ArticleShowItem from '../../items/ArticleShowItem';
 
 function ArticleShow(props) {
-    const [t, i18n] = useTranslation();
-    const [currentLanguage, setCurrentLanguage] = useState(i18n.language);
+    const [, i18n] = useTranslation();
 
     const [article, setArticle] = useState(null);
 
-    var scroll = 0;
-    var maxScroll = 0;
+    useEffect(() => {
+        var scroll = 0;
+        var maxScroll = 0;
 
-    const handleScroll = () => {
-        var p = document.body.parentNode
-        let percentage = (document.body.scrollTop || p.scrollTop) / (p.scrollHeight - p.clientHeight ) * 100;
-        scroll = percentage;
-        if(percentage > maxScroll) {
-            if(percentage > 100) {
-                maxScroll = 100;
+        const handleScroll = () => {
+            var p = document.body.parentNode
+            let percentage = (document.body.scrollTop || p.scrollTop) / (p.scrollHeight - p.clientHeight ) * 100;
+            scroll = percentage;
+            if(percentage > maxScroll) {
+                if(percentage > 100) {
+                    maxScroll = 100;
+                }
             }
         }
-    }
 
-    useEffect(() => {
         window.addEventListener("scroll", handleScroll, true);
         sessionStorage.setItem('isLiked', false)
 
@@ -43,7 +42,7 @@ function ArticleShow(props) {
             addViewHistory(login, props.match.params.id, scroll, maxScroll, isLiked, function(success, data) {
             })
         };
-    }, []);
+    }, [props.match.params.id]);
 
     const getArticleHandler = (id) => {
         getArticle(id, function(success, data) {

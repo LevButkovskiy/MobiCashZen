@@ -67,7 +67,6 @@ module.exports.userReadOne = function (req, res) {
         .find({linkTx: linkTx})
         .populate("historyOfView.articleId", "title author description imagePath publishDate tags")
         .exec(function (err, user) {
-            console.log(user[0].historyOfView);
             if (!user) {
                 return sendNoUser(res);
             }

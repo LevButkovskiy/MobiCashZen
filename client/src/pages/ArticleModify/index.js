@@ -36,22 +36,6 @@ function Articles(props) {
     const [image, setImage] = useState(null);
     const [imageData, setImageData] = useState(null);
 
-    useEffect(() => {
-        let url = window.location.pathname.split('/');
-        let mode = url[url.length-1] === "edit" ? true : false;
-        setIsEdit(mode);
-        groupsRequest(mode);
-    }, []);
-
-    const groupsRequest = (mode) => {
-        getUsersGroups(function(success, data) {
-            if(success) {
-                setAllGroups(data);
-                mode && articleRequest(data);
-            }
-        })
-    }
-
     const articleRequest = (allGroups) => {
         getArticle(props.match.params.id, function(success, data) {
             if (success) {
@@ -68,19 +52,65 @@ function Articles(props) {
                 let tagsStr = "";
                 data.tags && data.tags.forEach((element, index) => {
                     tagsStr += element.title;
-                    index != data.tags.length - 1 && (tagsStr += ",")
+                    (index !== data.tags.length - 1) && (tagsStr += ",")
                 })
                 tags.setValue(tagsStr);
                 setImage(data.imagePath ? ('/api/v1/' + data.imagePath) : null);
 
                 let groups = [];
-                data.allowedGroups.forEach(e => {groups.push(allGroups.find(aE => {return aE._id == e}))});
+                data.allowedGroups.forEach(e => {groups.push(allGroups.find(aE => {return aE._id === e}))});
                 setGroupsList(groups)
             }
             else {
                 console.log(data.error.message)
             }
         })
+    }
+
+    const groupsRequest = (mode) => {
+        getUsersGroups(function(success, data) {
+            if(success) {
+                setAllGroups(data);
+                mode && articleRequest(data);
+            }
+        })
+    }
+
+    useEffect(() => {
+        let url = window.location.pathname.split('/');
+        let mode = url[url.length-1] === "edit" ? true : false;
+        setIsEdit(mode);
+        groupsRequest(mode);
+    }, []);
+
+    const saveButtonClick = () => {
+        if (i18n.language === "en") {
+            if (title.en.value === "") {
+                console.log("title is empty");
+                return ;
+            }
+            if (rteData.en.value === "") {
+                console.log("rteData is empty");
+                return ;
+            }
+        }
+        if (i18n.language === "ru") {
+            if (title.ru.value === "") {
+                console.log("title is empty");
+                return ;
+            }
+            if (rteData.ru.value === "") {
+                console.log("rteData is empty");
+                return ;
+            }
+        }
+
+        if (isEdit) {
+            updateArticleClick();
+        }
+        else {
+            createArticleClick();
+        }
     }
 
     const createArticleClick = () => {
@@ -100,15 +130,15 @@ function Articles(props) {
     }
 
     const createArticleRequest = (imagePath) => {
-        let tagsArr = tags.value != "" ? tags.value.replace(', ', ',').split(',') : [];
+        let tagsArr = tags.value !== "" ? tags.value.replace(', ', ',').split(',') : [];
         let packedTags = null;
 
         if (tagsArr.length > 0) {
             packedTags = [];
             tagsArr.forEach(element => {
-                element != "" && packedTags.push({title: element})
+                (element !== "") && packedTags.push({title: element})
             });
-            packedTags = packedTags.length == 0 ? null : packedTags
+            packedTags = packedTags.length === 0 ? null : packedTags
         }
 
         let packedArticle = {
@@ -137,36 +167,36 @@ function Articles(props) {
         let allowedGroups = [];
         groupsList && groupsList.forEach(e => allowedGroups.push(e._id));
 
-        if(allowedGroups.length == 0) {
+        if(allowedGroups.length === 0) {
             allowedGroups.push(0);
         }
         packedArticle.allowedGroups = allowedGroups;
         
 
-        if (i18n.language  == "ru") {
-            if (title.en.value == "") {
+        if (i18n.language === "ru") {
+            if (title.en.value === "") {
                 packedArticle.title.en = title.ru.value
             }
-            if (description.en.value == "") {
+            if (description.en.value === "") {
                 packedArticle.description.en = description.ru.value
             }
-            if (rteData.en.value == "") {
+            if (rteData.en.value === "") {
                 packedArticle.rteData.en = rteData.ru.value
             }
-            if (author.en.value == "") {
+            if (author.en.value === "") {
                 packedArticle.author.en = author.ru.value
             }
-        } else if (i18n.language  == "en") {
-            if (title.ru.value == "") {
+        } else if (i18n.language === "en") {
+            if (title.ru.value === "") {
                 packedArticle.title.ru = title.en.value
             }
-            if (description.ru.value == "") {
+            if (description.ru.value === "") {
                 packedArticle.description.ru = description.en.value
             }
-            if (rteData.ru.value == "") {
+            if (rteData.ru.value === "") {
                 packedArticle.rteData.ru = rteData.en.value
             }
-            if (author.ru.value == "") {
+            if (author.ru.value === "") {
                 packedArticle.author.ru = author.en.value
             }
         }
@@ -198,15 +228,15 @@ function Articles(props) {
     }
 
     const updateArticleRequest = (imagePath) => {   
-        let tagsArr = tags.value != "" ? tags.value.replace(', ', ',').split(',') : [];
+        let tagsArr = tags.value !== "" ? tags.value.replace(', ', ',').split(',') : [];
         let packedTags = null;
 
         if (tagsArr.length > 0) {
             packedTags = [];
             tagsArr.forEach(element => {
-                element != "" && packedTags.push({title: element})
+                (element !== "") && packedTags.push({title: element})
             });
-            packedTags = packedTags.length == 0 ? null : packedTags
+            packedTags = packedTags.length === 0 ? null : packedTags
         }
 
         let packedArticle = {
@@ -238,7 +268,7 @@ function Articles(props) {
         let allowedGroups = [];
         groupsList && groupsList.forEach(e => allowedGroups.push(e._id));
 
-        if(allowedGroups.length == 0 || groupsList == null) {
+        if(allowedGroups.length === 0 || groupsList == null) {
             allowedGroups.push(0);
         }
         packedArticle.allowedGroups = allowedGroups;
@@ -280,7 +310,7 @@ function Articles(props) {
                             value={getLocale(title, currentLanguage)}
                             width="60%"
                         >
-                            {t("TITLE.1")}
+                            {t("TITLE.1")} *
                         </Input>
                         <Input 
                             type="textarea"
@@ -317,7 +347,7 @@ function Articles(props) {
                             placeholder={t("ARTICLE_DATA.1")}
                             data={getLocale(rteData, currentLanguage)}
                         >
-                            {t("DATA.1")}
+                            {t("DATA.1")} *
                         </RTEInput>
                         <Input 
                             type="textarea"
@@ -340,7 +370,7 @@ function Articles(props) {
                     </div>}
                     <div className="actions">
                         <div className="action">
-                            <Button onClick={isEdit ? updateArticleClick : createArticleClick}>{t("SAVE.1")}</Button>
+                            <Button onClick={saveButtonClick}>{t("SAVE.1")}</Button>
                         </div>
                         <div className="action">
                             <Button cancel onClick={()=>{props.history.goBack()}}>{t("CANCEL.1")}</Button>

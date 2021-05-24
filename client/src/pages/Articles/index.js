@@ -23,10 +23,6 @@ function Articles(props) {
 
     useEffect(() => {
         getArticlesHandler();
-    }, []);
-
-    useEffect(() => {
-        getArticlesHandler();
     }, [window.location.href]);
 
     const getArticlesHandler = (search = null) => {
@@ -34,7 +30,8 @@ function Articles(props) {
         let url = window.location.pathname.split('/');       
         let filterTag = (new URLSearchParams(window.location.search)).get("tag");
         let searchParams = {};
-        if (filterTag != null && filterTag != "") {
+
+        if (filterTag != null && filterTag !== "") {
             searchParams.tag = filterTag;
             setTag(filterTag)
         }
@@ -50,9 +47,9 @@ function Articles(props) {
             searchParams.search = search;
         }
 
-        if (url.length > 1 && url[1] == "personal" || !isSuperAdmin()) {
+        if ((url.length > 1 && url[1] === "personal") || !isSuperAdmin()) {
             searchParams.internal = "true";
-            if (url[1] == "personal") {
+            if (url[1] === "personal") {
                 setTitle("FOR_ME.1");
                 setTag(null);
             }

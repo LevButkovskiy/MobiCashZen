@@ -27,7 +27,7 @@ export const request = (url, method, callback) => {
 }
 
 export const requestWithBody = (url, method, body, callback) => {
-    if (url != '/api/v1/auth/login' && url != '/api/v1/auth/refreshToken') {
+    if (url !== '/api/v1/auth/login' && url !== '/api/v1/auth/refreshToken') {
         getToken(function(success, data) {
             if(success) {
                 fetch(url, {

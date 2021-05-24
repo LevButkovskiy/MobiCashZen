@@ -13,7 +13,7 @@ function LangSelector(props, { component: Component, ...children}) {
         <div className={props.separately ? "selectorBlock" : ""}>
             <ul className="selector">
                 {
-                    i18n.language == "ru" ?
+                    i18n.language === "ru" ?
                     (
                         <>
                             <li className="selectorElement" value="ru" isselected={props.currentLanguage === "ru" ? "true" : "false"} onClick={langSelectorChanged}>{t('LANG_RUS.1')}</li>

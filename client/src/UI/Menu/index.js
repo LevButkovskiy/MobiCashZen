@@ -15,30 +15,6 @@ function Menu(props) {
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [selectedElement, setSelectedElement] = useState(-1);
 
-    useEffect(() => {
-        getArticlesHandler()
-    }, []);
-
-    useEffect(() => {
-        getArticlesHandler();
-    }, [history.location]);
-
-    useEffect(() => {
-        getArticlesHandler();
-    }, [window.location.search]);
-
-    const getArticlesHandler = () => {
-        getArticles(null, function(success, data) {
-            if (success) {
-                setArticles(data.docs);
-                activeCategory(data.docs);
-            }
-            else {
-                console.log(data.error.message);
-            }
-        })
-    }
-
     const activeCategory = (articles) => {
         let url = window.location.pathname.split('/');
         let tag = (new URLSearchParams(window.location.search)).get("tag");
@@ -47,17 +23,18 @@ function Menu(props) {
             switch(tag) {
                 case "MobiCash": setSelectedCategory(2); setSelectedElement(-1); break;
                 case "Test": setSelectedCategory(3); setSelectedElement(-1); break;
+                default: break;
             }
             return;
         }
-        if(url.length > 1 && url[1] == "personal") {
+        if(url.length > 1 && url[1] === "personal") {
             setSelectedCategory(1);
             setSelectedElement(-1);
             return;
         }
         if (url.length > 2) {
             let articleId = url[2];
-            if(articleId === "new" || articles.length == 0) {
+            if(articleId === "new" || articles.length === 0) {
               setSelectedCategory(0);
               setSelectedElement(-1);
               return;
@@ -89,6 +66,23 @@ function Menu(props) {
             setSelectedElement(-1);
         }
     }
+
+    useEffect(() => {
+        const getArticlesHandler = () => {
+            getArticles(null, function(success, data) {
+                if (success) {
+                    setArticles(data.docs);
+                    activeCategory(data.docs);
+                }
+                else {
+                    console.log(data.error.message);
+                }
+            })
+        }
+
+        getArticlesHandler()
+
+    }, [history.location, window.location.search]);
 
     const renderMenu = (item, key) => {
         return (

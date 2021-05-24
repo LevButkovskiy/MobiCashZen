@@ -1,10 +1,7 @@
-import React, { useState } from 'react';
-import { useTranslation } from "react-i18next";
+import React from 'react';
 import './index.css';
 
 function Input(props) {
-    const [t, i18n] = useTranslation();
-
     return (
         <div className="input" id={props.first ? "first" : null}>
             <div className="title">
@@ -15,7 +12,7 @@ function Input(props) {
                     {props.description}
                 </div>
             }
-            {props.type != "textarea" ?
+            {props.type !== "textarea" ?
                 <input
                     style={{width: props.width || "100%"}}
                     type={props.type}

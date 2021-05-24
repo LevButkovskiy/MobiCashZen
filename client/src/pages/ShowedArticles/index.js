@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from "react-i18next";
-import { getArticles } from '../../Utils/ArticlesUtil';
 import { getLocale, useFormInput } from '../../Utils/Hoocks';
 import { getGroupId, getShowedArticles, isSuperAdmin } from '../../Utils/UserUtil';
 import { stringByNum } from '../../Utils/Formatter';
@@ -16,20 +15,14 @@ function Articles(props) {
     const [t, i18n] = useTranslation();
 
     const [articles, setArticles] = useState(null);
-    const [title, setTitle] = useState("SAVED_ARTICLES.1")
 
     const search = useFormInput('');
-
-    useEffect(() => {
-        getArticlesHandler();
-    }, []);
 
     useEffect(() => {
         getArticlesHandler();
     }, [window.location.href]);
 
     const getArticlesHandler = (search = null) => {
-        let url = window.location.pathname.split('/');       
         let searchParams = {};
 
         if (!isSuperAdmin()) {
@@ -43,7 +36,7 @@ function Articles(props) {
         getShowedArticles(function(success, data) {
             if (data.error == null) {
                 let articles = [];
-                data.historyOfView.map(el=> {
+                data.historyOfView.map(el => {
                     if(el.isLiked) {
                         articles.push({
                             articleId: el.articleId._id,
@@ -88,7 +81,7 @@ function Articles(props) {
 
     return (
         <div className="articles">
-            <Content title={t(title)}>
+            <Content title={t("SAVED_ARTICLES.1")}>
                 <div className="settings">
                     <div className="new">
                         <Button onClick={()=>{props.history.push("/article/new")}} width>{t("ADD_ARTICLE.1")}</Button>

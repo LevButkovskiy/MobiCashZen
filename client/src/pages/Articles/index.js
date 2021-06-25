@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from "react-i18next";
 import { getArticles } from '../../Utils/ArticlesUtil';
 import { getLocale, useFormInput } from '../../Utils/Hoocks';
-import { getGroupId, isSuperAdmin } from '../../Utils/UserUtil';
+import { getGroupId, getRole, isSuperAdmin } from '../../Utils/UserUtil';
 import { stringByNum } from '../../Utils/Formatter';
 import './index.css';
 
@@ -90,10 +90,10 @@ function Articles(props) {
         <div className="articles">
             <Content title={t(title)} subtitle={tag ? ("?tag=" + tag) : null}>
                 <div className="settings">
-                    <div className="new">
+                    <div className="new" id={getRole() !== "Manager" && "hidden"}>
                         <Button onClick={()=>{props.history.push("/article/new")}} width>{t("ADD_ARTICLE.1")}</Button>
                     </div>
-                    <div className="search">
+                    <div className="search" id={getRole() !== "Manager" && "noAdd"}>
                         <Input type="text" placeholder={t("SEARCH_PLACEHOLDER.1")} value={{value: search.value, onChange:onSearchChange}}>{t("SEARCH.1")}</Input>
                     </div>
                 </div>

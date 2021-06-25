@@ -40,7 +40,7 @@ function ArticleShowItem(props) {
             <div className="articleShowHeader">
                 {props.article.imagePath && <img className="articleShowImage" alt="articleImage" src={'/api/v1/' + props.article.imagePath}/>}
                 <div className="title">{getLocale(props.article.title, props.currentLanguage)}</div>
-                <div className="description">{getLocale(props.article.description, props.currentLanguage)}</div>
+                <div className="description">{getLocale(props.article.description, props.currentLanguage)} &nbsp;</div>
                 <div className="authorInfo">
                     <div className="author">{getLocale(props.article.author, props.currentLanguage)}</div>
                     <img className="authorImage" alt="articleAuthorImage" src="https://img02.rl0.ru/d0dd051ed46ec21dcaf128f1a4c941b3/765x-i/news.rambler.ru/img/2019/07/01125941.865243.9375.jpg"/>

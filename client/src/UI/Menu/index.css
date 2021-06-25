@@ -16,7 +16,6 @@
 .category {
     margin-left: 0;
     padding-left: 0;
-
 }
 
 .category:hover {
@@ -33,6 +32,12 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+
+.category#article > .title {
+    font-size: 14px;
+    padding: 0px 8px 8px 24px;
+}
+
 
 .category[type="selected"] {
     background: rgba(0, 0, 0, 0.05);
@@ -52,7 +57,11 @@
     left: 0px;
   
     background-color: #BE1E24;
-  }
+}
+
+.category#article[type="selected"]:before {
+    height: 30px;
+}
 
 .element {
     list-style-type: none;

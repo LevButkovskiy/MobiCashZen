@@ -22,7 +22,7 @@ function Menu(props) {
         if(tag != null) {
             switch(tag) {
                 case "MobiCash": setSelectedCategory(2); setSelectedElement(-1); break;
-                case "Test": setSelectedCategory(3); setSelectedElement(-1); break;
+                case "Образование": setSelectedCategory(3); setSelectedElement(-1); break;
                 default: break;
             }
             return;
@@ -88,13 +88,14 @@ function Menu(props) {
         return (
             <MenuCategory
                 key={key}
+                id="article"
                 title={getLocale(item.title, i18n.language)}
                 index={key + 4}
                 selectedCategory={selectedCategory}
                 selectedElement={selectedElement}
                 href={"/article/" + item._id}
                 onClick={handleSelect}>
-                    <MenuElement title={t("INFORMATION.1")}  index={0} selectedElement={selectedElement} href={"/article/" + item._id + "/edit"} onClick={handleSelect}/>
+                    <MenuElement title={t("INFORMATION.1")} index={0} selectedElement={selectedElement} href={"/article/" + item._id + "/edit"} onClick={handleSelect}/>
                     {/* <MenuElement title={t("PREVIEW.1")} index={1} selectedElement={selectedElement} href={"/article/" + item._id + "/preview"} onClick={handleSelect}/> */}
                     <MenuElement title={t("SHOW.1")} index={1} selectedElement={selectedElement} href={"/article/" + item._id + "/show"} onClick={handleSelect}/>
             </MenuCategory>)
@@ -113,7 +114,7 @@ function Menu(props) {
                     <MenuCategory hrAfter title={t("SAVED_ARTICLES.1")} index={1} selectedElement={-1} selectedCategory={selectedCategory} href="/personal" onClick={handleSelect}/>
                     <div className="categoryTitle">{t("TAGS.1")}</div>
                     <MenuCategory title={"MobiCash"} index={2} selectedElement={-1} selectedCategory={selectedCategory} href="/?tag=MobiCash" onClick={handleSelect}/>
-                    <MenuCategory hrAfter title={"Test"} index={3} selectedElement={-1} selectedCategory={selectedCategory} href="/?tag=Test" onClick={handleSelect}/>
+                    <MenuCategory hrAfter title={t("EDUCATION.1")} index={3} selectedElement={-1} selectedCategory={selectedCategory} href="/?tag=Образование" onClick={handleSelect}/>
                     <div className="categoryTitle">{t("ARTICLES.1")}</div>
                     {articles != null && articles.map(renderMenu)}
                 </>
@@ -125,8 +126,7 @@ function Menu(props) {
                     <MenuCategory title={t("ALL_ARTICLES.1")} index={0} selectedElement={-1} selectedCategory={selectedCategory} href="/" onClick={handleSelect}/>
                     <MenuCategory hrAfter title={t("SAVED_ARTICLES.1")} index={1} selectedElement={-1} selectedCategory={selectedCategory} href="/personal" onClick={handleSelect}/>
                     <div className="categoryTitle">{t("TAGS.1")}</div>
-                    <MenuCategory title={"MobiCash"} index={2} selectedElement={-1} selectedCategory={selectedCategory} href="/?tag=MobiCash" onClick={handleSelect}/>
-                    <MenuCategory hrAfter title={"Test"} index={3} selectedElement={-1} selectedCategory={selectedCategory} href="/?tag=Test" onClick={handleSelect}/>
+                    <MenuCategory hrAfter title={t("EDUCATION.1")} index={3} selectedElement={-1} selectedCategory={selectedCategory} href="/?tag=Образование" onClick={handleSelect}/>
                 </>
             )
         }
@@ -148,7 +148,7 @@ function MenuCategory(props) {
 
     return (
         <>
-            <li className="category" onClick={props.onClick} href={props.href} type={selected} >
+            <li className="category" id={props.id} onClick={props.onClick} href={props.href} type={selected} >
                 <div className="title" onClick={props.onClick} href={props.href}>{props.title}</div>
                 {props.hrAfter && <div className="line">&nbsp;</div>}
                 {props.children && props.index === props.selectedCategory &&

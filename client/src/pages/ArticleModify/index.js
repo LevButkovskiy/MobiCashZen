@@ -62,7 +62,8 @@ function Articles(props) {
                 setGroupsList(groups)
             }
             else {
-                console.log(data.error.message)
+                console.log(data.error.message);
+                alert(t(data.error.key))
             }
         })
     }
@@ -87,20 +88,24 @@ function Articles(props) {
         if (i18n.language === "en") {
             if (title.en.value === "") {
                 console.log("title is empty");
+                alert(t("ERROR_TITLE_EMPTY.1"))
                 return ;
             }
             if (rteData.en.value === "") {
                 console.log("rteData is empty");
+                alert(t("ERROR_RTEDATA_EMPTY.1"))
                 return ;
             }
         }
         if (i18n.language === "ru") {
             if (title.ru.value === "") {
                 console.log("title is empty");
+                alert(t("ERROR_TITLE_EMPTY.1"))
                 return ;
             }
             if (rteData.ru.value === "") {
                 console.log("rteData is empty");
+                alert(t("ERROR_RTEDATA_EMPTY.1"))
                 return ;
             }
         }
@@ -121,6 +126,7 @@ function Articles(props) {
                 }
                 else {
                     console.log(data.error.message);
+                    alert(t(data.error.key))
                 }
             });
           }
@@ -207,6 +213,7 @@ function Articles(props) {
             }
             else {
                 console.log(data.error.message);
+                alert(t(data.error.key))
             }
         })
     }
@@ -219,6 +226,8 @@ function Articles(props) {
                 }
                 else {
                     console.log(data.error.message);
+                    alert(t(data.error.key))
+
                 }
             });
           }
@@ -279,6 +288,7 @@ function Articles(props) {
             }
             else {
                 console.log(data.error.message);
+                alert(t(data.error.key))
             }
         })
     }

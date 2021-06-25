@@ -34,7 +34,7 @@ function ArticleItem(props) {
                 </div>
                 <div className="articleInfo" onClick={()=>{history.push(isSuperAdmin() ? "/article/" + props.id : "/article/" + props.id + "/show")}}>
                     <span className="title">{props.children}</span>
-                    <span className="description">{props.description}</span>
+                    <span className="description">{props.description} &nbsp;</span>
                     <span className="description">{props.exportKey}</span>
                     {props.percentage && <span className="percentage">{t("READED.1")} {props.percentage}%</span>}
                     <div className="dateBlock">

@@ -8,6 +8,10 @@
     width: 200px;
 }
 
+.settings > .new#hidden {
+    opacity: 0;
+}
+
 .articlesData {
     width: 100%;
     margin-top: 24px;
@@ -28,4 +32,12 @@
     width: 300px;
 
     left: 222px;
+}
+
+.settings > .search#noAdd {
+    position: absolute;
+    top: -26px;
+    width: 300px;
+
+    left: 0px;
 }

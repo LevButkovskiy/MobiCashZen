@@ -200,6 +200,13 @@ module.exports.getUsersGroups = function (req, res) {
             }
         },
         {
+            _id: 14,
+            title: {
+                ru: "Образовательная группа",
+                en: "Educational group"
+            }
+        },
+        {
             _id: -1,
             title: {
                 ru: "Никому",

@@ -263,7 +263,7 @@ module.exports.exportOne = function (req, res) {
         return sendNoId(req, res)
     }
     Articles
-        .find({_id: id})
+        .find({_id: id, internal: false})
         .exec(function (err, articles) {
             if (!articles || !articles[0]) {
                 return sendNoArticle(req, res);
